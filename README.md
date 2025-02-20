@@ -31,5 +31,5 @@
 
 <h1>💻 Desenvolvedores</h1>
 
-| [<img src="https://avatars.githubusercontent.com/u/111576177?v=4" width=115>](https://github.com/Gabriel-Baroni) <br> **Gabriel de Paula Baroni** | [<img src="https://avatars.githubusercontent.com/u/184117774?v=4" width=115>](https://github.com/vinimaxi) <br> **Vinícius Ferreira Guimarães Maximo** | [<img src="https://avatars.githubusercontent.com/u/184420136?v=4" width=115>](https://github.com/renan-alexandre-morais) <br> **Renan Alexandre Morais de Souza** | [<img src="" width=115>]() <br> **Felipe Oliveira Batista Silva** |
+| [<img src="https://avatars.githubusercontent.com/u/111576177?v=4" width=115>](https://github.com/Gabriel-Baroni) <br> **Gabriel de Paula Baroni** | [<img src="https://avatars.githubusercontent.com/u/184117774?v=4" width=115>](https://github.com/vinimaxi) <br> **Vinícius Ferreira Guimarães Maximo** | [<img src="https://avatars.githubusercontent.com/u/184420136?v=4" width=115>](https://github.com/renan-alexandre-morais) <br> **Renan Alexandre Morais de Souza** | [<img src="https://avatars.githubusercontent.com/u/174640883?v=4" width=115>](https://github.com/Felipo-alt) <br> **Felipe Oliveira Batista Silva** |
 | :---: | :---: | :---: |:---: |
