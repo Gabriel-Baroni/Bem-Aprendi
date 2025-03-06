@@ -29,7 +29,7 @@ O público-alvo desse projeto são crianças da faixa etária de 7 anos que saib
 
 -`Segurança`: Garantir a segurança dos dados do usuário
 
--`Desempenho`: Garantir que o site fuhncione sem travamentos
+-`Desempenho`: Garantir que o site funcione sem travamentos
 
  
 <h1>📑 Matriz de Requisitos</h1>
