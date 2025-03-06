@@ -34,6 +34,9 @@ O público-alvo desse projeto são crianças da faixa etária de 7 anos que saib
  
 <h1>📑 Matriz de Requisitos</h1>
 <img src="https://github.com/user-attachments/assets/bd8a07b4-7c77-429d-b6ae-a118e9d22509" width=1000> 
+<br>
+
+- `Observação`: C.T significa Criação de Tela
 
 <h1>📱Mockup do APP </h1>
 
