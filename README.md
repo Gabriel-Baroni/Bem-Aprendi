@@ -48,6 +48,25 @@ O público-alvo desse projeto são crianças da faixa etária de 7 anos que saib
 <h1>🧍Diagramas UML</h1>
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
+`Front-end`:
+<br><br>
+<img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
+
+`Back-end`:
+<br><br>
+
+
+`Banco de Dados`:
+<br><br>
+<img src="https://img.shields.io/badge/supabase-%2300C4B7.svg?style=for-the-badge&logo=supabase&logoColor=white">
+
+`Diagramas e Mockups`:
+<br><br>
+<img src="https://img.shields.io/badge/Miro-%23000000.svg?style=for-the-badge&logo=miro&logoColor=white">
+<img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=canva&logoColor=white">
+<img src="https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white">
 
 <h1>🏗️ Arquitetura da Aplicação</h1> 
 
