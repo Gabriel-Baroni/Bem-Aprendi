@@ -1,13 +1,15 @@
 <h1 align="center"> BEM-APRENDI </h1>
-<p align="center">Um trabalho para o PROJETO INTEGRADOR - 4º Informática do IFSP-Jacareí</p>
+<p align="center">Um trabalho para o PROJETO INTEGRADOR e para DESENVOLVIMENTO DE APLICAÇÕES WEB - 4º Informática do IFSP-Jacareí</p>
 <br>
 <p align="center">
 <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellow&style=for-the-badge"/>
 
-<h1>👩‍🏫 Professoras responsáveis</h1> 
+<h1>👓 Professores responsáveis</h1> 
 
 -  Ana Paula Abrantes de Castro Shiguemori
--  Flavia Beatriz Rodrigues Prisco da Cunha 
+-  Flavia Beatriz Rodrigues Prisco da Cunha
+-  Ariadne Arrais Cruz
+-  Sostenes Pereira Gomes
 
 <h1>🎯 Objetivo do projeto</h1> 
 O objetivo do projeto é construir um jogo de navegador educativo, que visa ensinar e estimular crianças a apreder de forma lúdica e prática. O estimulo ocorre com mimi games educativos, exercitanto o raciocício lógico das crianças. Os personagens pertencem a fauna brasileira e o mascote é um bem-te-vi, dando origem ao nome do jogo (Bem-Aprendi), cada personagem ensina uma matéria distinta, deixando a experiência mais divertida. 
@@ -15,7 +17,7 @@ O objetivo do projeto é construir um jogo de navegador educativo, que visa ensi
 <h1>✖️ O que não é o objetivo do projeto</h2>
 
 <h1>👥 Público-alvo</h2>
-O público-alvo desse projeto são crianças da faixa etária de 7 anos que saibam ler e escrever. 
+O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos que saibam ler e escrever. 
 
 <h1>:hammer: Funcionalidades do projeto</h2>
 
@@ -23,13 +25,15 @@ O público-alvo desse projeto são crianças da faixa etária de 7 anos que saib
 
  -`Mini games`: Mini games educativos que ensinem as crianças conceitos báscios das matérias.
 
- -`Sistema de pontuação e Ranking`: Pontuação do usuário em cada disciplina e pontuação geral do usuário. A pontuação geral é usada como base para a criação de um ranking entre os usuários
+ -`Sistema de pontuação e Ranking`: Pontuação do usuário em cada disciplina e pontuação geral do usuário. A pontuação geral é usada como base para a criação de um ranking entre os usuários.
 
 <h1>☑️ Requisitos não funcionais para o site</h1> 
 
--`Segurança`: Garantir a segurança dos dados do usuário
+-`Segurança`: Garantir a segurança dos dados do usuário.
 
--`Desempenho`: Garantir que o site funcione sem travamentos
+-`Desempenho`: Garantir que o site funcione sem travamentos.
+
+-`Qualidade educacional`: Garantir que os mini games estejam conceitualmente corretos e que proporcionem um aprendizado de qualidade às crianças.
 
  
 <h1>📑 Matriz de Requisitos</h1>
@@ -64,7 +68,6 @@ O público-alvo desse projeto são crianças da faixa etária de 7 anos que saib
 
 `Diagramas e Mockups`:
 <br><br>
-<img src="https://img.shields.io/badge/Miro-%23000000.svg?style=for-the-badge&logo=miro&logoColor=white">
 <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=canva&logoColor=white">
 <img src="https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white">
 
