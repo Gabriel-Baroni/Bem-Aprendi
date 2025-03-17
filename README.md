@@ -52,6 +52,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <h1>🧍Diagramas UML</h1>
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
+
 `Front-end`:
 <br><br>
 <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
