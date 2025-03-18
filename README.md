@@ -61,6 +61,8 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 
 `Back-end`:
 <br><br>
+<img src="https://img.shields.io/badge/Node.js-%23323330.svg?style=for-the-badge&logo=node.js&logoColor=%2361DA56">
+
 
 
 `Banco de Dados`:
