@@ -38,7 +38,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
  
 <h1>📑 Matriz de Requisitos</h1>
 
-<img src="(https://github.com/user-attachments/assets/23abb3b5-61d5-4dbf-98e6-15736e09be24" width=1000> 
+<img src="https://github.com/user-attachments/assets/23abb3b5-61d5-4dbf-98e6-15736e09be24" width=1000> 
 <br>
 
 - `Observação`: C.T significa Criação de Tela
