@@ -14,8 +14,6 @@
 <h1>🎯 Objetivo do projeto</h1> 
 O objetivo do projeto é construir um jogo de navegador educativo, que visa ensinar e estimular crianças a apreder de forma lúdica e prática. O estimulo ocorre com mimi games educativos, exercitanto o raciocício lógico das crianças. Os personagens pertencem a fauna brasileira e o mascote é um bem-te-vi, dando origem ao nome do jogo (Bem-Aprendi), cada personagem ensina uma matéria distinta, deixando a experiência mais divertida. 
 
-<h1>✖️ O que não é o objetivo do projeto</h2>
-
 <h1>👥 Público-alvo</h2>
 O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos que saibam ler e escrever. 
 
