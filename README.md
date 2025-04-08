@@ -17,23 +17,46 @@ O objetivo do projeto é construir um jogo de navegador educativo, que visa ensi
 <h1>👥 Público-alvo</h2>
 O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos que saibam ler e escrever. 
 
-<h1>:hammer: Funcionalidades do projeto</h2>
+<h1>:hammer: Requisitos Funionais para o site</h2>
 
--`Sistema de Login e cadastro de usuários`: Armazenamento dos dados do usuário no banco de dados. 
+- `Sistema de Login e cadastro de usuários`: Armazenamento dos dados do usuário no banco de dados. 
 
- -`Mini games`: Mini games educativos que ensinem as crianças conceitos báscios das matérias.
+ - `Mini games`: Mini games educativos que ensinem as crianças conceitos báscios das matérias.
 
- -`Sistema de pontuação e Ranking`: Pontuação do usuário em cada disciplina e pontuação geral do usuário. A pontuação geral é usada como base para a criação de um ranking entre os usuários.
+ - `Sistema de pontuação e Ranking`: Pontuação do usuário em cada disciplina e pontuação geral do usuário. A pontuação geral é usada como base para a criação de um ranking entre os usuários.
+
+ - `Sistema de conquistas`: Quando o usuário atingir determinado marco, será desbloqueado uma conquista. 
+
 
 <h1>☑️ Requisitos não funcionais para o site</h1> 
 
--`Segurança`: Garantir a segurança dos dados do usuário.
+<h2>Requisitos de Produto:</h2>
 
--`Desempenho`: Garantir que o site funcione sem travamentos.
+- `Segurança`: Garantir a segurança dos dados do usuário.
 
--`Qualidade educacional`: Garantir que os mini games estejam conceitualmente corretos e que proporcionem um aprendizado de qualidade às crianças.
+- `Facilidade de uso`: Garantir que o sistema seja de uso fácil e intuitivo, possibilitando que crianças utilizem do sistema sem grandes dificuldades. 
 
- 
+- `Desempenho`: Garantir que o site funcione sem travamentos.
+
+- `Qualidade educacional`: Garantir que os minigames estejam conceitualmente corretos e que proporcionem um aprendizado de qualidade às crianças
+
+
+<h2>Requisitos Organizacionais:</h2>
+
+- `Sistema operacional compatível`: O sistema deve ser acessado por qualquer navegador dos seguintes sistemas: Windows, Linux, android, ios, MacOs.
+
+- `Tecnologias utilizadas`: O sistema deve ser WEB, ou seja, precisa ser desenvolvido para ser acessados pelos navegadores. Assim, o sistema vai ser criado utilizando das tecnologias javaScript, HTML5, CSS3, CreateJS, nodeJS.
+
+
+<h2>Requisitos Externos:</h2>
+
+- `Lei Geral de Proteção de Dados (LGPD) - Lei nº 13.709/2018`: O sistema deve seguir as normas estabelecidas pela LGPD. 
+
+- `Marco Civil da Internet (Lei nº 12.965/2014)`: O sistema deve seguir as normas estabelecidas pelo Marco Civil da Internet. 
+
+- `Código de Defesa do Consumidor (CDC) – Lei nº 8.078/1990`: O sistema de seguir as normas estabelecidas pelo Código de Defesa do Consumidor. 
+
+
 <h1>📑 Matriz de Requisitos</h1>
 
 <img src="https://github.com/user-attachments/assets/23abb3b5-61d5-4dbf-98e6-15736e09be24" width=1000> 
