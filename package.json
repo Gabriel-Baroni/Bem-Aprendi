@@ -1,0 +1,25 @@
+{
+  "name": "bem-aprendi",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\"> BEM-APRENDI </h1>\r <p align=\"center\">Um trabalho para o PROJETO INTEGRADOR e para DESENVOLVIMENTO DE APLICAÇÕES WEB - 4º Informática do IFSP-Jacareí</p>\r <br>\r <p align=\"center\">\r <img loading=\"lazy\" src=\"http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellow&style=for-the-badge\"/>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-Baroni/Bem-Aprendi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-Baroni/Bem-Aprendi/issues"
+  },
+  "homepage": "https://github.com/Gabriel-Baroni/Bem-Aprendi#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
