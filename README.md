@@ -74,6 +74,9 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <h2>Diagrama de Caso de Uso</h2>
 <img src="https://github.com/user-attachments/assets/c430381e-3e8c-4358-a4c6-9ab4fd46ad97" width=1000> 
 
+<h2>Diagrama de Classes</h2>
+<img src="https://github.com/user-attachments/assets/c022ba09-095c-477d-a1c0-b00fbf1db307" width=1000> 
+
 <h1>🧰 Tecnologias Utilizadas</h1> 
 
 `Front-end`:
