@@ -77,6 +77,10 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <h2>Diagrama de Classes</h2>
 <img src="https://github.com/user-attachments/assets/1c3c2762-b5f3-46ff-a3d1-70666e4f7950" width=1000> 
 
+<h2>Modelo Entidade Relacionamento (MER)</h2>
+<img src="https://github.com/user-attachments/assets/990a56ba-ef4f-4195-a26a-9a909d9e1461" width=1000> 
+
+
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
 
