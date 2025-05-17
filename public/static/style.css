@@ -4,14 +4,8 @@ body{
     justify-content: center;
     height: 90vh;
     font-family: 'Press Start 2P', monospace;
-    background-image: url ('static/img/fundo.png');
-
-    
+    background-image: url('img/fundo.png'); 
 }
-
-
-
-
 
 .container{
     display: flex;
@@ -29,11 +23,11 @@ body{
 .input{
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 10px;
 }
 input{
     height: 40px;
-    padding: 10px;
+    padding: 5px;
     margin: 5px 0;  /* Adiciona um pequeno espaço vertical entre os inputs */
     border: none;
     border-radius: 70px;
@@ -46,6 +40,10 @@ input{
     font-size: 30px;
 }
 
+#login-form, .cadastro:nth-of-type(2) {
+  display: none;
+}
+
 .botao{
     display: flex;
     width: 80px;
@@ -53,4 +51,32 @@ input{
     border-radius: 70px;
     background-color: aliceblue;
     align-items: center;
+    justify-content: center;
+}
+
+.botao:hover{
+    background-color: lightgreen;
+    transition: 0.3s ease-in;
+}
+
+.trocarForm{
+    color: limegreen;
+    background-color: unset; 
+    border-color: unset;
+    border: none;
+    font-size: 12pt; 
+}
+
+.trocarForm:hover {
+    color: green;
+    font-size: 16pt;
+    transition: 0.3s;
+}
+
+.botoesForm {
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+  gap: 20px; 
 }

@@ -8,16 +8,32 @@
   <title>Page Title</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href= 'static/style.css'>
-  <script src='main.js'></script>
+  <script src='static/js/log.js'></script>
+  <script src="static/js/mudarForm.js"></script>
 </head>
 <body>
   <div class="container">
     <h2 class = "cadastro">Cadastro</h2>
-    <form class = "input">
-      <input type="text" placeholder="Nome" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Senha" required>
-      <button type="submit" class = "botao">Cadastrar</button>
+    <form class = "input" id="cadastro-form">
+      <input type="text" name="nome" placeholder="Nome" required>
+      <input type="text" name="idaide" placeholder="Idade" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <input type="password" name="confir_senha" placeholder="Confirmar Senha" required>
+      <div class="botoesForm">
+            <button type="submit" class = "botao">Cadastrar</button>
+            <button type="button" id="show-login" class="trocarForm">Já tem uma conta?</button>
+      </div>
+    </form>
+
+    <h2 class = "cadastro">Login</h2>
+    <form class = "input" id="login-form">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <div class="botoesForm">
+        <button type="submit" class ="botao">Entrar</button>
+        <button type="button" id="show-cadastro" class="trocarForm">Não tem uma conta?</button>
+      </div>
     </form>
   </div>
 </body>
