@@ -11,6 +11,7 @@ const port = 3000;
 // Middlewares Globais
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 // Rotas
 app.use('/auth', authRoutes);
