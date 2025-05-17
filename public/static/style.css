@@ -1,0 +1,56 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-family: 'Press Start 2P', monospace;
+    background-image: url ('static/img/fundo.png');
+
+    
+}
+
+
+
+
+
+.container{
+    display: flex;
+    width: 400px;
+    height: 500px;
+    background-color: rgba(156, 156, 156, 0.171);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;  
+    font-family: 'Press Start 2P', monospace;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+input{
+    height: 40px;
+    padding: 10px;
+    margin: 5px 0;  /* Adiciona um pequeno espaço vertical entre os inputs */
+    border: none;
+    border-radius: 70px;
+}
+.cadastro{
+    font-family: 'Press Start 2P', monospace;
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 30px;
+}
+
+.botao{
+    display: flex;
+    width: 80px;
+    height: 50px;
+    border-radius: 70px;
+    background-color: aliceblue;
+    align-items: center;
+}
