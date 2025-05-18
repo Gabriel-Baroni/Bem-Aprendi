@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
   const showLoginBtn = document.getElementById('show-login');
   const showCadastroBtn = document.getElementById('show-cadastro');
 
+  // Aplica o fundo inicial de cadastro
+  document.body.classList.add('cadastro-bg');
+
   showLoginBtn.addEventListener('click', function () {
     cadastroForm.style.display = 'none';
     cadastroTitle.style.display = 'none';
     loginForm.style.display = 'flex';
     loginTitle.style.display = 'flex';
+
+    // Muda o fundo para login
+    document.body.classList.remove('cadastro-bg');
+    document.body.classList.add('login-bg');
   });
 
   showCadastroBtn.addEventListener('click', function () {
@@ -18,5 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loginTitle.style.display = 'none';
     cadastroForm.style.display = 'flex';
     cadastroTitle.style.display = 'flex';
+
+    // Muda o fundo para cadastro
+    document.body.classList.remove('login-bg');
+    document.body.classList.add('cadastro-bg');
   });
 });
