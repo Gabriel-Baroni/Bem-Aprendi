@@ -67,6 +67,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <h1>📱Mockup do APP </h1>
 
 `Esboço da Interface`: <img src="https://github.com/user-attachments/assets/fd435986-9a24-4f1a-8ec6-91acd348258c" width=1000> 
+`Mockup do site`: https://www.canva.com/design/DAGhcNGDoB4/RJ91RutQgmSEIraWqMDJyQ/edit
 
 <h1>📊 Modelagem do Banco de Dados</h1>
 
