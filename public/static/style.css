@@ -6,6 +6,20 @@ body{
     font-family: 'Press Start 2P', monospace;
     background-image: url('img/fundo.png'); 
 }
+body.cadastro-bg {
+  background-image: url('img/fundo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+body.login-bg {
+  background-image: url('img/fundolog.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+  }
 
 .container{
     display: flex;
