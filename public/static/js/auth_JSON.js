@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const result = await response.json();
         if (response.ok) {
-          alert('Cadastro realizado com sucesso!');
+          window.location.href = '/start.html';
           cadastroForm.reset();
         } else {
           alert(result.error || 'Erro ao cadastrar.');
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const result = await response.json();
         if (response.ok) {
-          alert('Login realizado com sucesso!');
+          window.location.href = '/start.html';
           loginForm.reset();
         } else {
           alert(result.error || 'Erro ao fazer Login.');
