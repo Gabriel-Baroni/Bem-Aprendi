@@ -4,17 +4,17 @@ body{
     justify-content: center;
     height: 90vh;
     font-family: 'Press Start 2P', monospace;
-    background-image: url('img/fundo.png'); 
+    background-image: url('../img/auth_img/fundo.png'); 
 }
 body.cadastro-bg {
-  background-image: url('img/fundo.png');
+  background-image: url('../img/auth_img/fundo.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 body.login-bg {
-  background-image: url('img/fundolog.png');
+  background-image: url('../img/auth_img/fundolog.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +25,7 @@ body.login-bg {
     display: flex;
     width: 400px;
     height: 500px;
-    background-color: rgba(156, 156, 156, 0.171);
+    background-color: rgba(236, 232, 232, 0.718);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     flex-direction: column;
@@ -54,6 +54,7 @@ input{
     font-size: 30px;
 }
 
+
 #login-form, .cadastro:nth-of-type(2) {
   display: none;
 }
@@ -68,12 +69,16 @@ input{
     justify-content: center;
 }
 
-.botao:hover{
+.btn_cadastro:hover{
     background-color: lightgreen;
     transition: 0.3s ease-in;
 }
+.btn_login:hover{
+    background-color: rgb(224, 50, 224);
+    transition: 0.3s ease-in;
+}
 
-.trocarForm{
+.trocarForm_cadastro{
     color: limegreen;
     background-color: unset; 
     border-color: unset;
@@ -81,8 +86,22 @@ input{
     font-size: 12pt; 
 }
 
-.trocarForm:hover {
+.trocarForm_cadastro:hover {
     color: green;
+    font-size: 16pt;
+    transition: 0.3s;
+}
+
+.trocarForm_login{
+    color: darkorchid;
+    background-color: unset; 
+    border-color: unset;
+    border: none;
+    font-size: 12pt; 
+}
+
+.trocarForm_login:hover {
+    color: purple;
     font-size: 16pt;
     transition: 0.3s;
 }
