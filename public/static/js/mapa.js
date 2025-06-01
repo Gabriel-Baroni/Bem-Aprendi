@@ -3,12 +3,12 @@ const stage = new createjs.Stage("stage");
 
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
-  { x: 300, y: 800, materia: "Matemática" },
-  { x: 600, y: 700, materia: "Lógica" },
-  { x: 900, y: 850, materia: "Português" },
-  { x: 1200, y: 700, materia: "História" },
-  { x: 1500, y: 600, materia: "Ciências" },
-  { x: 1800, y: 750, materia: "Inglês" }
+  { x: 350, y: 620, materia: "Matemática" },
+  { x: 260, y: 290, materia: "Lógica" },
+  { x: 950, y: 825, materia: "Português" },
+  { x: 935, y: 300, materia: "História" },
+  { x: 1160, y: 560, materia: "Ciências" },
+  { x: 1670, y: 825, materia: "Inglês" }
 ];
 
 // Cria variaveis globais para o player, popup e fundoClick
@@ -20,7 +20,7 @@ let ultimoSelecionado = null; // Variável para guardar o último círculo clica
 // Pré-Carrega a imagem do player e a imagem do fundo
 const loader = new createjs.LoadQueue();
 loader.loadManifest([
-  { id: "bg", src: "static/img/index_img/fundo_pixel.png" },
+  { id: "bg", src: "static/img/index_img/fundo_pixel.jpeg" },
   { id: "player", src: "static/img/index_img/bem_te_vi.png" }
 ]);
 loader.on("complete", init);
@@ -29,8 +29,11 @@ loader.on("complete", init);
 function init() {
   // Carrerga a imagem do fundo e adiciona ao palco
   const bg = new createjs.Bitmap(loader.getResult("bg"));
-  stage.addChild(bg);
-
+  bg.set({
+    scaleX: stage.canvas.width / bg.image.width,
+    scaleY: stage.canvas.height / bg.image.height
+  });
+stage.addChild(bg);
   // Cria o FundoClick, que é um fundo invisível que detecta cliques fora do popup 
   fundoClick = new createjs.Shape();
   fundoClick.graphics.beginFill("rgba(0,0,0,0.01)").drawRect(0, 0, 1920, 1080 );
@@ -48,17 +51,16 @@ function init() {
   player.regX = player.image.width / 2;
   player.regY = player.image.height / 2;
   player.scaleX = player.scaleY = 0.3;
-  player.x = fases[0].x - 50;
-  player.y = fases[0].y - 50;
+  player.x = 620;
+  player.y = 900;
   stage.addChild(player);
 
-  // Cria os círculos para cada fase e suas características
 // Cria os círculos para cada fase e suas características
 fases.forEach((pos, i) => {
   const circle = new createjs.Shape();
-  const raio = 50;
+  const raio = 40;
   const corOriginal = "#ffffff";
-  const corSelecionado = "#FFFF00"; // ou outra cor desejada
+  const corSelecionado = "#FFFF00"; 
 
   circle.graphics.beginFill(corOriginal).drawCircle(0, 0, raio);
   circle.x = pos.x;
@@ -92,7 +94,7 @@ fases.forEach((pos, i) => {
     titulo.textContent = pos.materia;
 
     // Posiciona o pop-up próximo à matéria clicada
-    popup.style.left = ((i + 1) * 150) + "px";
+    popup.style.left = ((i + 1) * 200) + "px";
     popup.style.top = "150px";
     popup.style.display = "block";
 
