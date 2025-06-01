@@ -1,53 +1,135 @@
-body { margin: 0; background: #87ceeb; }
-canvas { background: #a3d9a5; display: block; margin: 0 auto; }
-  /* Ícone do menu */
-  #menu-icon {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    width: 30px;
-    height: 25px;
-    cursor: pointer;
-    z-index: 1001;
-  }
-  /* Linhas do ícone */
-  #menu-icon div {
-    background-color: #333;
-    height: 4px;
-    margin: 5px 0;
-    border-radius: 2px;
+body {
+  margin: 40px; /* margem ao redor do canvas */
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center;     /* centraliza vertical */
+  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  background: #f0f0f0;
+}
+
+/* Canvas com tamanho fluido para desktops e mobiles */
+#stage {
+  border: 2px solid #333;
+  width: 80vw;  /* largura padrão */
+  height: 90vh; /* altura padrão */
+  display: block; /* remove espaçamento */
+  max-width: 900px;  /* limite máximo para telas grandes */
+  max-height: 600px;
+}
+
+/* Ícone do menu */
+#menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Linhas do ícone */
+#menu-icon div {
+  background-color: #333;
+  height: 4px;
+  margin: 5px 0;
+  border-radius: 2px;
+}
+
+/* Menu lateral */
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* escondido inicialmente */
+  width: 250px;
+  height: 100vh;
+  background-color: #222;
+  color: white;
+  padding: 60px 20px 20px 20px;
+  box-sizing: border-box;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+/* Quando ativo, mostra o menu */
+#side-menu.active {
+  left: 0;
+}
+
+/* Itens do menu */
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+#side-menu ul li {
+  padding: 15px 0;
+  border-bottom: 1px solid #444;
+  cursor: pointer;
+}
+#side-menu ul li:hover {
+  background-color: #444;
+}
+
+/* ======== Media Queries para responsividade ======== */
+
+/* Para tablets e telas menores */
+@media (max-width: 768px) {
+  body {
+    margin: 20px;
+    height: calc(100vh - 20px);
   }
 
-  /* Menu lateral */
+  #stage {
+    width: 90vw;
+    height: 70vh;
+    max-width: none;
+    max-height: none;
+  }
+
   #side-menu {
-    position: fixed;
-    top: 0;
-    left: -250px; /* escondido inicialmente */
-    width: 250px;
-    height: 100vh;
-    background-color: #222;
-    color: white;
-    padding: 60px 20px 20px 20px;
-    box-sizing: border-box;
-    transition: left 0.3s ease;
-    z-index: 1000;
+    width: 200px;
+    padding: 50px 15px 15px 15px;
   }
 
-  /* Quando ativo, mostra o menu */
-  #side-menu.active {
-    left: 0;
+  #menu-icon {
+    width: 25px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
   }
 
-  /* Itens do menu */
-  #side-menu ul {
-    list-style: none;
-    padding: 0;
+  #menu-icon div {
+    height: 3px;
+    margin: 4px 0;
   }
-  #side-menu ul li {
-    padding: 15px 0;
-    border-bottom: 1px solid #444;
-    cursor: pointer;
+}
+
+/* Para celulares pequenos */
+@media (max-width: 480px) {
+  body {
+    margin: 8px; 
+    height: calc(100vh - 16px); 
   }
-  #side-menu ul li:hover {
-    background-color: #444;
+
+  #stage {
+    width: 95vw;
+    height: 80vh;
   }
+
+  #side-menu {
+    width: 180px;
+    padding: 40px 10px 10px 10px;
+  }
+
+  #menu-icon {
+    width: 20px;
+    height: 15px;
+    top: 8px;
+    left: 8px;
+  }
+
+  #menu-icon div {
+    height: 2.5px;
+    margin: 3px 0;
+  }
+}
