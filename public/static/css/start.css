@@ -4,6 +4,12 @@ body {
   align-items: center;
   height: 90vh;
   font-family: 'Press Start 2P', monospace;
+  background-image: url(../img/start/tela_start.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  margin: 0; /* Remove margens do body para evitar scroll */
+  min-height: 100vh; /* Garante altura mínima de 100% da viewport */
 }
 
 .container {
