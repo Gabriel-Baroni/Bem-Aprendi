@@ -3,20 +3,21 @@ const stage = new createjs.Stage("stage");
 
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
-  { x: 100, y: 300, materia: "Matemática" },
-  { x: 150, y: 350, materia: "Lógica" },
-  { x: 200, y: 250, materia: "Português" },
-  { x: 300, y: 300, materia: "História" },
-  { x: 400, y: 200, materia: "Ciências" },
-  { x: 500, y: 250, materia: "Inglês" }
+  { x: 300, y: 800, materia: "Matemática" },
+  { x: 600, y: 700, materia: "Lógica" },
+  { x: 900, y: 850, materia: "Português" },
+  { x: 1200, y: 700, materia: "História" },
+  { x: 1500, y: 600, materia: "Ciências" },
+  { x: 1800, y: 750, materia: "Inglês" }
 ];
 
-// Cria variaveis globais para o player, popup, titulo, botao e fundoClick
+// Cria variaveis globais para o player, popup e fundoClick
 let player;
 let popup, titulo, botao;
 let fundoClick;
+let ultimoSelecionado = null; // Variável para guardar o último círculo clicado
 
-// Pré-Carrega a imagem do player
+// Pré-Carrega a imagem do player e a imagem do fundo
 const loader = new createjs.LoadQueue();
 loader.loadManifest([
   { id: "bg", src: "static/img/index_img/fundo_pixel.png" },
@@ -24,17 +25,19 @@ loader.loadManifest([
 ]);
 loader.on("complete", init);
 
+// Função que ira criar cada elemento com o createjs e adicionar ao palco
 function init() {
+  // Carrerga a imagem do fundo e adiciona ao palco
   const bg = new createjs.Bitmap(loader.getResult("bg"));
   stage.addChild(bg);
 
   // Cria o FundoClick, que é um fundo invisível que detecta cliques fora do popup 
   fundoClick = new createjs.Shape();
-  fundoClick.graphics.beginFill("rgba(0,0,0,0.01)").drawRect(0, 0, 800, 600);
+  fundoClick.graphics.beginFill("rgba(0,0,0,0.01)").drawRect(0, 0, 1920, 1080 );
   fundoClick.visible = false;
   fundoClick.cursor = "default";
   fundoClick.on("click", () => {
-    popup.visible = false;
+    popup.style.display = "none"; // Esconde o popup ao clicar fora dele
     fundoClick.visible = false;
     stage.update();
   });
@@ -44,69 +47,63 @@ function init() {
   player = new createjs.Bitmap(loader.getResult("player"));
   player.regX = player.image.width / 2;
   player.regY = player.image.height / 2;
-  player.scaleX = player.scaleY = 0.1;
+  player.scaleX = player.scaleY = 0.3;
   player.x = fases[0].x - 50;
   player.y = fases[0].y - 50;
   stage.addChild(player);
 
   // Cria os círculos para cada fase e suas características
-  fases.forEach((pos, i) => {
-    const circle = new createjs.Shape();
-    circle.graphics.beginFill("#fff").drawCircle(0, 0, 15);
-    circle.x = pos.x;
-    circle.y = pos.y;
-    circle.cursor = "pointer";
-    stage.addChild(circle);
+// Cria os círculos para cada fase e suas características
+fases.forEach((pos, i) => {
+  const circle = new createjs.Shape();
+  const raio = 50;
+  const corOriginal = "#ffffff";
+  const corSelecionado = "#FFFF00"; // ou outra cor desejada
 
-    // Adiciona um evento de clique ao circulo
-    circle.on("click", (event) => {
-      event.stopPropagation();
-      titulo.text = pos.materia;
+  circle.graphics.beginFill(corOriginal).drawCircle(0, 0, raio);
+  circle.x = pos.x;
+  circle.y = pos.y;
+  circle.cursor = "pointer";
+  stage.addChild(circle);
 
-      // Ajusta posição do popup para cima da fase, com tamanho menor
-      popup.x = pos.x + 15;
-      popup.y = pos.y - 110;
-      popup.visible = true;
-      fundoClick.visible = true;
-      stage.update();
+  // Adiciona um evento de clique ao círculo
+  circle.on("click", (event) => {
+    event.stopPropagation();
 
-      botao.removeAllEventListeners("click");
-      botao.on("click", () => acessarSala(pos.materia));
-      movePlayerTo(i);
-    });
+    // Restaura o último selecionado, se não for o mesmo
+    if (ultimoSelecionado && ultimoSelecionado !== circle) {
+      ultimoSelecionado.graphics.clear()
+        .beginFill(corOriginal)
+        .drawCircle(0, 0, raio);
+    }
+
+    // Muda a cor do círculo atual
+    circle.graphics.clear()
+      .beginFill(corSelecionado)
+      .drawCircle(0, 0, raio);
+
+    ultimoSelecionado = circle; // Atualiza o último selecionado
+
+    // Mostra o popup HTML com a matéria
+    popup = document.getElementById("popup-materia");
+    titulo = document.getElementById("titulo-popup");
+    botao = document.getElementById("botao-popup");
+
+    titulo.textContent = pos.materia;
+
+    // Posiciona o pop-up próximo à matéria clicada
+    popup.style.left = ((i + 1) * 150) + "px";
+    popup.style.top = "150px";
+    popup.style.display = "block";
+
+    fundoClick.visible = true;
+    botao.onclick = () => acessarSala(pos.materia);
+
+    movePlayerTo(i);
   });
+});
 
-  // Cria o pop-up que aparece ao clicar em uma matéria
-  popup = new createjs.Container();
-  popup.visible = false;
-
-  // Fundo menor do popup
-  const fundo = new createjs.Shape();
-  fundo.graphics.beginFill("#fff").drawRoundRect(0, 0, 150, 100, 10);
-  fundo.shadow = new createjs.Shadow("#000", 2, 2, 5);
-
-  // Título menor e centralizado
-  titulo = new createjs.Text("", "12px 'Press Start 2P'", "#000");
-  titulo.textAlign = "center";
-  titulo.x = 75;  // metade da largura do fundo
-  titulo.y = 10;
-
-  // Botão menor e posicionado dentro do popup
-  botao = new createjs.Shape();
-  botao.graphics.beginFill("#4CAF50").drawRoundRect(0, 0, 140, 25, 5);
-  botao.x = 5;
-  botao.y = 50;
-  botao.cursor = "pointer";
-
-  const botaoTexto = new createjs.Text("Acessar Sala", "10px 'Press Start 2P'", "#fff");
-  botaoTexto.x = 15; 
-  botaoTexto.y = 56;
-
-  popup.addChild(fundo, titulo, botao, botaoTexto);
-  popup.on("click", (e) => e.stopPropagation()); // clique dentro do popup não fecha
-  stage.addChild(popup);
-
-  // Atualiza o stage a cada tick e define o framrate da tela em 60 fps
+  // Atualiza o stage a cada tick e define o framerate da tela em 60 fps
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
 }
@@ -114,7 +111,7 @@ function init() {
 // A função que move o player até a matéria correta 
 function movePlayerTo(index) {
   createjs.Tween.get(player)
-    .to({ x: fases[index].x - 40, y: fases[index].y }, 1000, createjs.Ease.getPowInOut(2));
+    .to({ x: fases[index].x - 100, y: fases[index].y }, 1000, createjs.Ease.getPowInOut(2));
 }
 
 // A função que acessa a sala da matéria selecionada
