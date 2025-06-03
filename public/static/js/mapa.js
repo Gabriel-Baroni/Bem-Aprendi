@@ -40,7 +40,7 @@ stage.addChild(bg);
   fundoClick.visible = false;
   fundoClick.cursor = "default";
   fundoClick.on("click", () => {
-    popup.style.display = "none"; // Esconde o popup ao clicar fora dele
+    popup.style.display = "none";
     fundoClick.visible = false;
     stage.update();
   });
@@ -58,7 +58,7 @@ stage.addChild(bg);
 // Cria os círculos para cada fase e suas características
 fases.forEach((pos, i) => {
   const circle = new createjs.Shape();
-  const raio = 40;
+  const raio = 35;
   const corOriginal = "#ffffff";
   const corSelecionado = "#FFFF00"; 
 
@@ -94,8 +94,10 @@ fases.forEach((pos, i) => {
     titulo.textContent = pos.materia;
 
     // Posiciona o pop-up próximo à matéria clicada
-    popup.style.left = ((i + 1) * 200) + "px";
-    popup.style.top = "150px";
+    popup.style.position = "fixed";
+    popup.style.left = "50%";
+    popup.style.top = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
     popup.style.display = "block";
 
     fundoClick.visible = true;
