@@ -3,12 +3,12 @@ const stage = new createjs.Stage("stage");
 
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
-  { x: 350, y: 620, materia: "Matemática" },
-  { x: 260, y: 290, materia: "Lógica" },
-  { x: 950, y: 825, materia: "Português" },
-  { x: 935, y: 300, materia: "História" },
-  { x: 1160, y: 560, materia: "Ciências" },
-  { x: 1670, y: 825, materia: "Inglês" }
+  { x: 350, y: 620, materia: "Matemática", img:"" },
+  { x: 260, y: 290, materia: "Lógica",  img:""},
+  { x: 950, y: 825, materia: "Português", img:"" },
+  { x: 935, y: 300, materia: "História", img:"" },
+  { x: 1160, y: 560, materia: "Ciências", img:"" },
+  { x: 1670, y: 825, materia: "Inglês", img:"" }
 ];
 
 // Cria variaveis globais para o player, popup e fundoClick
@@ -69,8 +69,16 @@ fases.forEach((pos, i) => {
   stage.addChild(circle);
 
   // Adiciona um evento de clique ao círculo
+  const clickMateriaSound = new Audio('static/sound/pluck_002.ogg');
   circle.on("click", (event) => {
     event.stopPropagation();
+
+    clickMateriaSound .currentTime = 0;
+    clickMateriaSound .volume = 1.0;
+    clickMateriaSound .play();
+
+    const popupImage = document.getElementById("popup-image");
+    popupImage.style.backgroundImage = `url('${pos.img}')`
 
     // Restaura o último selecionado, se não for o mesmo
     if (ultimoSelecionado && ultimoSelecionado !== circle) {
@@ -84,7 +92,7 @@ fases.forEach((pos, i) => {
       .beginFill(corSelecionado)
       .drawCircle(0, 0, raio);
 
-    ultimoSelecionado = circle; // Atualiza o último selecionado
+    ultimoSelecionado = circle; 
 
     // Mostra o popup HTML com a matéria
     popup = document.getElementById("popup-materia");
@@ -93,7 +101,7 @@ fases.forEach((pos, i) => {
 
     titulo.textContent = pos.materia;
 
-    // Posiciona o pop-up próximo à matéria clicada
+    // Posiciona o pop-up no centro da tela
     popup.style.position = "fixed";
     popup.style.left = "50%";
     popup.style.top = "50%";
@@ -105,6 +113,14 @@ fases.forEach((pos, i) => {
 
     movePlayerTo(i);
   });
+
+  document.getElementById("close-popup").addEventListener("click", () => {
+  popup.style.display = 'none';
+  fundoClick.visible = false;
+  stage.update();
+
+});
+
 });
 
   // Atualiza o stage a cada tick e define o framerate da tela em 60 fps
@@ -121,5 +137,13 @@ function movePlayerTo(index) {
 // A função que acessa a sala da matéria selecionada
 function acessarSala(materia) {
   alert("Indo para a sala de " + materia);
-  // window.location.href = `sala.html?materia=${encodeURIComponent(materia)}`;
+    const rotas = {
+    "Matemática": "Matematica/game1.html",
+    "Lógica": "game2.html",
+    "Português": "game3.html",
+    "História": "game4.html",
+    "Ciências": "game5.html",
+    "Inglês": "game6.html"
+  };
+   window.location.href = rotas[materia] || `sala.html?materia=${encodeURIComponent(materia)}`;
 }
