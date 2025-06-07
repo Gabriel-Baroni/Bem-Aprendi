@@ -4,3 +4,4 @@
   menuIcon.addEventListener('click', () => {
     sideMenu.classList.toggle('active');
   });
+

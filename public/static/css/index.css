@@ -58,8 +58,8 @@ body {
 
 /* Espaço para imagem pixelada à esquerda */
 .popup .popup-image {
-  flex: 0 0 180px; /* largura fixa para a imagem */
-  height: 20%;
+  width: 300px;           /* aumenta a largura */
+  height: 200px;          /* aumenta a altura */
   background-color: #c2a15c;
   border: 4px solid #5c2b00;
   border-radius: 12px;
@@ -67,6 +67,10 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  margin: auto;           /* centraliza verticalmente se necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Conteúdo textual à direita */
@@ -78,7 +82,7 @@ body {
   height: 100%;
 }
 
-/* Título */
+/* Título (Matéria)*/
 .popup h2 {
   font-size: 14px;
   color: #fff;
@@ -88,11 +92,12 @@ body {
   border: 4px solid #222;
   border-radius: 10px;
   text-shadow: 2px 2px #000;
+  text-align: center;
   box-shadow: 0 4px #000;
   user-select: none;
 }
 
-/* Botão principal */
+/* Botão principal (ir para sala) */
 #botao-popup {
   font-family: 'Press Start 2P', cursive;
   font-size: 10px;
@@ -105,6 +110,7 @@ body {
   box-shadow: 0 6px #000;
   transition: all 0.1s ease-in-out;
   user-select: none;
+  height: 70px;
 }
 
 #botao-popup:hover {
@@ -141,39 +147,86 @@ body {
 }
 
 
-/* Ícone do menu */
-#menu-icon {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-/* Linhas do ícone */
-#menu-icon div {
-  background-color: #333;
-  height: 4px;
-  margin: 5px 0;
-  border-radius: 2px;
-}
-
 /* Menu lateral */
 #side-menu {
   position: fixed;
   top: 0;
-  left: -250px; /* escondido inicialmente */
+  left: -250px;
   width: 250px;
   height: 100vh;
-  background-color: #222;
-  color: white;
+  background: linear-gradient(135deg, #ffe8a3 80%, #ffb347 100%);
+  color: #5c2b00;
   padding: 60px 20px 20px 20px;
   box-sizing: border-box;
-  transition: left 0.3s ease;
+  transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
   z-index: 1000;
+  border-right: 8px solid #5c2b00;
+  box-shadow: 8px 0 0 #ffb347, 0 0 0 8px #fffbe6;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
 }
+
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  padding: 18px 0;
+  border-bottom: 3px dashed #ffb347;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: #fffbe6;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #ffb347;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+a{
+  text-decoration: none;
+  color: #5c2b00;
+}
+
+#side-menu ul li:hover {
+  background: #ffb347;
+  color: #fff;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px 0 #5c2b00;
+  transform: scale(1.05);
+}
+
+#menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  background: #ffe8a3;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #ffb347;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-icon div {
+  background-color: #5c2b00;
+  height: 6px;
+  margin: 3px 0;
+  border-radius: 2px;
+  width: 80%;
+  image-rendering: pixelated;
+}
+
 
 /* Quando ativo, mostra o menu */
 #side-menu.active {
@@ -185,14 +238,7 @@ body {
   list-style: none;
   padding: 0;
 }
-#side-menu ul li {
-  padding: 15px 0;
-  border-bottom: 1px solid #444;
-  cursor: pointer;
-}
-#side-menu ul li:hover {
-  background-color: #444;
-}
+
 
 /* ======== Media Queries para responsividade ======== */
 
