@@ -4,12 +4,32 @@
   <meta charset="UTF-8">
   <title>Minigame de Matemática</title>
   <link rel="stylesheet" href="../static/css/matematica/game1.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <h2>Minigame de Operações</h2>
   <canvas id="gameCanvas" width="600" height="400"></canvas><br>
-  <button onclick="resetLinha()">Apagar Linhas Erradas</button>
+  <button id="resetButton" onclick="resetLinha()">Apagar Linhas Erradas</button>
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script src="../static/js/matematica/game1.js"></script>
+  <script src="../static/js/matematica/menu.js" defer></script>
+
+<div id="menu-icon">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+
+<nav id="side-menu">
+  <ul>
+    <a href="start.html"><li>Início</li></a>
+    <a href=""><li>Ranking</li></a>
+    <a href=""><li>Configurações</li></a>
+    <a href=""><li>Ajuda</li></a>
+    <li>Sair</li>
+  </ul>
+</nav>
+
 </body>
 </html>
