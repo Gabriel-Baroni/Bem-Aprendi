@@ -126,6 +126,7 @@ fases.forEach((pos, i) => {
   // Atualiza o stage a cada tick e define o framerate da tela em 60 fps
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
+  stage.update();
 }
 
 // A função que move o player até a matéria correta 

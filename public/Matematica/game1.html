@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>Minigame de Operações</h2>
-  <canvas id="gameCanvas" width="600" height="400"></canvas><br>
+  <canvas id="gameCanvas" width="1000" height="500"></canvas>
   <button id="resetButton" onclick="resetLinha()">Apagar Linhas Erradas</button>
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script src="../static/js/matematica/game1.js"></script>
@@ -31,5 +31,28 @@
   </ul>
 </nav>
 
+<div id="popupFimFase">
+  <div class="caixa">
+    <div class="titulo">Parabéns!</div>
+    <div class="pontuacao">Sua pontuação: <span id="pontuacaoFinal">0</span> / 200</div>
+    <div class="botoes">
+      <button id="btnProximo">Próximo</button>
+      <button id="btnJogarDeNovo">Jogar de novo</button>
+    </div>
+  </div>
+</div>
+
+<div id="popupGameOver" class="popup">
+  <div class="caixa">
+    <div class="close-btn">×</div>
+    <div class="titulo">Game Over</div>
+    <div class="botoes">
+      <button id="btnGameOverJogarDeNovo">Jogar de Novo</button>
+      <button id="btnGameOverMenu">Voltar ao Menu</button>
+    </div>
+  </div>
+</div>
+
+  <div id="vidas">❤️❤️❤️</div>
 </body>
 </html>

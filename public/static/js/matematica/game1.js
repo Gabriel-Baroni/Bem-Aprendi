@@ -9,10 +9,17 @@ window.onload = function () {
   let tempo = 0;
 
   // Cria um texto para exibir o tempo na tela
-  const textoTimer = new createjs.Text("Tempo: 0s", "20px Arial", "#000");
+  const textoTimer = new createjs.Text("Tempo: 0s", "12px 'Press Start 2P'", "#000");
   textoTimer.x = 10;
   textoTimer.y = 10;
   stage.addChild(textoTimer);
+
+  // --- NOVO: texto para mostrar quantas combinações faltam ---
+  const textoFaltam = new createjs.Text(`Faltam: 0`, "12px 'Press Start 2P'", "#000");
+  textoFaltam.x = 650;
+  textoFaltam.y = 10;
+  stage.addChild(textoFaltam);
+
 
   // Atualiza o tempo a cada segundo
   setInterval(() => {
@@ -21,7 +28,7 @@ window.onload = function () {
   }, 1000);
 
   // Array com a coordenada X de cada coluna
-  let colX = [50, 200, 350, 500];
+  let colX = [150, 350, 550, 750];
   // Array de arrays com o conteúdo de cada coluna
   let colunas = [
     [10, 9, 20, 3],
@@ -51,25 +58,35 @@ window.onload = function () {
 
   // Variável para pontuação do usuário, começa em 0
   let pontuacao = 0;
-  // Pontuação total da fase, fixada em 200 pontos
-  const pontuacaoTotal = 200;
   // Contador de respostas corretas para controlar quando acabar as possibilidades
   let respostasCorretas = 0;
   // Total de respostas possíveis (exemplo, pode ser ajustado conforme o jogo)
   const totalRespostasPossiveis = 5; // Ajuste esse número de acordo com as combinações corretas possíveis no seu jogo
 
+  // --- NOVO: sistema de vidas ---
+  let vidas = 3; // Quantidade inicial de vidas
+
+  // Atualiza o texto que mostra quantas combinações faltam
+  function atualizarTextoFaltam() {
+    textoFaltam.text = `Faltam: ${totalRespostasPossiveis - respostasCorretas} contas para fazer!`;
+  }
+  
+  function atualizarVidas() {
+      const vidasDiv = document.getElementById("vidas");
+      vidasDiv.textContent = "❤️".repeat(vidas);
+    }
   // Função que cria cada bloco, tem como parâmetros um texto para o bloco, suas coordenadas e o tipo 
   function criarBloco(texto, x, y, tipo) {
     const cont = new createjs.Container(); //Cria um container 
     const shape = new createjs.Shape();  // Dentro do container, cria uma forma
-    shape.graphics.beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 60, 50, 12); // Define a forma como um retângulo e atribui suas características 
+    shape.graphics.beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12); // Define a forma como um retângulo e atribui suas características 
 
-    const label = new createjs.Text(texto, "20px Comic Sans MS", "#000"); //Cria um texto com o texto passado pelo parâmetro
+    const label = new createjs.Text(texto, "30px Comic Sans MS", "#000"); //Cria um texto com o texto passado pelo parâmetro
     // Define a posição do texto dentro do container
     label.textAlign = "center";
     label.textBaseline = "middle";
-    label.x = 30;
-    label.y = 25;
+    label.x = 45;
+    label.y = 40;
     cont.addChild(shape, label);  // Adiciona o retângulo e o texto como filhos do container
     // Define as coordenadas do container a partir das passadas por parâmetro
     cont.x = x;
@@ -88,7 +105,7 @@ window.onload = function () {
   function criarColunas() {
     for (let i = 0; i < colunas.length; i++) { //Laço for externo, que percorre cada coluna
       for (let j = 0; j < colunas[i].length; j++) { //Laço for interno, que percorre cada elemento da coluna
-        const bloco = criarBloco(colunas[i][j], colX[i], 50 + j * 80, i); //Chama a função criarBloco e passa os parâmetros
+        const bloco = criarBloco(colunas[i][j], colX[i], 50 + j * 100, i); //Chama a função criarBloco e passa os parâmetros
         stage.addChild(bloco); //Adiciona esse novo bloco ao palco 
       }
     }
@@ -98,7 +115,7 @@ window.onload = function () {
   function pegarBlocoEm(x, y) {
     return blocos.find(b => { //Usa o método find() para procurar dentro do array blocos
       const bx = b.x, by = b.y; //Cria variáveis com as coordenadas x e y do bloco
-      return x >= bx && x <= bx + 60 && y >= by && y <= by + 50; //Vai retornar blocos que estiverem dentro da coordenada do clique. 
+      return x >= bx && x <= bx + 90 && y >= by && y <= by + 80; //Vai retornar blocos que estiverem dentro da coordenada do clique. 
     });
   }
 
@@ -110,7 +127,7 @@ window.onload = function () {
     }
     // Retorna a os atributos originais em cada bloco em todos os blocos
     blocos.forEach(b => {
-      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 60, 50, 12);
+      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
     });
     // Limpa os arrays de linhasErradas e pontosSelecionados
     linhasErradas = [];
@@ -118,118 +135,110 @@ window.onload = function () {
     stage.update(); //Força a atualização da tela
   }
 
-  // Função para criar o pop-up de fim de fase com a pontuação e opções
-  function criarPopupFinal() {
-    // Container para o pop-up
-    const popup = new createjs.Container();
-
-    // Fundo semi-transparente para o pop-up
-    const fundo = new createjs.Shape();
-    fundo.graphics.beginFill("rgba(0,0,0,0.7)").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
-    popup.addChild(fundo);
-
-    // Caixa do pop-up branca
-    const caixa = new createjs.Shape();
-    caixa.graphics.beginFill("#fff").drawRoundRect(0, 0, 400, 250, 20);
-    caixa.x = stage.canvas.width / 2 - 200;
-    caixa.y = stage.canvas.height / 2 - 125;
-    popup.addChild(caixa);
-
-    // Texto Parabéns
-    const textoParabens = new createjs.Text("Parabéns!", "30px Comic Sans MS", "#333");
-    textoParabens.x = stage.canvas.width / 2;
-    textoParabens.y = stage.canvas.height / 2 - 100;
-    textoParabens.textAlign = "center";
-    popup.addChild(textoParabens);
-
-    // Texto da pontuação do usuário
-    const textoPontuacao = new createjs.Text(
-      `Sua pontuação: ${pontuacao} / ${pontuacaoTotal}`,
-      "24px Comic Sans MS",
-      "#333"
-    );
-    textoPontuacao.x = stage.canvas.width / 2;
-    textoPontuacao.y = stage.canvas.height / 2 - 40;
-    textoPontuacao.textAlign = "center";
-    popup.addChild(textoPontuacao);
-
-    // Botão "Próximo"
-    const botaoProximo = new createjs.Container();
-    const botaoProximoBg = new createjs.Shape();
-    botaoProximoBg.graphics.beginFill("#4CAF50").drawRoundRect(0, 0, 150, 50, 12);
-    botaoProximo.addChild(botaoProximoBg);
-    botaoProximo.x = stage.canvas.width / 2 - 175;
-    botaoProximo.y = stage.canvas.height / 2 + 70;
-
-    const textoBotaoProximo = new createjs.Text("Próximo", "22px Comic Sans MS", "#fff");
-    textoBotaoProximo.textAlign = "center";
-    textoBotaoProximo.textBaseline = "middle";
-    textoBotaoProximo.x = 75;
-    textoBotaoProximo.y = 25;
-    botaoProximo.addChild(textoBotaoProximo);
-    popup.addChild(botaoProximo);
-
-    botaoProximo.cursor = "pointer";
-    botaoProximo.on("click", () => {
-      // Aqui você pode colocar a lógica para ir para a próxima fase
-      // Por enquanto, só remove o pop-up e reseta o jogo
-      stage.removeChild(popup);
-      resetJogo();
-    });
-
-    // Botão "Jogar de novo"
-    const botaoJogarDeNovo = new createjs.Container();
-    const botaoJogarDeNovoBg = new createjs.Shape();
-    botaoJogarDeNovoBg.graphics.beginFill("#2196F3").drawRoundRect(0, 0, 150, 50, 12);
-    botaoJogarDeNovo.addChild(botaoJogarDeNovoBg);
-    botaoJogarDeNovo.x = stage.canvas.width / 2 + 25;
-    botaoJogarDeNovo.y = stage.canvas.height / 2 + 70;
-
-    const textoBotaoJogarDeNovo = new createjs.Text("Jogar de novo", "22px Comic Sans MS", "#fff");
-    textoBotaoJogarDeNovo.textAlign = "center";
-    textoBotaoJogarDeNovo.textBaseline = "middle";
-    textoBotaoJogarDeNovo.x = 75;
-    textoBotaoJogarDeNovo.y = 25;
-    botaoJogarDeNovo.addChild(textoBotaoJogarDeNovo);
-    popup.addChild(botaoJogarDeNovo);
-
-    botaoJogarDeNovo.cursor = "pointer";
-    botaoJogarDeNovo.on("click", () => {
-      stage.removeChild(popup);
-      resetJogo();
-    });
-
-    stage.addChild(popup);
-  }
-
   // Função para resetar o jogo (resetar variáveis, limpar linhas, etc)
-  function resetJogo() {
-    pontuacao = 0;
-    respostasCorretas = 0;
-    corIndex = 0;
-    linhasErradas.forEach(l => stage.removeChild(l));
-    linhasErradas = [];
-    pontosSelecionados = [];
-    blocos.forEach(b => {
-      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 60, 50, 12);
-      b.linhasConectadas = [];
+function resetJogo() {
+  pontuacao = 0;
+  respostasCorretas = 0;
+  corIndex = 0;
+  vidas = 3; // Resetar vidas também
+  tempo=0
+
+  // Remove todas as linhas erradas do palco
+  linhasErradas.forEach(l => stage.removeChild(l));
+  linhasErradas = [];
+
+  // Remove todas as linhas corretas conectadas de cada bloco
+  blocos.forEach(b => {
+    b.linhasConectadas.forEach(linha => {
+      stage.removeChild(linha);
     });
-    stage.update();
+    b.linhasConectadas = []; // limpa o array do bloco
+
+    // Restaura o visual original do bloco
+    b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+  });
+
+  // Limpa os blocos selecionados
+  pontosSelecionados = [];
+
+  atualizarTextoFaltam(); // Atualiza o texto das combinações faltando ao resetar
+  atualizarVidas(); // Atualiza o texto das vidas ao resetar
+  stage.update();
+}
+
+  // Função para criar o pop-up de fim de fase com a pontuação e opções
+function criarPopupFinal() {
+  const popup = document.getElementById("popupFimFase");
+  const pontuacaoSpan = document.getElementById("pontuacaoFinal");
+  pontuacaoSpan.textContent = pontuacao; // Atualiza a pontuação exibida
+  popup.classList.add("mostrar"); // Mostra o pop-up
+
+  // Botão Jogar de Novo
+  document.getElementById("btnProximo").onclick = () => {
+    popup.classList.remove("mostrar");
+    resetJogo();
+    // Aqui você pode adicionar lógica para próxima fase
+  };
+
+  // Botão Jogar de Novo (alternativo)
+  document.getElementById("btnJogarDeNovo").onclick = () => {
+    popup.classList.remove("mostrar");
+    resetJogo();
+  };
+
+}
+
+function criarPopupGameOver() {
+  const popup = document.getElementById("popupGameOver");
+
+  // Exibe o popup
+  popup.classList.add("mostrar");
+
+  // Configura o botão "Jogar de Novo"
+  document.getElementById("btnGameOverJogarDeNovo").onclick = () => {
+    popup.classList.remove("mostrar"); // Fecha o popup
+    resetJogo(); // Função que você já tem para reiniciar o jogo
+  };
+
+  // (Opcional) Configura botão fechar, se existir no popup
+  const btnFechar = popup.querySelector(".close-btn");
+  if (btnFechar) {
+    btnFechar.onclick = () => popup.classList.remove("mostrar");
+  };
+
+   document.getElementById("btnGameOverMenu").onclick = () => {
+    window.location.href = "/index.html";
+
+  };
+}
+
+ stage.on("stagemousedown", (evt) => {
+  const bloco = pegarBlocoEm(evt.stageX, evt.stageY);
+  if (!bloco) return;
+
+  // Se o bloco já está selecionado, não faz nada (evita seleção dupla)
+  if (pontosSelecionados.includes(bloco)) return;
+
+  // Verifica se já tem um bloco selecionado na mesma coluna (tipo)
+  const blocoMesmoTipo = pontosSelecionados.find(b => b.tipo === bloco.tipo);
+
+  if (blocoMesmoTipo) {
+    // Desmarcar o bloco anterior da mesma coluna
+    blocoMesmoTipo.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+
+    // Remove ele do array de selecionados
+    pontosSelecionados = pontosSelecionados.filter(b => b !== blocoMesmoTipo);
   }
 
-  stage.on("stagemousedown", (evt) => { //Adiciona um listener de click no palco 
-    const bloco = pegarBlocoEm(evt.stageX, evt.stageY); // Chama a função e passa as coordenadas do click como parâmetro
-    if (!bloco || pontosSelecionados.includes(bloco)) return; // Verifica se o tem algum bloco ou se o bloco ja foi selecionado
+  // Marca o novo bloco selecionado
+  pontosSelecionados.push(bloco);
+  bloco.shape.graphics.clear().beginFill(corSelecionado).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
 
-    if (!pontosSelecionados.find(b => b.tipo === bloco.tipo)) { //Verifica se não existe um bloco selecionado com o mesmo tipo 
-      pontosSelecionados.push(bloco); //Adiciona o bloco ao array dos blocos selecionados 
-      bloco.shape.graphics.clear().beginFill(corSelecionado).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 60, 50, 12); 
-
-      if (pontosSelecionados.length === 4) { //Verifica se foram selecionados 4 blocos
-        verificarResposta();
-      }
-    }
-  });
+  // Verifica se já selecionou 4 blocos (1 por coluna)
+  if (pontosSelecionados.length === 4) {
+    verificarResposta();
+  }
+});
 
   // Cria uma função para mostrar o icone de certo ou errado 
   function mostrarIcone(resultado, x, y) {
@@ -277,13 +286,42 @@ window.onload = function () {
 
     if (!correta) {
       linhasErradas.push(line);
+
+      // --- NOVO: perde uma vida ao errar ---
+      vidas--;
+      atualizarVidas();
+
+      // Verifica se acabou as vidas, exibe popup game over
+      if (vidas <= 0) {
+        criarPopupGameOver();
+        return; // Para o fluxo para evitar continuar no jogo
+      }
+
     } else {
       [b1, b2, b3, b4].forEach(b => b.linhasConectadas.push(line));
-      // Incrementa a pontuação proporcionalmente, para totalizar 200 pontos após todas as respostas corretas
-      pontuacao += Math.floor(pontuacaoTotal / totalRespostasPossiveis);
+
+      // Definir tempos em segundos para os limites da pontuação
+      const tempoMaxPontos = 30;   // Até 30s => pontuação máxima
+      const tempoMinPontos = 120;  // A partir de 120s => pontuação mínima
+      const pontuacaoMax = 200;    // Pontuação máxima total
+      const pontuacaoMin = 50;     // Pontuação mínima total
+
+      // Calcular pontos proporcionais para essa resposta baseado no tempo (supondo que 'tempo' esteja disponível)
+      let pontosResposta = 0;
+      if (tempo <= tempoMaxPontos) {
+        pontosResposta = pontuacaoMax / totalRespostasPossiveis;
+      } else if (tempo >= tempoMinPontos) {
+        pontosResposta = pontuacaoMin / totalRespostasPossiveis;
+      } else {
+        const fator = (tempo - tempoMaxPontos) / (tempoMinPontos - tempoMaxPontos);
+        pontosResposta = ((1 - fator) * pontuacaoMax + fator * pontuacaoMin) / totalRespostasPossiveis;
+      }
+
+      pontuacao += Math.floor(pontosResposta);
       respostasCorretas++;
 
-      // Se já encontrou todas as respostas corretas possíveis, exibe o pop-up final
+      atualizarTextoFaltam(); // Atualiza o contador das combinações restantes
+
       if (respostasCorretas >= totalRespostasPossiveis) {
         criarPopupFinal();
       }
@@ -292,7 +330,7 @@ window.onload = function () {
     mostrarIcone(correta, b4.x + 70, b4.y);
 
     pontosSelecionados.forEach(b => { //Limpa o visual dos blocos selecionados
-      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 60, 50, 12);
+      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
     });
 
     pontosSelecionados = []; 
@@ -300,4 +338,8 @@ window.onload = function () {
 
   // Chama a função para desenhar as colunas e blocos
   criarColunas();
+
+  // Atualiza o contador no início do jogo
+  atualizarTextoFaltam();
+  atualizarTextoVidas();
 };
