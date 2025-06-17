@@ -7,6 +7,11 @@ window.onload = function () {
 
   // Variável para armazenar o tempo em segundos
   let tempo = 0;
+  const coresFase = ["#fffbcc", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
+  const coresBlocosFase = ["#fff7db", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
+
+  let faseAtual = 0;
+  atualizarCorFase();
 
   // Cria um texto para exibir o tempo na tela
   const textoTimer = new createjs.Text("Tempo: 0s", "12px 'Press Start 2P'", "#000");
@@ -30,12 +35,41 @@ window.onload = function () {
   // Array com a coordenada X de cada coluna
   let colX = [150, 350, 550, 750];
   // Array de arrays com o conteúdo de cada coluna
-  let colunas = [
+const fases = [
+  [
     [10, 9, 20, 3],
     ['+', '-', '×', '÷'],
     [5, 1, 6, 2],
     [15, 10, 18, 5]
-  ];
+  ],
+  [
+    [8, 4, 12, 6],
+    ['+', '-', '×', '÷'],
+    [2, 3, 4, 2],
+    [10, 1, 48, 3]
+  ],
+  [
+    [7, 15, 2, 9],
+    ['+', '-', '×', '÷'],
+    [1, 5, 6, 3],
+    [8, 10, 12, 3]
+  ],
+  [
+    [30, 20, 10, 5],
+    ['+', '-', '×', '÷'],
+    [2, 10, 5, 1],
+    [32, 10, 50, 5]
+  ],
+  [
+    [100, 50, 25, 10],
+    ['+', '-', '×', '÷'],
+    [1, 2, 4, 5],
+    [101, 48, 100, 2]
+  ]
+];
+
+
+
   // Array para armazenar todos os blocos (caixas com os números)
   let blocos = [];
   // Array para armazenar todos os blocos selecionados 
@@ -70,6 +104,12 @@ window.onload = function () {
   function atualizarTextoFaltam() {
     textoFaltam.text = `Faltam: ${totalRespostasPossiveis - respostasCorretas} contas para fazer!`;
   }
+  function atualizarCorFase() {
+  const cor = coresFase[faseAtual] || "#ffffff";
+  document.body.style.backgroundColor = cor;
+  const canvas = document.getElementById("gameCanvas");
+  canvas.style.backgroundColor = cor; // muda fundo do canvas também
+}
   
   function atualizarVidas() {
       const vidasDiv = document.getElementById("vidas");
@@ -78,8 +118,9 @@ window.onload = function () {
   // Função que cria cada bloco, tem como parâmetros um texto para o bloco, suas coordenadas e o tipo 
   function criarBloco(texto, x, y, tipo) {
     const cont = new createjs.Container(); //Cria um container 
-    const shape = new createjs.Shape();  // Dentro do container, cria uma forma
-    shape.graphics.beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12); // Define a forma como um retângulo e atribui suas características 
+    const shape = new createjs.Shape(); 
+    const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
+    shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12); // Define a forma como um retângulo e atribui suas características 
 
     const label = new createjs.Text(texto, "30px Comic Sans MS", "#000"); //Cria um texto com o texto passado pelo parâmetro
     // Define a posição do texto dentro do container
@@ -102,14 +143,16 @@ window.onload = function () {
   }
 
   // Função para criar as colunas 
-  function criarColunas() {
-    for (let i = 0; i < colunas.length; i++) { //Laço for externo, que percorre cada coluna
-      for (let j = 0; j < colunas[i].length; j++) { //Laço for interno, que percorre cada elemento da coluna
-        const bloco = criarBloco(colunas[i][j], colX[i], 50 + j * 100, i); //Chama a função criarBloco e passa os parâmetros
-        stage.addChild(bloco); //Adiciona esse novo bloco ao palco 
-      }
+function criarColunas() {
+  blocos = []; // Limpa os blocos antigos
+  const colunas = fases[faseAtual]; // Usa as colunas da fase atual
+  for (let i = 0; i < colunas.length; i++) { // Laço for externo, que percorre cada coluna
+    for (let j = 0; j < colunas[i].length; j++) { // Laço for interno, que percorre cada elemento da coluna
+      const bloco = criarBloco(colunas[i][j], colX[i], 50 + j * 100, i); // Chama a função criarBloco
+      stage.addChild(bloco); // Adiciona esse novo bloco ao palco 
     }
   }
+}
 
   // Função para identificar qual bloco foi clicado, tem como parâmetro a coordenada do clique
   function pegarBlocoEm(x, y) {
@@ -161,8 +204,12 @@ function resetJogo() {
   // Limpa os blocos selecionados
   pontosSelecionados = [];
 
-  atualizarTextoFaltam(); // Atualiza o texto das combinações faltando ao resetar
-  atualizarVidas(); // Atualiza o texto das vidas ao resetar
+    blocos.forEach(b => stage.removeChild(b));
+  criarColunas(); // Recria blocos com base na nova fase
+
+  atualizarTextoFaltam(); // Atualiza o texto das combinações faltando
+  atualizarVidas(); // Atualiza o texto das vidas
+  atualizarCorFase(); 
   stage.update();
 }
 
@@ -173,19 +220,33 @@ function criarPopupFinal() {
   pontuacaoSpan.textContent = pontuacao; // Atualiza a pontuação exibida
   popup.classList.add("mostrar"); // Mostra o pop-up
 
-  // Botão Jogar de Novo
-  document.getElementById("btnProximo").onclick = () => {
-    popup.classList.remove("mostrar");
-    resetJogo();
-    // Aqui você pode adicionar lógica para próxima fase
-  };
+  const btnProximo = document.getElementById("btnProximo");
+  const btnJogarDeNovo = document.getElementById("btnJogarDeNovo");
 
-  // Botão Jogar de Novo (alternativo)
-  document.getElementById("btnJogarDeNovo").onclick = () => {
-    popup.classList.remove("mostrar");
-    resetJogo();
-  };
+  // Verifica se ainda há fases restantes
+  if (faseAtual < fases.length - 1) {
+    btnProximo.textContent = "Próxima Fase";
+    btnProximo.style.display = "inline-block";
+    btnProximo.onclick = () => {
+      faseAtual++; // Avança para próxima fase
+      popup.classList.remove("mostrar");
+      resetJogo();
+    };
+  } else {
+    // Última fase concluída
+    btnProximo.textContent = "Finalizar";
+    btnProximo.style.display = "inline-block";
+    btnProximo.onclick = () => {
+      popup.classList.remove("mostrar");
+      alert("🎉 Parabéns! Você completou todas as fases!");
+      window.location.href = "/index.html"; // Volta ao menu
+    };
+  }
 
+  btnJogarDeNovo.onclick = () => {
+    popup.classList.remove("mostrar");
+    resetJogo(); // Reinicia a mesma fase
+  };
 }
 
 function criarPopupGameOver() {
@@ -341,5 +402,6 @@ function criarPopupGameOver() {
 
   // Atualiza o contador no início do jogo
   atualizarTextoFaltam();
-  atualizarTextoVidas();
+  atualizarVidas();
+  atualizarCorFase();
 };
