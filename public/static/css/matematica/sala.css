@@ -1,0 +1,199 @@
+/* Container do canvas + diálogo */
+#container-canvas {
+  position: relative;
+  width: 100vw;
+  height: 95vh;
+  max-width: 1200px;
+  max-height: 800px;
+  margin: 0 auto;
+  font-family: "Press Start 2P";
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Canvas */
+#gameCanvas {
+  width: 90vw;
+  height: auto;
+  max-width: 1200px;
+  max-height: 675px;
+  border: 2px solid #333;
+  display: block;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  #container-canvas {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  #gameCanvas {
+    width: auto;
+    height: 90vh; /* Ocupa 90% da altura da tela */
+    max-width: none;
+    max-height: none;
+    display: block;
+    margin: 0 auto;
+  }
+}
+/* Caixa de diálogo */
+#caixa-dialogo {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background-color: #fff8d1;
+  border: 4px solid #5c2b00;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 8px 8px 0 #000;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  z-index: 200;
+  pointer-events: auto;
+  display: none; /* Começa escondido */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lado esquerdo (foto + nome) */
+#dialogo-esquerda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+/* Foto do personagem */
+#dialogo-foto {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  background: #fff2b3;
+}
+
+/* Nome do personagem */
+#dialogo-nome {
+  margin-top: 8px;
+  font-size: 10px;
+  background: #ff6b6b;
+  padding: 4px 8px;
+  color: #fff;
+  border-radius: 6px;
+  border: 2px solid #222;
+  text-shadow: 1px 1px #000;
+}
+
+/* Texto do diálogo */
+#dialogo-texto-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#dialogo-texto {
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Botão de fechar */
+#dialogo-fechar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4b4b;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-family: 'Press Start 2P', cursive;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 300;
+}
+
+/* Botão iniciar minigame */
+.botao-iniciar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 12px 10px;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 6px #000;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+  height: 70px;
+}
+
+.botao-iniciar:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  #container-canvas {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+  }
+
+  #gameCanvas {
+    width: 95vw;
+    height: auto;
+    max-width: none;
+    max-height: none;
+  }
+
+  #dialogo-esquerda {
+    width: 90px;
+  }
+
+  #dialogo-foto {
+    width: 70px;
+    height: 70px;
+  }
+
+  #dialogo-nome {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  #dialogo-texto {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .botao-iniciar {
+    font-size: 12px;
+    height: 60px;
+    padding: 10px 8px;
+  }
+
+  #caixa-dialogo {
+    width: 95%;
+    padding: 12px;
+    gap: 12px;
+  }
+}
