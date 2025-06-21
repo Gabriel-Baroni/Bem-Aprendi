@@ -89,6 +89,8 @@ const fases = [
   iconeCerto.src = "https://img.icons8.com/emoji/48/000000/check-mark-emoji.png";
   const iconeErrado = new Image();
   iconeErrado.src = "https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png";
+  createjs.Sound.registerSound("../static/sound/digital-beeping.mp3", "acerto");
+  createjs.Sound.registerSound("../static/sound/error_008.ogg", "erro");
 
   // Variável para pontuação do usuário, começa em 0
   let pontuacao = 0;
@@ -170,7 +172,8 @@ function criarColunas() {
     }
     // Retorna a os atributos originais em cada bloco em todos os blocos
     blocos.forEach(b => {
-      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+       const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
+       shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
     });
     // Limpa os arrays de linhasErradas e pontosSelecionados
     linhasErradas = [];
@@ -198,7 +201,8 @@ function resetJogo() {
     b.linhasConectadas = []; // limpa o array do bloco
 
     // Restaura o visual original do bloco
-    b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+    const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
+    b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
   });
 
   // Limpa os blocos selecionados
@@ -285,7 +289,8 @@ function criarPopupGameOver() {
 
   if (blocoMesmoTipo) {
     // Desmarcar o bloco anterior da mesma coluna
-    blocoMesmoTipo.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+    const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
+    blocoMesmoTipo.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
 
     // Remove ele do array de selecionados
     pontosSelecionados = pontosSelecionados.filter(b => b !== blocoMesmoTipo);
@@ -307,95 +312,106 @@ function criarPopupGameOver() {
     bitmap.x = x;
     bitmap.y = y;
     bitmap.scaleX = bitmap.scaleY = 0.6;
+    createjs.Sound.play(resultado ? "acerto" : "erro");
     stage.addChild(bitmap);
     createjs.Tween.get(bitmap) // Animação para retirar o ícone da tela
       .to({ alpha: 0, y: y - 20 }, 1500)
       .call(() => stage.removeChild(bitmap));
   }
 
-  // Cria a função que verifica se a operação matemática feita está correta
-  function verificarResposta() {
-    const [b1, b2, b3, b4] = pontosSelecionados; //Armazenas os blocos selecionados em 4 variáveis 
-    //Converte os valores numéricos em numeros e armazena o operador 
-    const n1 = Number(b1.valor);
-    const op = b2.valor;
-    const n2 = Number(b3.valor);
-    const resultado = Number(b4.valor);
+ // Cria a função que verifica se a operação matemática feita está correta
+function verificarResposta() {
+  // --- MODIFICAÇÃO: organiza os blocos por tipo antes de verificar ---
+  const ordenados = [];
+  for (let i = 0; i < 4; i++) {
+    const bloco = pontosSelecionados.find(b => b.tipo === i);
+    if (!bloco) return; // caso falte algum, evita erro
+    ordenados.push(bloco);
+  }
 
-    let calc = null; // Variável que vai armazenar o resultado da conta
-    if (op === '+') calc = n1 + n2;
-    else if (op === '-') calc = n1 - n2;
-    else if (op === '×') calc = n1 * n2;
-    else if (op === '÷') calc = n2 !== 0 ? n1 / n2 : NaN;
+  const [b1, b2, b3, b4] = ordenados; //Armazenas os blocos selecionados em 4 variáveis 
+  //Converte os valores numéricos em numeros e armazena o operador 
+  const n1 = Number(b1.valor);
+  const op = b2.valor;
+  const n2 = Number(b3.valor);
+  const resultado = Number(b4.valor);
 
-    const correta = calc === resultado; //Verifica se o resultado é o esperado
+  let calc = null; // Variável que vai armazenar o resultado da conta
+  if (op === '+') calc = n1 + n2;
+  else if (op === '-') calc = n1 - n2;
+  else if (op === '×') calc = n1 * n2;
+  else if (op === '÷') calc = n2 !== 0 ? n1 / n2 : NaN;
 
-    const line = new createjs.Shape(); //Cria a linha que vai ligar os blocos
-    const corLinha = correta ? coresLinhas[corIndex % coresLinhas.length] : "red"; // Se for correta, uma das cores do arry coresLinhas, se não é vermelho
-    corIndex++;
+  const correta = calc === resultado; //Verifica se o resultado é o esperado
 
-    const offset = corIndex * 2; //Deslocamento verticall da linha para não ficar uma sobre a outra
+  const line = new createjs.Shape(); //Cria a linha que vai ligar os blocos
+  const corLinha = correta ? coresLinhas[corIndex % coresLinhas.length] : "red"; // Se for correta, uma das cores do arry coresLinhas, se não é vermelho
+  corIndex++;
 
-    //Desenha a linha pasando pelo o caminho certo
-    line.graphics.setStrokeStyle(4).beginStroke(corLinha)
-      .moveTo(b1.x + 30, b1.y + 25 + offset)
-      .lineTo(b2.x + 30, b2.y + 25 + offset)
-      .lineTo(b3.x + 30, b3.y + 25 + offset)
-      .lineTo(b4.x + 30, b4.y + 25 + offset);
+  const offset = corIndex * 2; //Deslocamento verticall da linha para não ficar uma sobre a outra
 
-    stage.addChildAt(line, 0); //Adiciona a linha atrás de todos os outros elementos 
+  //Desenha a linha pasando pelo o caminho certo
+  line.graphics.setStrokeStyle(4).beginStroke(corLinha)
+    .moveTo(b1.x + 30, b1.y + 25 + offset)
+    .lineTo(b2.x + 30, b2.y + 25 + offset)
+    .lineTo(b3.x + 30, b3.y + 25 + offset)
+    .lineTo(b4.x + 30, b4.y + 25 + offset);
 
-    if (!correta) {
-      linhasErradas.push(line);
+  stage.addChildAt(line, 0); //Adiciona a linha atrás de todos os outros elementos 
 
-      // --- NOVO: perde uma vida ao errar ---
-      vidas--;
-      atualizarVidas();
+  if (!correta) {
+    linhasErradas.push(line);
 
-      // Verifica se acabou as vidas, exibe popup game over
-      if (vidas <= 0) {
-        criarPopupGameOver();
-        return; // Para o fluxo para evitar continuar no jogo
-      }
+    // --- NOVO: perde uma vida ao errar ---
+    vidas--;
+    atualizarVidas();
 
-    } else {
-      [b1, b2, b3, b4].forEach(b => b.linhasConectadas.push(line));
-
-      // Definir tempos em segundos para os limites da pontuação
-      const tempoMaxPontos = 30;   // Até 30s => pontuação máxima
-      const tempoMinPontos = 120;  // A partir de 120s => pontuação mínima
-      const pontuacaoMax = 200;    // Pontuação máxima total
-      const pontuacaoMin = 50;     // Pontuação mínima total
-
-      // Calcular pontos proporcionais para essa resposta baseado no tempo (supondo que 'tempo' esteja disponível)
-      let pontosResposta = 0;
-      if (tempo <= tempoMaxPontos) {
-        pontosResposta = pontuacaoMax / totalRespostasPossiveis;
-      } else if (tempo >= tempoMinPontos) {
-        pontosResposta = pontuacaoMin / totalRespostasPossiveis;
-      } else {
-        const fator = (tempo - tempoMaxPontos) / (tempoMinPontos - tempoMaxPontos);
-        pontosResposta = ((1 - fator) * pontuacaoMax + fator * pontuacaoMin) / totalRespostasPossiveis;
-      }
-
-      pontuacao += Math.floor(pontosResposta);
-      respostasCorretas++;
-
-      atualizarTextoFaltam(); // Atualiza o contador das combinações restantes
-
-      if (respostasCorretas >= totalRespostasPossiveis) {
-        criarPopupFinal();
-      }
+    // Verifica se acabou as vidas, exibe popup game over
+    if (vidas <= 0) {
+      criarPopupGameOver();
+      return; // Para o fluxo para evitar continuar no jogo
     }
 
-    mostrarIcone(correta, b4.x + 70, b4.y);
+  } else {
+    [b1, b2, b3, b4].forEach(b => b.linhasConectadas.push(line));
 
-    pontosSelecionados.forEach(b => { //Limpa o visual dos blocos selecionados
-      b.shape.graphics.clear().beginFill(corOriginal).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
-    });
+    // Definir tempos em segundos para os limites da pontuação
+    const tempoMaxPontos = 30;   // Até 30s => pontuação máxima
+    const tempoMinPontos = 120;  // A partir de 120s => pontuação mínima
+    const pontuacaoMax = 200;    // Pontuação máxima total
+    const pontuacaoMin = 50;     // Pontuação mínima total
 
-    pontosSelecionados = []; 
+    // Calcular pontos proporcionais para essa resposta baseado no tempo (supondo que 'tempo' esteja disponível)
+    let pontosResposta = 0;
+    if (tempo <= tempoMaxPontos) {
+      pontosResposta = pontuacaoMax / totalRespostasPossiveis;
+    } else if (tempo >= tempoMinPontos) {
+      pontosResposta = pontuacaoMin / totalRespostasPossiveis;
+    } else {
+      const fator = (tempo - tempoMaxPontos) / (tempoMinPontos - tempoMaxPontos);
+      pontosResposta = ((1 - fator) * pontuacaoMax + fator * pontuacaoMin) / totalRespostasPossiveis;
+    }
+
+    pontuacao += Math.floor(pontosResposta);
+    respostasCorretas++;
+
+    atualizarTextoFaltam(); // Atualiza o contador das combinações restantes
+
+    if (respostasCorretas >= totalRespostasPossiveis) {
+      criarPopupFinal();
+    }
   }
+
+  mostrarIcone(correta, b4.x + 70, b4.y);
+
+  pontosSelecionados.forEach(b => { 
+    //Limpa o visual dos blocos selecionados
+    const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
+    b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+  });
+
+  pontosSelecionados = []; 
+}
 
   // Chama a função para desenhar as colunas e blocos
   criarColunas();

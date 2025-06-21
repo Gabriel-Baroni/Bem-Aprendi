@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sala de Aula - Diálogo</title>
+  <link rel="stylesheet" href="../static/css/matematica/sala.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+</head>
+<body>
+<div id="container-canvas">
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <div id="caixa-dialogo">
+    <div id="dialogo-esquerda">
+      <img id="dialogo-foto" src="imagens/professor.png" alt="Personagem" />
+      <div id="dialogo-nome">Professor Leo</div>
+    </div>
+    <div id="dialogo-texto-container">
+      <div id="dialogo-texto"></div>
+    </div>
+    <button id="dialogo-fechar">X</button>
+  </div>
+</div>
+
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="../static/js/matematica/sala_aula/dialogo.js"></script>
+  <script src="../static/js/matematica/sala_aula/sala.js"></script>
+</body>
+</html>
