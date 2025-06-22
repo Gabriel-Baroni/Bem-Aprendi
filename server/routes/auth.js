@@ -3,7 +3,7 @@ import supabase from '../db/supabaseClient.js';
 
 const router = Router();
 
-// Rota para CADASTRO
+// ---------ROTA PARA CADASTRO----------
 router.post('/register', async (req, res) => {
   let { nome, email, senha, idade } = req.body;
 
@@ -18,6 +18,7 @@ router.post('/register', async (req, res) => {
       email,
       password: senha
     });
+    console.log('Resposta do signUp:', data); // 👈 VER AQUI
     if (error) {
       return res.status(400).json({ error: error.message });
     }
@@ -31,13 +32,13 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: dbError.message });
     }
 
-    return res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
+    return res.status(201).json({ message: 'Usuário cadastrado com sucesso', user_id: userId });
   } catch (error) {
     return res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 
-// Rota para LOGIN
+// ---------ROTA PARA LOGIN----------
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
@@ -52,7 +53,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Email ou senha inválidos' });
     }
 
-    return res.json({ message: 'Login realizado com sucesso', usuario: data.user });
+    return res.json({ message: 'Login realizado com sucesso', user_id: data.user.id });
   } catch (error) {
     return res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
