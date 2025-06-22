@@ -1,3 +1,4 @@
+/* ----------------ESTILOS DOS BODY E CONTAINERS----------------- */
 body{
     display: flex;
     align-items: center;
@@ -33,7 +34,7 @@ body.login-bg {
     padding: 20px;  
     font-family: 'Press Start 2P', monospace;
 }
-
+/* ------------------ESTILO DOS FORMULÁRIOS----------------- */
 .input{
     display: flex;
     flex-direction: column;

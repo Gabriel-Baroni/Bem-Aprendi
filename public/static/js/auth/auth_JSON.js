@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Cadastro
-  const cadastroForm = document.getElementById('cadastro-form');
+  // ---------------CADASTRO---------------
+  const cadastroForm = document.getElementById('cadastro-form'); // Garante que o scrpit só seja executado após o carregamento completo do DOM 
   if (cadastroForm) {
     cadastroForm.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -19,18 +19,19 @@ document.addEventListener('DOMContentLoaded', function () {
         nome: cadastroForm.nome.value,
         email: cadastroForm.email.value,
         senha: cadastroForm.senha.value,
-        idade: cadastroForm.idaide.value 
+        idade: cadastroForm.idade.value 
       };
 
       try {
-        const response = await fetch('/auth/register', {
+        //Faz um requisição tipo POST ao endpoint do CADASTRO, enviando dados em JSON
+        const response = await fetch('/auth/register', { 
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(formData)
         });
-
+        //Confirma se a resposta esta ok
         const result = await response.json();
         if (response.ok) {
           window.location.href = '/start.html';
@@ -44,19 +45,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Login
+  // -------------------LOGIN--------------------
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       
-      // Pega as informações do formulário
+      // Pega as informações do formulário e atribui a variáveis
       const formData = {
         email: loginForm.email.value,
         senha: loginForm.senha.value,
       };
 
       try {
+        //Faz uma requisição tipo POST ao endpoint do LOGIN, enviando dados em JSON
         const response = await fetch('/auth/login', {
           method: 'POST',
           headers: {
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           body: JSON.stringify(formData)
         });
-
+        //Verifica se a resposta esta ok
         const result = await response.json();
         if (response.ok) {
           window.location.href = '/start.html';

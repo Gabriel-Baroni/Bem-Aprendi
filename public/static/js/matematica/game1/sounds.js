@@ -1,5 +1,5 @@
 
-// Áudios do menu lateral
+// ----------ÁUDIOS DO MENU LATERAL------------
 const hoverMenuSound = new Audio('../static/sound/select_003.ogg');
 const clickMenuSound = new Audio('../static/sound/click_003.ogg');
 
@@ -15,7 +15,7 @@ document.querySelectorAll('#side-menu ul li').forEach(item => {
   });
 });
 
-// Áudios do Popup
+// ---------ÁUDIOS DO POP-UP---------
 const closePopupSound = new Audio('static/sound/error_008.ogg');
 const clickButtonSound = new Audio('static/sound/confirmation_004.ogg');
 const HoverButtonSound = new Audio('static/sound/select_005.ogg');
