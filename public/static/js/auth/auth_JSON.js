@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //Confirma se a resposta esta ok
         const result = await response.json();
         if (response.ok) {
+          // localStorage.setItem('user_id', result.usuario.id);
           window.location.href = '/start.html';
           cadastroForm.reset();
         } else {
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //Verifica se a resposta esta ok
         const result = await response.json();
         if (response.ok) {
+          localStorage.setItem('user_id', result.usuario.id);
           window.location.href = '/start.html';
           loginForm.reset();
         } else {

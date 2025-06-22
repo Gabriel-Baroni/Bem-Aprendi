@@ -1,4 +1,3 @@
-let pontuacaoAcumulada = 0;
 // Aguarda o carregamento da página
 window.onload = function () {
   // Cria um novo palco no CreateJS e delimita o framerate em 60 fps
@@ -10,8 +9,8 @@ window.onload = function () {
   let tempo = 0;
   const coresFase = ["#fffbcc", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
   const coresBlocosFase = ["#fff7db", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
-
-  let faseAtual = 0;
+    // Variável para armazenar a fase atual
+  let faseAtual = 0; 
   atualizarCorFase();
 
   // Cria um texto para exibir o tempo na tela
@@ -26,7 +25,6 @@ window.onload = function () {
   textoFaltam.y = 10;
   stage.addChild(textoFaltam);
 
-
   // Atualiza o tempo a cada segundo
   setInterval(() => {
     tempo++;
@@ -36,41 +34,40 @@ window.onload = function () {
   // Array com a coordenada X de cada coluna
   let colX = [150, 350, 550, 750];
   // Array de arrays com o conteúdo de cada coluna
-const fases = [
-  [
-    [10, 9, 20, 3],
-    ['+', '-', '×', '÷'],
-    [5, 1, 6, 2],
-    [15, 10, 18, 5]
-  ],
-  [
-    [8, 4, 12, 6],
-    ['+', '-', '×', '÷'],
-    [2, 3, 4, 2],
-    [10, 1, 48, 3]
-  ],
-  [
-    [7, 15, 2, 9],
-    ['+', '-', '×', '÷'],
-    [1, 5, 6, 3],
-    [8, 10, 12, 3]
-  ],
-  [
-    [30, 20, 10, 5],
-    ['+', '-', '×', '÷'],
-    [2, 10, 5, 1],
-    [32, 10, 50, 5]
-  ],
-  [
-    [100, 50, 25, 10],
-    ['+', '-', '×', '÷'],
-    [1, 2, 4, 5],
-    [101, 48, 100, 2]
-  ]
-];
-
-
-
+  const fases = [
+    [
+      [38, 14, 21, 7],
+      ['+', '-', '×', '÷'],
+      [9, 2, 17, 3],
+      [45, 29, 7, 38]
+    ],
+    [
+      [18, 9, 72, 61],
+      ['+', '-', '×', '÷'],
+      [25, 4, 8, 19],
+      [2, 43, 36, 41]
+    ],
+    [
+      [33, 12, 54, 8],
+      ['+', '-', '×', '÷'],
+      [15, 11, 9, 7],
+      [4, 18, 21, 27]
+    ],
+    [
+      [80, 47, 19, 5],
+      ['+', '-', '×', '÷'],
+      [10, 23, 16, 6],
+      [17, 24, 56, 35]
+    ],
+    [
+      [13, 29, 36, 25],
+      ['+', '-', '×', '÷'],
+      [2, 12, 6, 18],
+      [14, 41 , 26, 42]
+    ]
+  ];
+  // Variável para armazenar a pontuação acumulada
+  let pontuacaoAcumulada = 0; 
   // Array para armazenar todos os blocos (caixas com os números)
   let blocos = [];
   // Array para armazenar todos os blocos selecionados 
@@ -92,16 +89,14 @@ const fases = [
   iconeErrado.src = "https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png";
   createjs.Sound.registerSound("../static/sound/digital-beeping.mp3", "acerto");
   createjs.Sound.registerSound("../static/sound/error_008.ogg", "erro");
-
   // Variável para pontuação do usuário, começa em 0
   let pontuacao = 0;
   // Contador de respostas corretas para controlar quando acabar as possibilidades
   let respostasCorretas = 0;
   // Total de respostas possíveis (exemplo, pode ser ajustado conforme o jogo)
   const totalRespostasPossiveis = 5; // Ajuste esse número de acordo com as combinações corretas possíveis no seu jogo
-
-  // --- NOVO: sistema de vidas ---
-  let vidas = 3; // Quantidade inicial de vidas
+  // Variável para armazenar as vidas
+  let vidas = 3; 
 
   // Atualiza o texto que mostra quantas combinações faltam
   function atualizarTextoFaltam() {
@@ -113,11 +108,12 @@ const fases = [
   const canvas = document.getElementById("gameCanvas");
   canvas.style.backgroundColor = cor; // muda fundo do canvas também
 }
-  
+  // Função para atualizar o número de vidas exibido na tela
   function atualizarVidas() {
       const vidasDiv = document.getElementById("vidas");
       vidasDiv.textContent = "❤️".repeat(vidas);
     }
+
   // Função que cria cada bloco, tem como parâmetros um texto para o bloco, suas coordenadas e o tipo 
   function criarBloco(texto, x, y, tipo) {
     const cont = new createjs.Container(); //Cria um container 
@@ -217,23 +213,31 @@ function resetJogo() {
   atualizarCorFase(); 
   stage.update();
 }
-function enviarPontuacaoParaServidor(pontuacao) {
+
+// Função para enviar a pontuação acumulada para o endpoint pontuação.js
+function enviarPontuacaoParaServidor(pontuacao, materia) {
   const userId = localStorage.getItem('user_id');
+  
   if (!userId) {
     console.error('Usuário não autenticado!');
     return;
   }
+
   fetch("/pontuacao", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId, pontuacao })
+    body: JSON.stringify({
+      user_id: userId,
+      materia: materia,         
+      pontuacao: pontuacao
+    })
   })
   .then(res => res.json())
   .then(data => console.log("Pontuação atualizada:", data))
   .catch(err => console.error("Erro ao enviar pontuação:", err));
 }
 
-  // Função para criar o pop-up de fim de fase com a pontuação e opções
+// Função para criar o pop-up de fim de fase
 function criarPopupFinal() {
   pontuacaoAcumulada += pontuacao;  // soma a pontuação da fase atual
 
@@ -260,7 +264,7 @@ function criarPopupFinal() {
       popup.classList.remove("mostrar");
 
       // Enviar pontuação acumulada para o servidor
-      enviarPontuacaoParaServidor(pontuacaoAcumulada);
+      enviarPontuacaoParaServidor(pontuacaoAcumulada, "matematica");
 
       alert("🎉 Parabéns! Você completou todas as fases! Sua pontuação total foi: " + pontuacaoAcumulada);
       window.location.href = "/index.html";
@@ -273,6 +277,7 @@ function criarPopupFinal() {
   };
 }
 
+// Função para criar o pop-up de game over
 function criarPopupGameOver() {
   const popup = document.getElementById("popupGameOver");
 
@@ -281,11 +286,9 @@ function criarPopupGameOver() {
 
   // Configura o botão "Jogar de Novo"
   document.getElementById("btnGameOverJogarDeNovo").onclick = () => {
-    popup.classList.remove("mostrar"); // Fecha o popup
-    resetJogo(); // Função que você já tem para reiniciar o jogo
+    popup.classList.remove("mostrar"); 
+    resetJogo(); 
   };
-
-  // (Opcional) Configura botão fechar, se existir no popup
   const btnFechar = popup.querySelector(".close-btn");
   if (btnFechar) {
     btnFechar.onclick = () => popup.classList.remove("mostrar");
