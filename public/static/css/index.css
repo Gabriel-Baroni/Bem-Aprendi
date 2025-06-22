@@ -1,3 +1,4 @@
+/* ESTILO DO BODY E CANVAS */
 body {
   margin: 40px; /* margem ao redor do canvas */
   display: flex;
@@ -19,6 +20,8 @@ body {
   image-rendering: crisp-edges;
 }
 
+
+/* ------------ ESTILO DO POP-UP----------- */
 .popup {
   position: absolute;
   display: flex;
@@ -146,8 +149,7 @@ body {
   background: #d13b3b;
 }
 
-
-/* Menu lateral */
+/* -------------ESTILO DO MENU LATERAL------------- */
 #side-menu {
   position: fixed;
   top: 0;
@@ -240,7 +242,7 @@ a{
 }
 
 
-/* ======== Media Queries para responsividade ======== */
+/*---------------MEDIA QUERIES PARA RESPONSIVIDADE--------------*/ 
 
 /* Para tablets e telas menores */
 @media (max-width: 768px) {

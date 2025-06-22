@@ -1,3 +1,4 @@
+let pontuacaoAcumulada = 0;
 // Aguarda o carregamento da página
 window.onload = function () {
   // Cria um novo palco no CreateJS e delimita o framerate em 60 fps
@@ -173,7 +174,7 @@ function criarColunas() {
     // Retorna a os atributos originais em cada bloco em todos os blocos
     blocos.forEach(b => {
        const corBloco = coresBlocosFase[faseAtual] || corOriginal; // Dentro do container, cria uma forma
-       shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+       b.shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
     });
     // Limpa os arrays de linhasErradas e pontosSelecionados
     linhasErradas = [];
@@ -216,40 +217,59 @@ function resetJogo() {
   atualizarCorFase(); 
   stage.update();
 }
+function enviarPontuacaoParaServidor(pontuacao) {
+  const userId = localStorage.getItem('user_id');
+  if (!userId) {
+    console.error('Usuário não autenticado!');
+    return;
+  }
+  fetch("/pontuacao", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user_id: userId, pontuacao })
+  })
+  .then(res => res.json())
+  .then(data => console.log("Pontuação atualizada:", data))
+  .catch(err => console.error("Erro ao enviar pontuação:", err));
+}
 
   // Função para criar o pop-up de fim de fase com a pontuação e opções
 function criarPopupFinal() {
+  pontuacaoAcumulada += pontuacao;  // soma a pontuação da fase atual
+
   const popup = document.getElementById("popupFimFase");
   const pontuacaoSpan = document.getElementById("pontuacaoFinal");
-  pontuacaoSpan.textContent = pontuacao; // Atualiza a pontuação exibida
-  popup.classList.add("mostrar"); // Mostra o pop-up
+  pontuacaoSpan.textContent = pontuacao; // Pontuação da fase atual
+  popup.classList.add("mostrar");
 
   const btnProximo = document.getElementById("btnProximo");
   const btnJogarDeNovo = document.getElementById("btnJogarDeNovo");
 
-  // Verifica se ainda há fases restantes
   if (faseAtual < fases.length - 1) {
     btnProximo.textContent = "Próxima Fase";
     btnProximo.style.display = "inline-block";
     btnProximo.onclick = () => {
-      faseAtual++; // Avança para próxima fase
+      faseAtual++;
       popup.classList.remove("mostrar");
       resetJogo();
     };
   } else {
-    // Última fase concluída
     btnProximo.textContent = "Finalizar";
     btnProximo.style.display = "inline-block";
     btnProximo.onclick = () => {
       popup.classList.remove("mostrar");
-      alert("🎉 Parabéns! Você completou todas as fases!");
-      window.location.href = "/index.html"; // Volta ao menu
+
+      // Enviar pontuação acumulada para o servidor
+      enviarPontuacaoParaServidor(pontuacaoAcumulada);
+
+      alert("🎉 Parabéns! Você completou todas as fases! Sua pontuação total foi: " + pontuacaoAcumulada);
+      window.location.href = "/index.html";
     };
   }
 
   btnJogarDeNovo.onclick = () => {
     popup.classList.remove("mostrar");
-    resetJogo(); // Reinicia a mesma fase
+    resetJogo();
   };
 }
 
