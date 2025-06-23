@@ -62,7 +62,7 @@ fases.forEach((pos, i) => {
   const corOriginal = "#ffffff";
   const corSelecionado = "#FFFF00"; 
 
-  circle.graphics.beginFill(corOriginal).drawCircle(0, 0, raio);
+  circle.graphics.beginFill(corOriginal).drawCircle(0, 0, raio); //DEIXAR TRANSPARENTE
   circle.x = pos.x;
   circle.y = pos.y;
   circle.cursor = "pointer";
