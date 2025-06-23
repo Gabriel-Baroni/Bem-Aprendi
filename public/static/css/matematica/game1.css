@@ -13,10 +13,8 @@ body {
 }
 
 /* Ajustar o h1 para ficar melhor em telas pequenas */
-h1 {
-  color: #ff6f91; /* rosa suave */
-  font-size: 3rem;
-  margin-bottom: 20px;
+h2 { 
+  font-size: 16vw;
   text-shadow: 2px 2px 0 #fddde6;
   letter-spacing: 3px;
   font-weight: bold;
@@ -29,30 +27,26 @@ h1 {
 
 /* Canvas com borda pixelada e fundo pastel */
 #gameCanvas {
-  border: 5px solid #a2d5f2; /* azul pastel */
-  background-color: #fff7db; /* amarelo pastel base */
-  box-shadow: 0 0 15px 5px #ffe4c4cc;
-  image-rendering: pixelated; /* deixa pixelado */
-  margin-bottom: 20px;
-  cursor: crosshair;
+  width: 80vw;
+  aspect-ratio: 4 / 3;
+  max-height: 65vh;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  width: 100%; /* base para responsividade */
-  max-width: 640px; /* limite max no desktop */
-  height: auto; /* altura automática para manter proporção */
-  aspect-ratio: 4 / 3; /* proporção clássica do canvas (largura:altura) */
-  max-height: 480px;
+  margin: 0 auto 20px auto;
+  border: 5px solid #a2d5f2;
+  background-color: #fff7db;
+  box-shadow: 0 0 15px 5px #ffe4c4cc;
+  image-rendering: pixelated;
+  cursor: crosshair;
   box-sizing: border-box;
 }
+
 
 /* ---------------ESTILO DO BOTÃO DE RESET-------------- */
 button#resetButton {
   background-color: #f9c784; /* laranja pastel */
   border: 4px solid #f6a96b;
   border-radius: 12px;
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #4a3c31;
   padding: 15px 50px;
@@ -324,7 +318,7 @@ a {
   top: 20px;
   right: 20px;
   z-index: 1000;
-  font-size: 36px;
+  font-size: 3vw;
   color: black;
   display: flex;
   flex-direction: row;
@@ -334,147 +328,72 @@ a {
 
 /* ------------------ MEDIA QUERIES PARA RESPONSIVIDADE ------------------- */
 
-/* Celulares - tela menor que 480px */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-    justify-content: flex-start; /* ficar no topo */
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-  }
-
-  #gameCanvas {
-    width: 70vw;           /* ocupa quase toda largura da tela */
-    height: 200vw;         /* deixa a altura maior que a largura, para vertical */
-    max-width: none;       /* tira limite de largura */
-    max-height: none;      /* tira limite de altura */
-    aspect-ratio: auto;    /* desliga proporção fixa para poder ajustar livremente */
-    border-width: 3px;
-  }
-
+button#resetButton {
+  font-size: 1rem;
+  padding: 12px 30px;
+  width: 100%;
+  max-width: 350px;
+  margin: 10px auto;
+  display: block;
+}
+@media (max-width: 600px) {
   button#resetButton {
-    font-size: 1.4rem;
-    padding: 12px 30px;
-    margin: 8px 0;
-    width: 100%;
-    max-width: none;
+    font-size: 1rem;
+    padding: 10px 8px;
+    max-width: 99vw;
   }
-
-  #side-menu {
-    width: 80vw;
-    left: -80vw;
-    padding: 60px 15px 20px 15px;
-    border-right-width: 6px;
-  }
-
-  #side-menu.active {
-    left: 0;
-  }
-
-  #menu-icon {
-    top: 10px;
-    left: 10px;
-    width: 32px;
-    height: 26px;
-    border-width: 2px;
-  }
-
-  #menu-icon div {
-    height: 5px;
-    margin: 2px 0;
-    width: 75%;
+}
+h2 {
+  font-size: 1.5rem;
+}
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.1rem;
   }
 }
 
-/* Tablets - telas entre 481px e 768px */
-@media (min-width: 481px) and (max-width: 768px) {
-  body {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  #gameCanvas {
-    width: 80vw;
-    max-width: 600px;
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-
-  button#resetButton {
-    font-size: 1.6rem;
-    padding: 14px 40px;
-    max-width: 100%;
-  }
-
-  #side-menu {
-    width: 220px;
-    left: -220px;
-  }
-
-  #side-menu.active {
-    left: 0;
-  }
-
-  #menu-icon {
-    top: 12px;
-    left: 12px;
-    width: 34px;
-    height: 28px;
-  }
-
-  #menu-icon div {
-    height: 5.5px;
-    margin: 2.5px 0;
-    width: 78%;
+#popupFimFase .caixa,
+#popupGameOver .caixa {
+  width: 95vw;
+  max-width: 400px;
+  min-width: 0;
+  padding: 10px;
+  font-size: 13px;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  #popupFimFase .caixa,
+  #popupGameOver .caixa {
+    width: 99vw;
+    max-width: 99vw;
+    padding: 6px;
+    font-size: 11px;
   }
 }
-
-/* PCs - telas acima de 769px */
+#side-menu {
+  width: 50vw;
+  left: -50vw;
+}
 @media (min-width: 769px) {
-  body {
-    padding: 30px 40px;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  #gameCanvas {
-    width: 640px;
-    height: 480px;
-    aspect-ratio: 4 / 3;
-  }
-
-  button#resetButton {
-    font-size: 1.8rem;
-    padding: 15px 50px;
-  }
-
   #side-menu {
     width: 250px;
     left: -250px;
   }
+}
 
-  #side-menu.active {
-    left: 0;
-  }
+@media (max-width: 900px) {
+  #gameCanvas {
+    width: 95vw;
+    height: 60vh;
+    margin: 10%;
+    border-width: 2px;
 
-  #menu-icon {
-    top: 15px;
-    left: 15px;
-    width: 36px;
-    height: 30px;
-  }
-
-  #menu-icon div {
-    height: 6px;
-    margin: 3px 0;
-    width: 80%;
   }
 }
+@media (max-width: 600px) {
+  #gameCanvas {
+    max-width: 100vw;
+    
+  }
+}
+
