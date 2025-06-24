@@ -244,64 +244,24 @@ a{
 
 /*---------------MEDIA QUERIES PARA RESPONSIVIDADE--------------*/ 
 
-/* Para tablets e telas menores */
-@media (max-width: 768px) {
-  body {
-    margin: 20px;
-    height: calc(100vh - 20px);
-  }
 
+
+@media (min-width: 1025px){
   #stage {
-    width: 90vw;
-    height: 70vh;
-    max-width: none;
-    max-height: none;
+  width: 90vw;  /* largura padrão */
+  height: 90vh; /* altura padrão */
+  display: block; /* remove espaçamento */
+}
+
+}
+
+@media screen and (orientation: portrait) {
+  body {
+    display: none;
   }
 
-  #side-menu {
-    width: 200px;
-    padding: 50px 15px 15px 15px;
-  }
-
-  #menu-icon {
-    width: 25px;
-    height: 20px;
-    top: 10px;
-    left: 10px;
-  }
-
-  #menu-icon div {
-    height: 3px;
-    margin: 4px 0;
+  #rotate-message {
+    display: block;
   }
 }
 
-/* Para celulares pequenos */
-@media (max-width: 480px) {
-  body {
-    margin: 8px; 
-    height: calc(100vh - 16px); 
-  }
-
-  #stage {
-    width: 95vw;
-    height: 80vh;
-  }
-
-  #side-menu {
-    width: 180px;
-    padding: 40px 10px 10px 10px;
-  }
-
-  #menu-icon {
-    width: 20px;
-    height: 15px;
-    top: 8px;
-    left: 8px;
-  }
-
-  #menu-icon div {
-    height: 2.5px;
-    margin: 3px 0;
-  }
-}
