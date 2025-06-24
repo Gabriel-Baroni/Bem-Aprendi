@@ -14,7 +14,7 @@ body {
 
 /* Ajustar o h1 para ficar melhor em telas pequenas */
 h2 { 
-  font-size: 16vw;
+  font-size: 1vw;
   text-shadow: 2px 2px 0 #fddde6;
   letter-spacing: 3px;
   font-weight: bold;
@@ -29,7 +29,7 @@ h2 {
 #gameCanvas {
   width: 80vw;
   aspect-ratio: 4 / 3;
-  max-height: 65vh;
+  max-height: 75vh;
   display: block;
   margin: 0 auto 20px auto;
   border: 5px solid #a2d5f2;
@@ -38,6 +38,7 @@ h2 {
   image-rendering: pixelated;
   cursor: crosshair;
   box-sizing: border-box;
+  padding: 2%;
 }
 
 
@@ -57,7 +58,7 @@ button#resetButton {
   font-family: 'Press Start 2P', cursive, sans-serif;
   user-select: none;
   filter: drop-shadow(2px 2px 1px #b2703e);
-  max-width: 90vw;
+  width: 90vw;
   width: fit-content;
 }
 
@@ -104,7 +105,7 @@ button#resetButton:hover {
   padding: 18px 0;
   border-bottom: 3px dashed #ffb347;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.6rem;
   letter-spacing: 1px;
   background: #fffbe6;
   margin-bottom: 10px;
@@ -190,8 +191,7 @@ a {
   background-color: #ffe8a3;
   border: 6px solid #5c2b00;
   border-radius: 16px;
-  width: 400px;
-  max-width: 90vw;
+  width: 30vw;
   padding: 20px;
   box-shadow: 8px 8px 0 #000;
   font-family: 'Press Start 2P', cursive;
@@ -215,7 +215,7 @@ a {
   user-select: none;
   box-shadow: 0 4px #000;
   text-align: center;
-  width: 100%;
+  width: 90%;
 }
 
 /* Texto da pontuação */
@@ -252,6 +252,7 @@ a {
   user-select: none;
   flex: 1;
   max-width: 140px;
+  line-height: 1.5;
 }
 
 #popupFimFase button:hover,
@@ -276,6 +277,7 @@ a {
 #popupFimFase button#btnJogarDeNovo,
 #popupGameOver button#btnJogarDeNovo {
   background-color: #2196f3;
+  
 }
 
 #popupFimFase button#btnJogarDeNovo:hover,
@@ -328,40 +330,25 @@ a {
 
 /* ------------------ MEDIA QUERIES PARA RESPONSIVIDADE ------------------- */
 
-button#resetButton {
-  font-size: 1rem;
-  padding: 12px 30px;
-  width: 100%;
-  max-width: 350px;
-  margin: 10px auto;
-  display: block;
-}
+/* ------------------MEDIA QUERIE PARA CELULARES --------------------------- */
 @media (max-width: 600px) {
-  button#resetButton {
+  #gameCanvas {
+   width: 100vw;
+   height: 70vh;
+   margin: 5%;
+  }
+
+  h2 {
     font-size: 1rem;
+    margin-top: 2%;
+  }
+    button#resetButton {
+    font-size: 0.8rem;
     padding: 10px 8px;
     max-width: 99vw;
+    line-height: 1.5;
   }
-}
-h2 {
-  font-size: 1.5rem;
-}
-@media (max-width: 600px) {
-  h2 {
-    font-size: 1.1rem;
-  }
-}
 
-#popupFimFase .caixa,
-#popupGameOver .caixa {
-  width: 95vw;
-  max-width: 400px;
-  min-width: 0;
-  padding: 10px;
-  font-size: 13px;
-  gap: 10px;
-}
-@media (max-width: 600px) {
   #popupFimFase .caixa,
   #popupGameOver .caixa {
     width: 99vw;
@@ -369,31 +356,68 @@ h2 {
     padding: 6px;
     font-size: 11px;
   }
+
+  #popupFimFase .titulo,
+  #popupGameOver .titulo {
+    width: 80%;
+  }
+
+  #side-menu {
+    width: 50vw;
+    left: -50vw;
+  }
+
 }
-#side-menu {
-  width: 50vw;
-  left: -50vw;
-}
-@media (min-width: 769px) {
+
+/* -----------------MEDIA QUERIE PARA TABLETS------------------- */
+@media (min-width: 601px) and (max-width: 1024px)  {
+    #gameCanvas {
+    width: 95vw;
+    height: 90vh;
+    margin: 2%;
+    border-width: 2px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 5%;
+  }
+
+    button#resetButton {
+    font-size: 1.5rem;
+    width: 80vw;
+    padding: 20px;
+  }
+  #popupFimFase .caixa,
+  #popupGameOver .caixa {
+    width: 60vw;
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  #popupFimFase .titulo,
+  #popupGameOver .titulo {
+    width: 80%;
+  }
+
   #side-menu {
     width: 250px;
     left: -250px;
   }
+
 }
 
-@media (max-width: 900px) {
+/* -----------------MEDIA QUERIE PARA  COMPUTADORES------------------- */
+@media (min-width: 1025px){
   #gameCanvas {
-    width: 95vw;
-    height: 60vh;
-    margin: 10%;
+    width: 90vw;
+    height: 70vh;
+    margin: 2%;
     border-width: 2px;
+  }
+    h2 {
+    margin-top: 0%;
+  }
+}
 
-  }
-}
-@media (max-width: 600px) {
-  #gameCanvas {
-    max-width: 100vw;
-    
-  }
-}
 
