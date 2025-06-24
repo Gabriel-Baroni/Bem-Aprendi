@@ -1,7 +1,7 @@
 // Aguarda o carregamento da página
 window.onload = function () {
   // Coordenadas base para um canvas 1000x500
-  const colXBase = [150, 350, 550, 750];
+  const colXBase = [120, 320, 520, 720];
   const yBaseStart = 50;
   const yBaseStep = 100;
 
@@ -62,11 +62,15 @@ window.onload = function () {
   iconeErrado.src = "https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png";
   createjs.Sound.registerSound("../static/sound/digital-beeping.mp3", "acerto");
   createjs.Sound.registerSound("../static/sound/error_008.ogg", "erro");
+  
 
   // Cria o stage ANTES de qualquer função que use ele!
   const stage = new createjs.Stage("gameCanvas");
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
+  const escala = Math.min(stage.scaleX, stage.scaleY);
+  const fontSize_num = 55 * escala;
+  const fontSize_text = 20 * escala;
 
   // Função para calcular X proporcional
   function getX(i) {
@@ -107,17 +111,17 @@ window.onload = function () {
   window.addEventListener('DOMContentLoaded', resizeCanvasStage);
 
   // Cria um texto para exibir o tempo na tela
-  const textoTimer = new createjs.Text("Tempo: 0s", "12px 'Press Start 2P'", "#000");
+  const textoTimer = new createjs.Text("Tempo: 0s", `${fontSize_text}px 'Press Start 2P'`,"#000");
   textoTimer.x = 10;
   textoTimer.y = 10;
   stage.addChild(textoTimer);
 
   // --- NOVO: texto para mostrar quantas combinações faltam ---
-  const textoFaltam = new createjs.Text(`Faltam: 0`, "12px 'Press Start 2P'", "#000");
-  textoFaltam.x = 650;
+  const textoFaltam = new createjs.Text(`Faltam: 0`,  `${fontSize_text}px 'Press Start 2P'`,"#000");
+  textoFaltam.x = 440;
   textoFaltam.y = 10;
   stage.addChild(textoFaltam);
-
+  
   // Atualiza o tempo a cada segundo
   setInterval(() => {
     tempo++;
@@ -144,11 +148,11 @@ window.onload = function () {
     const cont = new createjs.Container();
     const shape = new createjs.Shape();
     const corBloco = coresBlocosFase[faseAtual] || corOriginal;
-    shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
-    const label = new createjs.Text(texto, "30px Comic Sans MS", "#000");
+    shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+    const label = new createjs.Text(texto, `${fontSize_num}px Comic Sans MS`, "#000");
     label.textAlign = "center";
     label.textBaseline = "middle";
-    label.x = 45;
+    label.x = 75;
     label.y = 40;
     cont.addChild(shape, label);
     cont.x = x;
@@ -179,7 +183,7 @@ window.onload = function () {
     return blocos.find(b => {
       const bx = b.x, by = b.y;
       return (
-        x >= bx && x <= bx + 90 &&
+        x >= bx && x <= bx + 150 &&
         y >= by && y <= by + 80
       );
     });
@@ -192,7 +196,7 @@ window.onload = function () {
     }
     blocos.forEach(b => {
       const corBloco = coresBlocosFase[faseAtual] || corOriginal;
-      b.shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+      b.shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
     });
     linhasErradas = [];
     pontosSelecionados = [];
@@ -214,7 +218,7 @@ window.onload = function () {
       });
       b.linhasConectadas = [];
       const corBloco = coresBlocosFase[faseAtual] || corOriginal;
-      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
     });
     pontosSelecionados = [];
     blocos.forEach(b => stage.removeChild(b));
@@ -305,11 +309,11 @@ window.onload = function () {
     const blocoMesmoTipo = pontosSelecionados.find(b => b.tipo === bloco.tipo);
     if (blocoMesmoTipo) {
       const corBloco = coresBlocosFase[faseAtual] || corOriginal;
-      blocoMesmoTipo.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+      blocoMesmoTipo.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
       pontosSelecionados = pontosSelecionados.filter(b => b !== blocoMesmoTipo);
     }
     pontosSelecionados.push(bloco);
-    bloco.shape.graphics.clear().beginFill(corSelecionado).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+    bloco.shape.graphics.clear().beginFill(corSelecionado).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
     if (pontosSelecionados.length === 4) {
       verificarResposta();
     }
@@ -392,7 +396,7 @@ window.onload = function () {
     mostrarIcone(correta, b4.x + 70, b4.y);
     pontosSelecionados.forEach(b => {
       const corBloco = coresBlocosFase[faseAtual] || corOriginal;
-      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 90, 80, 12);
+      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
     });
     pontosSelecionados = [];
   }
