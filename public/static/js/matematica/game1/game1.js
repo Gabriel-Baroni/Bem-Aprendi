@@ -69,8 +69,8 @@ window.onload = function () {
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
   const escala = Math.min(stage.scaleX, stage.scaleY);
-  const fontSize_num = 55 * escala;
-  const fontSize_text = 20 * escala;
+  const fontSize_num = 40 * escala;
+  const fontSize_text = 15 * escala;
 
   // Função para calcular X proporcional
   function getX(i) {
@@ -118,7 +118,7 @@ window.onload = function () {
 
   // --- NOVO: texto para mostrar quantas combinações faltam ---
   const textoFaltam = new createjs.Text(`Faltam: 0`,  `${fontSize_text}px 'Press Start 2P'`,"#000");
-  textoFaltam.x = 440;
+  textoFaltam.x = 550;
   textoFaltam.y = 10;
   stage.addChild(textoFaltam);
   
