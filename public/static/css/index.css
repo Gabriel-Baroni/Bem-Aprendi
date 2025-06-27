@@ -255,13 +255,42 @@ a{
 
 }
 
+#rotate-message {
+  display: none;
+}
+
+/* Esconde o app e mostra a mensagem de rotação em modo retrato */
 @media screen and (orientation: portrait) {
-  body {
+  #app {
     display: none;
   }
 
   #rotate-message {
-    display: block;
+    margin: 40px; /* margem ao redor do canvas */
+    display: flex;
+    justify-content: center; /* centraliza horizontal */
+    align-items: center;     /* centraliza vertical */
+    height: calc(100vh - 80px); /* altura da tela menos as margens */
+    background: #f0f0f0;
+    font-family: 'Press Start 2P', cursive;
+
+  }
+  #aviso_tela{
+      font-size: 200%;
+      color: #fff;
+      padding: 10px;
+      margin: 0 0 12px 0;
+      background: #ff6b6b;
+      border: 4px solid #222;
+      border-radius: 10px;
+      text-shadow: 2px 2px #000;
+      text-align: center;
+      box-shadow: 0 4px #000;
+      user-select: none;
+      line-height: 1.5;
   }
 }
+
+
+
 

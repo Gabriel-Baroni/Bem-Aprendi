@@ -8,40 +8,46 @@
 </head>
 <body>
 
-<canvas id="stage" width="1920" height="1080"></canvas>
-<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-<script src="static/js/index/mapa.js" defer></script>
-<script src="static/js/index/menu.js" defer></script>
-<script src="static/js/index/sounds.js" defer></script>
-
-<div id="menu-icon">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-
-<nav id="side-menu">
-  <ul>
-    <a href="start.html"><li>Início</li></a>
-    <a href=""><li>Ranking</li></a>
-    <a href=""><li>Configurações</li></a>
-    <a href=""><li>Ajuda</li></a>
-    <li>Sair</li>
-  </ul>
-</nav>
-<div id="popup-materia" class="popup" style="display: none;">
-  <div class="close-btn" id="close-popup">X</div>
-  <div class="popup-content">
-    <div id="popup-esquerda">
-      <h2 id="titulo-popup">Título</h2>
-      <button id="botao-popup">Entrar na Sala</button>
-    </div>
-    <div id="popup-direita">
-      <div class="popup-image" id="popup-image"></div>
-    </div>
+  <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
   </div>
-</div>
 
+
+  <div id="app">
+    <canvas id="stage" width="1920" height="1080"></canvas>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="static/js/index/mapa.js" defer></script>
+    <script src="static/js/index/menu.js" defer></script>
+    <script src="static/js/index/sounds.js" defer></script>
+      <div id="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <nav id="side-menu">
+        <ul>
+          <a href="start.html"><li>Início</li></a>
+          <a href=""><li>Ranking</li></a>
+          <a href=""><li>Configurações</li></a>
+          <a href=""><li>Ajuda</li></a>
+          <li>Sair</li>
+        </ul>
+      </nav>
+
+      <div id="popup-materia" class="popup" style="display: none;">
+        <div class="close-btn" id="close-popup">X</div>
+        <div class="popup-content">
+          <div id="popup-esquerda">
+            <h2 id="titulo-popup">Título</h2>
+            <button id="botao-popup">Entrar na Sala</button>
+          </div>
+          <div id="popup-direita">
+            <div class="popup-image" id="popup-image"></div>
+          </div>
+        </div>
+      </div>
+  </div>
 
 </body>
 </html>
