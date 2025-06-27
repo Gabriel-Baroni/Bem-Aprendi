@@ -43,20 +43,26 @@ router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
   // Login utilizando o Auth do Supabase
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password: senha
+try {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password: senha
+  });
+
+  if (error || !data || !data.user) {
+    return res.status(401).json({ 
+      error: 'Email ou senha inválidos', 
+      details: error ? error.message : 'Dados incompletos no retorno',
+      data,
+      errorObj: error
     });
-
-    if (error || !data || !data.user) {
-      return res.status(401).json({ error: 'Email ou senha inválidos' });
-    }
-
-    return res.json({ message: 'Login realizado com sucesso', user_id: data.user.id });
-  } catch (error) {
-    return res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
+
+  return res.json({ message: 'Login realizado com sucesso', user_id: data.user.id, session: data.session  });
+} catch (error) {
+    console.error('Erro interno do servidor:', error);  // <<< IMPORTANTE: log completo do erro
+    return res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
+}
 });
 
 export default router;

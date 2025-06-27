@@ -70,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
         //Verifica se a resposta esta ok
         const result = await response.json();
         if (response.ok) {
-          localStorage.setItem('user_id', result.usuario.id);
+          // Salvar tokens no localStorage
+          localStorage.setItem('access_token', result.session.access_token);
+          localStorage.setItem('refresh_token', result.session.refresh_token);
+          localStorage.setItem('user_id', result.user_id);
           window.location.href = '/start.html';
           loginForm.reset();
         } else {
