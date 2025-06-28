@@ -1,41 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
   // ---------------CADASTRO---------------
-  const cadastroForm = document.getElementById('cadastro-form'); // Garante que o scrpit só seja executado após o carregamento completo do DOM 
+  const cadastroForm = document.getElementById('cadastro-form');
   if (cadastroForm) {
     cadastroForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      // Atribui os campos das senhas a variáveis
       const senha = cadastroForm.senha.value;
       const confirSenha = cadastroForm.confir_senha.value;
 
-      // Verificar se as senhas são iguais
       if (senha !== confirSenha) {
         alert('As senhas não coincidem!');
         return;
       }
-      // Pega as informações do formulário 
+
       const formData = {
         nome: cadastroForm.nome.value,
         email: cadastroForm.email.value,
         senha: cadastroForm.senha.value,
-        idade: cadastroForm.idade.value 
+        idade: cadastroForm.idade.value
       };
 
       try {
-        //Faz um requisição tipo POST ao endpoint do CADASTRO, enviando dados em JSON
-        const response = await fetch('/auth/register', { 
+        const response = await fetch('/auth/register', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
-        //Confirma se a resposta esta ok
+
         const result = await response.json();
+
         if (response.ok) {
-          // localStorage.setItem('user_id', result.usuario.id);
-          window.location.href = '/start.html';
+          alert('Cadastro realizado com sucesso! Faça o login.');
+          window.location.href = '/auth.html';
           cadastroForm.reset();
         } else {
           alert(result.error || 'Erro ao cadastrar.');
@@ -51,30 +47,41 @@ document.addEventListener('DOMContentLoaded', function () {
   if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
-      
-      // Pega as informações do formulário e atribui a variáveis
+
       const formData = {
         email: loginForm.email.value,
         senha: loginForm.senha.value,
       };
 
       try {
-        //Faz uma requisição tipo POST ao endpoint do LOGIN, enviando dados em JSON
         const response = await fetch('/auth/login', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
-        //Verifica se a resposta esta ok
+
         const result = await response.json();
+
         if (response.ok) {
-          // Salvar tokens no localStorage
+          // Salvar dados no localStorage
           localStorage.setItem('access_token', result.session.access_token);
           localStorage.setItem('refresh_token', result.session.refresh_token);
           localStorage.setItem('user_id', result.user_id);
-          window.location.href = '/start.html';
+          localStorage.setItem('user_nome', result.usuario.nome);
+          localStorage.setItem('tipo_usuario', result.usuario.tipo);
+
+          // Definir crianca_id dependendo do tipo de usuário
+          if (result.usuario.tipo === 'responsavel') {
+            // Limpa crianca_id para que o responsável escolha depois
+            localStorage.removeItem('crianca_id');
+            window.location.href = '/perfis/perfil.html';
+          } else {
+            // Usuário é criança, usa seu próprio ID como crianca_id
+            localStorage.setItem('crianca_id', result.user_id);
+            localStorage.setItem('crianca_nome', result.usuario.nome);
+            window.location.href = '/index.html';
+          }
+
           loginForm.reset();
         } else {
           alert(result.error || 'Erro ao fazer Login.');

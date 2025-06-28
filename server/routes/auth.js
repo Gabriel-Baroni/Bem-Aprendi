@@ -42,27 +42,47 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
-  // Login utilizando o Auth do Supabase
-try {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password: senha
-  });
-
-  if (error || !data || !data.user) {
-    return res.status(401).json({ 
-      error: 'Email ou senha inválidos', 
-      details: error ? error.message : 'Dados incompletos no retorno',
-      data,
-      errorObj: error
+  try {
+    // Faz o login pelo Auth do Supabase
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password: senha
     });
-  }
 
-  return res.json({ message: 'Login realizado com sucesso', user_id: data.user.id, session: data.session  });
-} catch (error) {
-    console.error('Erro interno do servidor:', error);  // <<< IMPORTANTE: log completo do erro
+    if (error || !data || !data.user) {
+      return res.status(401).json({ 
+        error: 'Email ou senha inválidos', 
+        details: error ? error.message : 'Dados incompletos no retorno',
+      });
+    }
+
+    const userId = data.user.id;
+
+    // Agora buscamos os dados complementares na tabela Usuario_infos
+    const { data: infos, error: infoError } = await supabase
+      .from('Usuario_infos')
+      .select('nome, tipo') // você pode adicionar mais campos se quiser
+      .eq('id_auth', userId)
+      .single();
+
+    if (infoError) {
+      return res.status(404).json({ error: 'Dados do usuário não encontrados' });
+    }
+
+    return res.json({
+      message: 'Login realizado com sucesso',
+      user_id: userId,
+      session: data.session,
+      usuario: {
+        nome: infos.nome,
+        tipo: infos.tipo
+      }
+    });
+
+  } catch (error) {
+    console.error('Erro interno do servidor:', error);
     return res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
-}
+  }
 });
 
 export default router;
