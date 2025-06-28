@@ -5,7 +5,20 @@ body {
   justify-content: center; /* centraliza horizontal */
   align-items: center;     /* centraliza vertical */
   height: calc(100vh - 80px); /* altura da tela menos as margens */
-  background: #f0f0f0;
+  background: var(--bs-light-bg, #f0f0f0);
+}
+
+body {
+  margin: 40px; /* margem ao redor do canvas */
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center;     /* centraliza vertical */
+  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  background: #fff; /* fundo branco no modo claro */
+}
+
+body[data-bs-theme="dark"] {
+  background: #000; /* fundo preto no modo escuro */
 }
 
 /* Canvas com tamanho fluido para desktops e mobiles */
@@ -167,6 +180,9 @@ body {
   font-family: 'Press Start 2P', cursive;
   image-rendering: pixelated;
 }
+  #nome-crianca {
+    font-size: 0.8rem;
+  }
 
 #side-menu ul {
   list-style: none;
@@ -189,7 +205,7 @@ body {
   user-select: none;
 }
 
-a{
+a {
   text-decoration: none;
   color: #5c2b00;
 }
@@ -201,7 +217,6 @@ a{
   text-shadow: 1px 1px 0 #5c2b00;
   transform: scale(1.05);
 }
-
 #menu-icon {
   position: fixed;
   top: 15px;
@@ -242,8 +257,19 @@ a{
 }
 
 
-/*---------------MEDIA QUERIES PARA RESPONSIVIDADE--------------*/ 
 
+/*---------------MEDIA QUERIES PARA RESPONSIVIDADE--------------*/ 
+@media (min-width: 601px) and (max-width: 1024px) {
+    #side-menu {
+    width: 50vw;
+    left: -50vw;
+  }
+
+  #side-menu ul li {
+  font-size: 0.6rem;
+  padding: 3% 0;
+}
+}
 
 
 @media (min-width: 1025px){

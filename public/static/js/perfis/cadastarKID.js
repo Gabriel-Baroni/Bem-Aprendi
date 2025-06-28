@@ -23,8 +23,7 @@ import supabase from '../db/supabaseClient.js';
       msg.textContent = 'Erro: ' + error.message;
       msg.style.color = 'red';
     } else {
-      msg.textContent = 'Criança cadastrada com sucesso!';
-      msg.style.color = 'green';
+        window.location.href = '/NavBar/perfis/perfil.html';
       form.reset();
     }
   });
