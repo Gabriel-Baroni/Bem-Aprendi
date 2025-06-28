@@ -231,17 +231,17 @@ window.onload = function () {
 
   // Função para enviar a pontuação acumulada para o endpoint pontuação.js
   function enviarPontuacaoParaServidor(pontuacao, materia) {
-    const userId = localStorage.getItem('user_id');
-    if (!userId) {
-      console.error('Usuário não autenticado!');
+    const crianca_id = localStorage.getItem('crianca_id');
+    if (!crianca_id) {
+      console.error('Crianca não autenticada!');
       return;
     }
     fetch("/pontuacao", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        user_id: userId,
-        materia: materia,         
+        materia: materia, 
+        id_crianca: crianca_id,        
         pontuacao: pontuacao
       })
     })
