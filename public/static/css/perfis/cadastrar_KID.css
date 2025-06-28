@@ -1,0 +1,225 @@
+/* ---------------- ESTILO GERAL ------------------ */
+body {
+  margin: 0;
+  padding: 0 20px 40px;
+  background: linear-gradient(135deg, #ffe8a3 80%, #ffb347 100%);
+  font-family: 'Press Start 2P', cursive;
+  color: #5c2b00;
+  image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------------- TÍTULOS ------------------ */
+h1, h2 {
+  font-size: 1rem;
+  margin-top: 60px;
+  text-align: center;
+  color: #4a3c31;
+  text-shadow: 2px 2px #ffdd99;
+  user-select: none;
+}
+
+/* ---------------- FORMULÁRIO ------------------ */
+form#form-crianca {
+  background-color: #ffe8a3;
+  border: 6px solid #5c2b00;
+  border-radius: 16px;
+  padding: 20px 30px;
+  box-shadow: 8px 8px 0 #000;
+  max-width: 400px;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+form#form-crianca label {
+  font-size: 11px;
+  color: #5c2b00;
+  user-select: none;
+}
+
+form#form-crianca input[type="text"],
+form#form-crianca input[type="number"] {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  padding: 10px;
+  border: 4px solid #5c2b00;
+  border-radius: 10px;
+  background-color: #fffbe6;
+  color: #5c2b00;
+  outline: none;
+  image-rendering: pixelated;
+  transition: border-color 0.2s ease;
+}
+
+form#form-crianca input[type="text"]:focus,
+form#form-crianca input[type="number"]:focus {
+  border-color: #ffb347;
+}
+
+/* ---------------- BOTÃO CADASTRAR ------------------ */
+form#form-crianca button[type="submit"] {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 12px 0;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 6px #000;
+  user-select: none;
+  transition: all 0.1s ease-in-out;
+}
+
+form#form-crianca button[type="submit"]:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+/* ---------------- MENSAGEM DE FEEDBACK ------------------ */
+#mensagem {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #5c2b00;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+}
+
+/* ---------------- LISTA DE PERFIS ------------------ */
+#lista-perfis {
+  width: 90vw;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0 0 0;
+}
+
+/* CARTÕES DE PERFIL */
+.perfil-card {
+  background-color: #ffe8a3;
+  border: 6px solid #5c2b00;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 8px 8px 0 #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Nome e idade */
+.perfil-nome, .perfil-idade {
+  font-size: 12px;
+  color: #5c2b00;
+  word-break: break-word;
+  user-select: none;
+}
+
+/* Botões dentro do card */
+.perfil-acoes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botão entrar no perfil */
+.botao-entrar-perfil {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  padding: 12px 20px;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 6px #000;
+  user-select: none;
+  transition: all 0.1s ease-in-out;
+  white-space: nowrap;
+}
+
+.botao-entrar-perfil:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+/* Botão excluir perfil */
+.botao-excluir-perfil {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  padding: 12px 16px;
+  background-color: #ff4b4b;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 6px #000;
+  user-select: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.botao-excluir-perfil:hover {
+  background-color: #d13b3b;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+/* ---------------- RESPONSIVIDADE ------------------ */
+@media (max-width: 600px) {
+  h1, h2 {
+    font-size: 0.7rem;
+  }
+
+  form#form-crianca {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  form#form-crianca input[type="text"],
+  form#form-crianca input[type="number"] {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  form#form-crianca button[type="submit"] {
+    font-size: 10px;
+    padding: 10px 0;
+  }
+
+  #lista-perfis {
+    padding: 10px 0 0 0;
+  }
+
+  .perfil-card {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .perfil-nome, .perfil-idade {
+    font-size: 10px;
+  }
+
+  .perfil-acoes {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .botao-entrar-perfil, .botao-excluir-perfil {
+    font-size: 10px;
+    padding: 10px 14px;
+    width: 100%;
+    max-width: none;
+  }
+}

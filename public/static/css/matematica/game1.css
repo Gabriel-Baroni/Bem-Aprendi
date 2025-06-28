@@ -92,23 +92,25 @@ button#resetButton:hover {
   box-shadow: 8px 0 0 #ffb347, 0 0 0 8px #fffbe6;
   font-family: 'Press Start 2P', cursive;
   image-rendering: pixelated;
-  overflow-y: auto;
 }
+  #nome-crianca {
+    font-size: 0.8rem;
+  }
 
 #side-menu ul {
   list-style: none;
   padding: 0;
-  margin-top: 10px;
+  margin: 0;
 }
 
 #side-menu ul li {
-  padding: 10% 0;
+  padding: 18px 0;
   border-bottom: 3px dashed #ffb347;
   cursor: pointer;
-  font-size: 0.6rem;
+  font-size: 13px;
   letter-spacing: 1px;
   background: #fffbe6;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 4px 4px 0 #ffb347;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
@@ -369,8 +371,7 @@ a {
 
   #side-menu ul li {
   font-size: 0.6rem;
-  letter-spacing: 1px;
-   padding: 5% 0;
+  padding: 3% 0;
 }
 
   #menu-icon {
@@ -404,14 +405,49 @@ a {
     top: 3%
   }
 }
+#rotate-message {
+  display: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
 
 @media screen and (orientation: portrait) {
-  body {
+  #app {
     display: none;
   }
 
   #rotate-message {
-    display: block;
+    margin: 40px; /* margem ao redor do canvas */
+    display: flex;
+    justify-content: center; /* centraliza horizontal */
+    align-items: center;     /* centraliza vertical */
+    height: calc(100vh - 80px); /* altura da tela menos as margens */
+    font-family: 'Press Start 2P', cursive;
+    width: 100%;
+
+  }
+  #aviso_tela{
+      font-size: 150%;
+      color: #fff;
+      padding: 10px;
+      margin: 0 0 12px 0;
+      background: #ff6b6b;
+      border: 4px solid #222;
+      border-radius: 10px;
+      text-shadow: 2px 2px #000;
+      text-align: center;
+      box-shadow: 0 4px #000;
+      user-select: none;
+      line-height: 1.5;
   }
 }
+
+
+
+
 

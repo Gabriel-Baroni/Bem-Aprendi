@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tipoUsuario === 'responsavel') {
       // Se for responsável, vai para a seleção de perfis
-      window.location.href = "/perfis/perfil.html";
+      window.location.href = "NavBar/perfis/perfil.html";
     } else {
       // Se for criança, vai direto pro jogo
       window.location.href = "/index.html";
