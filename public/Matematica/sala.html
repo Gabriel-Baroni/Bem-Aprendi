@@ -8,23 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </head>
 <body>
-<div id="container-canvas">
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  
+  <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+  </div>
+  <div id="app">
+    <div id="container-canvas">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-  <div id="caixa-dialogo">
-    <div id="dialogo-esquerda">
-      <img id="dialogo-foto" src="imagens/professor.png" alt="Personagem" />
-      <div id="dialogo-nome">Professor Leo</div>
+    <div id="caixa-dialogo">
+      <div id="dialogo-esquerda">
+        <img id="dialogo-foto" src="imagens/professor.png" alt="Personagem" />
+        <div id="dialogo-nome">Professor Leo</div>
+      </div>
+      <div id="dialogo-texto-container">
+        <div id="dialogo-texto"></div>
+      </div>
+
     </div>
-    <div id="dialogo-texto-container">
-      <div id="dialogo-texto"></div>
-    </div>
+  </div>
+
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="../static/js/matematica/sala_aula/dialogo.js"></script>
+    <script src="../static/js/matematica/sala_aula/sala.js"></script>
 
   </div>
-</div>
 
-  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-  <script src="../static/js/matematica/sala_aula/dialogo.js"></script>
-  <script src="../static/js/matematica/sala_aula/sala.js"></script>
 </body>
 </html>

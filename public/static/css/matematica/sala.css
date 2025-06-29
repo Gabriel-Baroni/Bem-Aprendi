@@ -169,10 +169,7 @@
     width: 90px;
   }
 
-  #dialogo-foto {
-    width: 70px;
-    height: 70px;
-  }
+
 
   #dialogo-nome {
     font-size: 12px;
@@ -196,3 +193,74 @@
     gap: 12px;
   }
 }
+
+#rotate-message {
+  display: none;
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+    #gameCanvas {
+    width: 90vw;
+    height: 70vh;
+    border-width: 2px;
+    margin-bottom: 0;
+  }
+    #caixa-dialogo {
+    width: 80%;
+    height: 25%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+    #dialogo-foto {
+    width: 50%;
+    height: 50%;
+  }
+
+    .botao-iniciar {
+    font-size: 12px;
+    height: 70%;
+    width: 25%;
+    padding: 10px 8px;
+  }
+}
+
+@media (min-width: 1025px){
+  #gameCanvas {
+    width: 90vw;
+    height: 90vh;
+    margin: 2%;
+    border-width: 2px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  #app {
+    display: none;
+  }
+
+  #rotate-message {
+    margin: 40px; /* margem ao redor do canvas */
+    display: flex;
+    justify-content: center; /* centraliza horizontal */
+    align-items: center;     /* centraliza vertical */
+    height: calc(100vh - 80px); /* altura da tela menos as margens */
+    background: #f0f0f0;
+    font-family: 'Press Start 2P', cursive;
+
+  }
+  #aviso_tela{
+      font-size: 200%;
+      color: #fff;
+      padding: 10px;
+      margin: 0 0 12px 0;
+      background: #ff6b6b;
+      border: 4px solid #222;
+      border-radius: 10px;
+      text-shadow: 2px 2px #000;
+      text-align: center;
+      box-shadow: 0 4px #000;
+      user-select: none;
+      line-height: 1.5;
+  }
+}
+

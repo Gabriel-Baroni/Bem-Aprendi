@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (result.usuario.tipo === 'responsavel') {
             // Limpa crianca_id para que o responsável escolha depois
             localStorage.removeItem('crianca_id');
-            window.location.href = '/perfis/perfil.html';
+            window.location.href = 'NavBar/perfis/perfil.html';
           } else {
             // Usuário é criança, usa seu próprio ID como crianca_id
             localStorage.setItem('crianca_id', result.user_id);
