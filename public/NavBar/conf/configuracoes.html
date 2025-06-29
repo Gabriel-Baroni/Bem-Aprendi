@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/conf.css'> 
+    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css//conf/conf.css'> 
     <script src="../../static/js/index/menu.js" defer></script>
     <script src="/static/js/conf/sounds.js" defer></script>
     <script src="../../static/js/index/NavBarControls.js" defer></script>
@@ -20,7 +20,7 @@
     <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
   </div>
 
-      <div id="app">
+  <div id="app">
         <div id="menu-icon">
         <div></div>
         <div></div>
@@ -32,7 +32,6 @@
         <ul>
           <a href="/index.html"><li>Início</li></a>
           <a href=""><li>Ranking</li></a>
-          <a href="NavBar/conf/configuracoes.html"><li>Configurações</li></a>
           <a href=""><li>Ajuda</li></a>
           <a href="NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
           <li>Sair</li>
@@ -42,6 +41,11 @@
     <button id="toggle-theme" class="btn btn-outline-secondary">🌙 Modo Escuro</button>
     <button id="mudar-senha" class="btn btn-outline-secondary">🔒 Mudar Senha</button>
     <button id="editar-perfil" class="btn btn-outline-secondary">👤 Editar Perfil</button>
+    <script>
+      document.getElementById("editar-perfil").addEventListener("click", function () {
+        window.location.href = "editar_perf.html";
+      });
+    </script>
     <button id="musicas" class="btn btn-outline-secondary">🎵 Músicas</button>
 
 

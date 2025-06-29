@@ -8,17 +8,10 @@ body {
   background: var(--bs-light-bg, #f0f0f0);
 }
 
-body {
-  margin: 40px; /* margem ao redor do canvas */
-  display: flex;
-  justify-content: center; /* centraliza horizontal */
-  align-items: center;     /* centraliza vertical */
-  height: calc(100vh - 80px); /* altura da tela menos as margens */
-  background: #fff; /* fundo branco no modo claro */
-}
+
 
 body[data-bs-theme="dark"] {
-  background: #000; /* fundo preto no modo escuro */
+  background: #292828; /* fundo preto no modo escuro */
 }
 
 /* Canvas com tamanho fluido para desktops e mobiles */
