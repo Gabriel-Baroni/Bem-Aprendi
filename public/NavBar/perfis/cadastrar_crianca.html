@@ -6,7 +6,7 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="../../static/css/perfis/cadastrar_KID.css" />
-    <script type="module" src='../../static/js/perfis/cadastarKID.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
         <h2>Cadastrar Nova Criança</h2>
@@ -21,6 +21,28 @@
         </form>
 
         <div id="mensagem"></div>
+
+        <div id="menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+    
+          <nav id="side-menu">
+            <p id="nome-crianca"></p>
+            <ul>
+              <li><button onclick="history.back()">Voltar</button></li>
+              <a href=""><li>Ranking</li></a>
+              <a href="/NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+              <a href=""><li>Ajuda</li></a>
+              <a href="/NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+              <a href="/auth.html"><li>Sair</li></a>
+            </ul>
+          </nav>
+          
+    <script type="module" src='../../static/js/perfis/cadastarKID.js'></script>
+    <script src="../../static/js/index/menu.js"></script>
+    <script src="../../static/js/perfis/NavBarControls.js"></script>
     
 </body>
 </html>

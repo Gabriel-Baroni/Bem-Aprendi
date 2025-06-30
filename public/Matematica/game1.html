@@ -17,11 +17,6 @@
      <h2>Minigame de Operações</h2>
   <canvas id="gameCanvas"></canvas>
   <button id="resetButton" onclick="resetLinha()">Apagar Linhas Erradas</button>
-  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-  <script src="../static/js/matematica/game1/game1.js" defer></script>
-  <script src="../static/js/matematica/game1/menu.js" defer></script>
-  <script src="../static/js/matematica/game1/sounds.js" defer></script>
-  <script src="../static/js/index/NavBarControls.js" defer></script>
 
 
 <div id="menu-icon">
@@ -34,7 +29,7 @@
 <nav id="side-menu">
   <p id="nome-crianca"></p>
   <ul>
-    <a href="/index.html"><li>Início</li></a>
+    <li><button onclick="history.back()">Voltar</button></li>
     <a href=""><li>Ranking</li></a>
     <a href="/NavBar/conf/configuracoes.html"><li>Configurações</li></a>
     <a href=""><li>Como jogar ?</li></a>
@@ -68,6 +63,10 @@
 
   </div>
  
-
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="../static/js/matematica/game1/game1.js"></script>
+  <script src="../static/js/matematica/game1/menu.js"></script>
+  <script src="../static/js/matematica/game1/sounds.js"></script>
+  <script src="../static/js/index/NavBarControls.js"></script>
 </body>
 </html>

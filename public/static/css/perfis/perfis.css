@@ -252,6 +252,102 @@ a {
 
 }
 
+
+/* ------------SIDE MENU----------------- */
+
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe8a3 80%, #ffb347 100%);
+  color: #5c2b00;
+  padding: 60px 20px 20px 20px;
+  box-sizing: border-box;
+  transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  z-index: 1000;
+  border-right: 8px solid #5c2b00;
+  box-shadow: 8px 0 0 #ffb347, 0 0 0 8px #fffbe6;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+  #nome-crianca {
+    font-size: 0.8rem;
+  }
+
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  padding: 18px 0;
+  border-bottom: 3px dashed #ffb347;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: #fffbe6;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #ffb347;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: #5c2b00;
+}
+
+#side-menu ul li:hover {
+  background: #ffb347;
+  color: #fff;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px 0 #5c2b00;
+  transform: scale(1.05);
+}
+#menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  background: #ffe8a3;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #ffb347;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-icon div {
+  background-color: #5c2b00;
+  height: 6px;
+  margin: 3px 0;
+  border-radius: 2px;
+  width: 80%;
+  image-rendering: pixelated;
+}
+
+
+/* Quando ativo, mostra o menu */
+#side-menu.active {
+  left: 0;
+}
+
+/* Itens do menu */
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
 /* ----------------- RESPONSIVO ----------------- */
 @media (max-width: 600px) {
   h1 {

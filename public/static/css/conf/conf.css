@@ -55,6 +55,16 @@ body[data-bs-theme="dark"] {
   user-select: none;
 }
 
+#side-menu ul li button {
+  width: 100%;
+  border: none;
+  color: #5c2b00;
+  background: none;
+  font-size: 13px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+
 a {
   text-decoration: none !important;
   color: #5c2b00 !important;

@@ -15,12 +15,6 @@
 
   <div id="app">
     <canvas id="stage" width="1920" height="1080"></canvas>
-    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-    <script src="static/js/index/mapa.js" defer></script>
-    <script src="static/js/index/menu.js" defer></script>
-    <script src="static/js/index/sounds.js" defer></script>
-    <script src='static/js/conf/theme.js' defer></script>
-    <script src="static/js/index/NavBarControls.js" defer></script>
       <div id="menu-icon">
         <div></div>
         <div></div>
@@ -30,11 +24,12 @@
       <nav id="side-menu">
         <p id="nome-crianca"></p>
         <ul>
+          <li><button onclick="history.back()">Voltar</button></li>
           <a href=""><li>Ranking</li></a>
           <a href="NavBar/conf/configuracoes.html"><li>Configurações</li></a>
           <a href=""><li>Ajuda</li></a>
           <a href="NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
-          <li>Sair</li>
+          <a href="/auth.html"><li>Sair</li></a>
         </ul>
       </nav>
 
@@ -51,6 +46,13 @@
         </div>
       </div>
   </div>
+
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="static/js/index/mapa.js" ></script>
+  <script src="static/js/index/menu.js" ></script>
+  <script src="static/js/index/sounds.js" ></script>
+  <script src='static/js/conf/theme.js' ></script>
+  <script src="static/js/index/NavBarControls.js"></script>
 
 </body>
 </html>
