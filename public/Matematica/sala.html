@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Sala de Aula - Diálogo</title>
   <link rel="stylesheet" href="../static/css/matematica/sala.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </head>
 <body>
   
@@ -24,13 +24,32 @@
       <div id="dialogo-texto-container">
         <div id="dialogo-texto"></div>
       </div>
-
     </div>
   </div>
+
+  <div id="menu-icon">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <nav id="side-menu">
+    <p id="nome-crianca"></p>
+    <ul>
+      <li><button onclick="history.back()">Voltar</button></li>
+      <a href=""><li>Ranking</li></a>
+      <a href="../NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+      <a href=""><li>Ajuda</li></a>
+      <a href="../NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+      <a href="/auth.html"><li>Sair</li></a>
+    </ul>
+  </nav>
 
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="../static/js/matematica/sala_aula/dialogo.js"></script>
     <script src="../static/js/matematica/sala_aula/sala.js"></script>
+    <script src="../../static/js/index/menu.js"></script>
+    <script src="../../static/js/index/NavBarControls.js"></script>
 
   </div>
 

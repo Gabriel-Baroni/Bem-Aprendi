@@ -228,6 +228,16 @@ a {
   align-items: center;
 }
 
+#side-menu ul li button {
+  width: 100%;
+  border: none;
+  color: #5c2b00;
+  background: none;
+  font-size: 13px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+
 #menu-icon div {
   background-color: #5c2b00;
   height: 6px;
