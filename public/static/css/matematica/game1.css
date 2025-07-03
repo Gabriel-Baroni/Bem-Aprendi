@@ -32,9 +32,7 @@ h2 {
   max-height: 75vh;
   display: block;
   margin: 0 auto 20px auto;
-  border: 5px solid #a2d5f2;
   background-color: #fff7db;
-  box-shadow: 0 0 15px 5px #ffe4c4cc;
   image-rendering: pixelated;
   cursor: crosshair;
   box-sizing: border-box;
