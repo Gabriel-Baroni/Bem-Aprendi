@@ -16,12 +16,9 @@ body[data-bs-theme="dark"] {
 
 /* Canvas com tamanho fluido para desktops e mobiles */
 #stage {
-  border: 2px solid #333;
-  width: 80vw;  /* largura padrão */
+  width: 100vw;  /* largura padrão */
   height: 90vh; /* altura padrão */
   display: block; /* remove espaçamento */
-  max-width: 2060px;  /* limite máximo para telas grandes */
-  max-height: 1080px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
@@ -187,7 +184,7 @@ body[data-bs-theme="dark"] {
   padding: 18px 0;
   border-bottom: 3px dashed #ffb347;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.6rem;
   letter-spacing: 1px;
   background: #fffbe6;
   margin-bottom: 10px;
@@ -233,7 +230,7 @@ a {
   border: none;
   color: #5c2b00;
   background: none;
-  font-size: 13px;
+  font-size: 0.6rem;
   font-family: 'Press Start 2P', cursive;
   cursor: pointer;
 }
@@ -261,6 +258,7 @@ a {
 
 
 
+
 /*---------------MEDIA QUERIES PARA RESPONSIVIDADE--------------*/ 
 @media (min-width: 601px) and (max-width: 1024px) {
     #side-menu {
@@ -272,13 +270,19 @@ a {
   font-size: 0.6rem;
   padding: 3% 0;
 }
+
+  #stage {
+  width: 100vw;  /* largura padrão */
+  height: 100vh; /* altura padrão */
+  display: block; /* remove espaçamento */
+}
 }
 
 
 @media (min-width: 1025px){
   #stage {
-  width: 90vw;  /* largura padrão */
-  height: 90vh; /* altura padrão */
+  width: 100vw;  /* largura padrão */
+  height: 100vh; /* altura padrão */
   display: block; /* remove espaçamento */
 }
 

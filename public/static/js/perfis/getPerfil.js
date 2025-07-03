@@ -6,7 +6,7 @@ const btnCadastrar = document.getElementById('btn-cadastrar');
 
 if (!responsavel_id) {
   alert('Usuário não autenticado. Faça login!');
-  window.location.href = '/login.html';
+  window.location.href = '/auth.html';
 }
 
 let idParaExcluir = null;

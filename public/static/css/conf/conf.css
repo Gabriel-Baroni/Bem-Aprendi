@@ -44,7 +44,7 @@ body[data-bs-theme="dark"] {
   padding: 18px 0;
   border-bottom: 3px dashed #ffb347;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.6rem;
   letter-spacing: 1px;
   background: #fffbe6;
   margin-bottom: 10px;
@@ -60,7 +60,7 @@ body[data-bs-theme="dark"] {
   border: none;
   color: #5c2b00;
   background: none;
-  font-size: 13px;
+  font-size: 0.6rem;
   font-family: 'Press Start 2P', cursive;
   cursor: pointer;
 }
@@ -114,6 +114,7 @@ a {
 #side-menu ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #rotate-message {
@@ -171,6 +172,7 @@ a {
   font-size: 0.6rem;
   padding: 3% 0;
 }
+
 #mudar-senha,
 #editar-perfil,
 #toggle-theme,

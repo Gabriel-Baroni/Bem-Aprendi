@@ -3,12 +3,12 @@ const stage = new createjs.Stage("stage");
 
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
-  { x: 350, y: 620, materia: "Matemática", img:"" },
-  { x: 260, y: 290, materia: "Lógica",  img:""},
-  { x: 950, y: 825, materia: "Português", img:"" },
-  { x: 935, y: 300, materia: "História", img:"" },
-  { x: 1160, y: 560, materia: "Ciências", img:"" },
-  { x: 1670, y: 825, materia: "Inglês", img:"" }
+  { x: 356, y: 619, materia: "Matemática", img:"" },
+  { x: 266, y: 289, materia: "Lógica",  img:""},
+  { x: 949, y: 822, materia: "Português", img:"" },
+  { x: 919, y: 295, materia: "História", img:"" },
+  { x: 1151, y: 560, materia: "Ciências", img:"" },
+  { x: 1669, y: 830, materia: "Inglês", img:"" }
 ];
 
 // Cria variaveis globais para o player, popup e fundoClick
@@ -20,7 +20,7 @@ let ultimoSelecionado = null; // Variável para guardar o último círculo clica
 // Pré-Carrega a imagem do player e a imagem do fundo
 const loader = new createjs.LoadQueue();
 loader.loadManifest([
-  { id: "bg", src: "static/img/index_img/fundo_pixel.jpeg" },
+  { id: "bg", src: "static/img/index_img/tela_fases.png" },
   { id: "player", src: "static/img/index_img/bem_te_vi.png" }
 ]);
 loader.on("complete", init);
@@ -58,7 +58,7 @@ stage.addChild(bg);
 // Cria os círculos para cada fase e suas características
 fases.forEach((pos, i) => {
   const circle = new createjs.Shape();
-  const raio = 35;
+  const raio =12;
   const corOriginal = "#ffffff";
   const corSelecionado = "#FFFF00"; 
 

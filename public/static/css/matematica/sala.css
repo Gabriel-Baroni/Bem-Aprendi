@@ -1,10 +1,24 @@
+body {
+  margin: 40px; /* margem ao redor do canvas */
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center;     /* centraliza vertical */
+  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  background: var(--bs-light-bg, #f0f0f0);
+}
+
+
+
+body[data-bs-theme="dark"] {
+  background: #292828; /* fundo preto no modo escuro */
+}
+
+
 /* Container do canvas + diálogo */
 #container-canvas {
   position: relative;
   width: 100vw;
   height: 95vh;
-  max-width: 1200px;
-  max-height: 800px;
   margin: 0 auto;
   font-family: "Press Start 2P";
   box-sizing: border-box;
@@ -15,10 +29,8 @@
 
 /* Canvas */
 #gameCanvas {
-  width: 90vw;
+  width: 100vw;
   height: auto;
-  max-width: 1200px;
-  max-height: 675px;
   display: block;
 }
 
@@ -53,7 +65,7 @@
   padding: 18px 0;
   border-bottom: 3px dashed #ffb347;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.6rem;
   letter-spacing: 1px;
   background: #fffbe6;
   margin-bottom: 10px;
@@ -74,7 +86,7 @@ a {
   border: none;
   color: #5c2b00;
   background: none;
-  font-size: 13px;
+  font-size: 0.6rem;
   font-family: 'Press Start 2P', cursive;
   cursor: pointer;
 }
@@ -126,26 +138,7 @@ a {
 }
 
 
-/* ===== Responsividade ===== */
-@media (max-width: 768px) {
-  #container-canvas {
-    width: 100vw;
-    height: 100vh;
-    max-width: none;
-    max-height: none;
-    padding: 0;
-    margin: 0 auto;
-  }
 
-  #gameCanvas {
-    width: auto;
-    height: 90vh; /* Ocupa 90% da altura da tela */
-    max-width: none;
-    max-height: none;
-    display: block;
-    margin: 0 auto;
-  }
-}
 /* Caixa de diálogo */
 #caixa-dialogo {
   position: absolute;
@@ -253,58 +246,13 @@ a {
   box-shadow: 0 4px #000;
 }
 
-/* ===== Responsividade ===== */
-@media (max-width: 768px) {
-  #container-canvas {
-    width: 100vw;
-    height: 100vh;
-    max-width: none;
-    max-height: none;
-  }
-
-  #gameCanvas {
-    width: 95vw;
-    height: auto;
-    max-width: none;
-    max-height: none;
-  }
-
-  #dialogo-esquerda {
-    width: 90px;
-  }
-
-
-
-  #dialogo-nome {
-    font-size: 12px;
-    padding: 5px 10px;
-  }
-
-  #dialogo-texto {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .botao-iniciar {
-    font-size: 12px;
-    height: 60px;
-    padding: 10px 8px;
-  }
-
-  #caixa-dialogo {
-    width: 95%;
-    padding: 12px;
-    gap: 12px;
-  }
-}
-
 #rotate-message {
   display: none;
 }
 @media (min-width: 601px) and (max-width: 1024px) {
     #gameCanvas {
-    width: 90vw;
-    height: 70vh;
+    width:100vw;
+    height: 100vh;
     border-width: 2px;
     margin-bottom: 0;
   }
@@ -326,14 +274,19 @@ a {
     width: 25%;
     padding: 10px 8px;
   }
+  #side-menu ul li {
+    padding: 3% 0;
+}
+    #side-menu {
+    width: 50vw;
+    left: -50vw;
+  }
 }
 
 @media (min-width: 1025px){
   #gameCanvas {
-    width: 90vw;
-    height: 90vh;
-    margin: 2%;
-    border-width: 2px;
+    width: 100vw;
+    height: 100vh;
   }
 }
 
