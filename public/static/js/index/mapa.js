@@ -50,9 +50,9 @@ stage.addChild(bg);
   player = new createjs.Bitmap(loader.getResult("player"));
   player.regX = player.image.width / 2;
   player.regY = player.image.height / 2;
-  player.scaleX = player.scaleY = 0.3;
-  player.x = 620;
-  player.y = 900;
+  player.scaleX = player.scaleY = 0.15;
+  player.x = 630;
+  player.y = 850;
   stage.addChild(player);
 
 // Cria os círculos para cada fase e suas características

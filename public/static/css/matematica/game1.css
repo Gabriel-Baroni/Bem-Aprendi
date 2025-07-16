@@ -31,7 +31,7 @@ h2 {
   aspect-ratio: 4 / 3;
   max-height: 75vh;
   display: block;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
   background-color: #fff7db;
   image-rendering: pixelated;
   cursor: crosshair;
@@ -400,7 +400,7 @@ a {
   #gameCanvas {
     width: 90vw;
     height: 90vh;
-    margin: 2%;
+
     border-width: 2px;
   }
     h2 {

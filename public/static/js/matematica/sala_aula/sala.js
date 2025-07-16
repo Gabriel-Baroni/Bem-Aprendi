@@ -14,15 +14,15 @@ window.onload = function () {
 
   // Personagem
   const personagem = new createjs.Bitmap("/static/img/matematica/prof.png"); // substitua pelo caminho da sua imagem
-  personagem.x = 700;
-  personagem.y = 250;
+  personagem.x = 800;
+  personagem.y = 200;
   personagem.cursor = "pointer";
   
   // Ajuste a escala da imagem para um tamanho aproximado da bola (opcional)
   personagem.image.onload = () => {
     const desiredRadius = 40;
     // Assume que a imagem é quadrada ou usar largura
-    const scale = (desiredRadius * 6) / personagem.image.width;
+    const scale = (desiredRadius * 3.5) / personagem.image.width;
     personagem.scaleX = personagem.scaleY = scale;
     stage.update();
   };
