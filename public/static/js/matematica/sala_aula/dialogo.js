@@ -1,5 +1,6 @@
 let textoEmDigitacao = false;
 
+// MOSTRAR DIÁLOGO
 function mostrarDialogo(nome, imagem, texto, callback) {
   const dialogo = document.getElementById("caixa-dialogo");
   const nomeEl = document.getElementById("dialogo-nome");
@@ -19,8 +20,8 @@ function mostrarDialogo(nome, imagem, texto, callback) {
     i++;
     if (i >= texto.length) {
       clearInterval(intervalo);
-      textoEmDigitacao = false; // agora pode clicar
-      if (callback) callback(); // só chama quando terminar
+      textoEmDigitacao = false; 
+      if (callback) callback(); 
     }
   }, 25);
 }

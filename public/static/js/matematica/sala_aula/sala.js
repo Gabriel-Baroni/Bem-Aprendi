@@ -1,9 +1,10 @@
 window.onload = function () {
+  // CANVAS
  const stage = new createjs.Stage("gameCanvas");
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
 
-  // Fundo com imagem ajustada ao canvas
+  // FUNDO
   const fundo = new createjs.Bitmap("/static/img/matematica/sala.png");
   fundo.image.onload = () => {
     fundo.scaleX = stage.canvas.width / fundo.image.width;
@@ -12,34 +13,30 @@ window.onload = function () {
   };
   stage.addChild(fundo);
 
-  // Personagem
+  // PERSONAGEM
   const personagem = new createjs.Bitmap("/static/img/matematica/prof.png"); // substitua pelo caminho da sua imagem
   personagem.x = 800;
   personagem.y = 200;
   personagem.cursor = "pointer";
-  
-  // Ajuste a escala da imagem para um tamanho aproximado da bola (opcional)
   personagem.image.onload = () => {
     const desiredRadius = 40;
-    // Assume que a imagem é quadrada ou usar largura
     const scale = (desiredRadius * 3.5) / personagem.image.width;
     personagem.scaleX = personagem.scaleY = scale;
     stage.update();
   };
-
   stage.addChild(personagem);
 
-
+// DIÁLOGO DO PROFESSOR
   const nomePersonagem = "Prof. Leo";
   const imagemPersonagem = "/static/img/matematica/prof.png";
   const falas = [
-    "Olá, aluno!",
-    "Você está pronto para começar o desafio de hoje?",
-    "Vamos aprender brincando. Clique no botão ao lado para começar!"
+    "Olá, aluno como vai?",
+    "Eu sou o Professor Leo, um Lobo Guará!",
+    "Você está pronto para começar nosso super legal DESAFIO DE MATEMÁTICA?!",
+    "Vamos aprender JOGANDO! Melhor que isso só dois disso!!",
+    "Clique no botão ao lado para começar!"
   ];
-
   let falaIndex = 0;
-
   personagem.on("click", () => {
     falaIndex = 0;
     mostrarDialogo(nomePersonagem, imagemPersonagem, falas[falaIndex], () => {
@@ -51,21 +48,22 @@ window.onload = function () {
     });
   });
 
+  //PERCORRER A LISTA DE FALAS
   function proximaFala() {
     falaIndex++;
-    if (falaIndex < falas.length) {
+    if (falaIndex < 4) {
       mostrarDialogo(nomePersonagem, imagemPersonagem, falas[falaIndex]);
     } else {
-      mostrarDialogo(nomePersonagem, imagemPersonagem, falas[falaIndex - 1]);
+      mostrarDialogo(nomePersonagem, imagemPersonagem, falas[4]);
       document.getElementById("caixa-dialogo").onclick = null;
       mostrarBotaoIniciar();
     }
   }
 
+  // CRIAR O BOTÃO
   function mostrarBotaoIniciar() {
     const antigo = document.querySelector(".botao-iniciar");
     if (antigo) antigo.remove();
-
     const botao = document.createElement("button");
     botao.textContent = "Iniciar Minigame";
     botao.className = "botao-iniciar";

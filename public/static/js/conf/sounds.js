@@ -1,3 +1,4 @@
+// --------- ÁUDIOS DO MENU LATERAL ----------
 const hoverMenuSound = new Audio('../../static/sound/select_003.ogg');
 const clickMenuSound = new Audio('../../static/sound/click_003.ogg');
 

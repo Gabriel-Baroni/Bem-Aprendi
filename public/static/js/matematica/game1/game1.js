@@ -1,11 +1,12 @@
 // Aguarda o carregamento da página
 window.onload = function () {
-  // Coordenadas base para um canvas 1000x500
+
+  // COORDENADAS DE X CADA COLUNA E Y DE CADA LINHA
   const colXBase = [120, 320, 520, 720];
   const yBaseStart = 50;
   const yBaseStep = 100;
 
-  // Array de arrays com o conteúdo de cada coluna
+  // --------- ARRAY DE CADA COLUNA ------------
   const fases = [
     [
       [38, 14, 21, 7],
@@ -39,29 +40,45 @@ window.onload = function () {
     ]
   ];
 
-  // Variáveis globais do jogo
-  let blocos = [];
-  let pontosSelecionados = [];
-  let linhasErradas = [];
-  let corIndex = 0;
-  let tempo = 0;
-  let faseAtual = 0;
-  let pontuacaoAcumulada = 0;
-  let pontuacao = 0;
-  let respostasCorretas = 0;
-  const totalRespostasPossiveis = 5;
-  let vidas = 3;
-  const coresFase = ["#fffbcc", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
-  const coresBlocosFase = ["#fff7db", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"];
-  const coresLinhas = ["blue", "purple", "orange", "brown", "deeppink", "green", "teal"];
-  const corOriginal = "#fff7db";
-  const corSelecionado = "#a8d8ea";
+  // ------ VARIÁVEIS GLOBAIS ------
+  const estadoJogo = {
+    blocos: [],
+    pontosSelecionados: [],
+    linhasErradas: [],
+    corIndex: 0,
+    tempo: 0,
+    faseAtual: 0,
+    pontuacaoAcumulada: 0,
+    pontuacao: 0,
+    respostasCorretas: 0,
+    totalRespostasPossiveis: 0, 
+    vidas: 3,
+  };
+
+  const cores ={
+    coresFase: ["#fffbcc", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"],
+    coresBlocosFase: ["#fff7db", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"],
+    coresLinhas: ["blue", "purple", "orange", "brown", "deeppink", "green", "teal"],
+    corOriginal: "#fff7db",
+    corSelecionado: "#a8d8ea",
+
+  };
+  
+  const icones ={
+    iconeCerto: new Image(),
+    iconeErrado: new Image(),
+  };
   const iconeCerto = new Image();
   iconeCerto.src = "https://img.icons8.com/emoji/48/000000/check-mark-emoji.png";
   const iconeErrado = new Image();
   iconeErrado.src = "https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png";
-  createjs.Sound.registerSound("../static/sound/digital-beeping.mp3", "acerto");
-  createjs.Sound.registerSound("../static/sound/error_008.ogg", "erro");
+
+  const sons = {
+    acerto: "../static/sound/digital-beeping.mp3",
+    erro: "../static/sound/error_008.ogg"
+  };
+  createjs.Sound.registerSound(sons.acerto, "acerto");
+  createjs.Sound.registerSound(sons.erro, "erro");
   
 
   // Cria o stage ANTES de qualquer função que use ele!
@@ -82,7 +99,7 @@ window.onload = function () {
 
   // Função para reposicionar blocos ao redimensionar
   function reposicionarBlocos() {
-    blocos.forEach((bloco) => {
+      blocos.forEach((bloco) => {
       const tipo = bloco.tipo;
       const colunas = fases[faseAtual][tipo];
       const j = colunas.indexOf(bloco.valor);
