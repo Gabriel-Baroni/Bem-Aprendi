@@ -90,6 +90,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
 <img src="https://img.shields.io/badge/CreateJS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/Bootstrap-blueviolet?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 
 
@@ -109,8 +110,6 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <br><br>
 <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=canva&logoColor=white">
 <img src="https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white">
-
-<h1>🏗️ Arquitetura da Aplicação</h1> 
 
 <h1>💻 Desenvolvedores</h1>
 
