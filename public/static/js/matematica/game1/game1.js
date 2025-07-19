@@ -57,11 +57,10 @@ window.onload = function () {
 
   const cores ={
     coresFase: ["#fffbcc", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"],
-    coresBlocosFase: ["#fff7db", "#d4f1f9", "#e4ffd8", "#fce4ec", "#f0e0ff"],
+    coresBlocosFase: ["#f6f622ff", "#1520e9ff", "#54da1bff", "#d51455ff", "#7816d4ff"],
     coresLinhas: ["blue", "purple", "orange", "brown", "deeppink", "green", "teal"],
     corOriginal: "#fff7db",
     corSelecionado: "#a8d8ea",
-
   };
   
   const icones ={
@@ -79,7 +78,7 @@ window.onload = function () {
   createjs.Sound.registerSound(sons.erro, "erro");
   
 
-  // Cria o stage ANTES de qualquer função que use ele!
+  // ----- STAGE -----
   const stage = new createjs.Stage("gameCanvas");
   createjs.Ticker.framerate = 60;
   createjs.Ticker.addEventListener("tick", stage);
@@ -87,7 +86,6 @@ window.onload = function () {
   const fontSize_num = 40 * escala;
   const fontSize_text = 15 * escala;
 
-  // Função para calcular X proporcional
   function getX(i) {
     return colXBase[i];
   }
@@ -125,45 +123,47 @@ window.onload = function () {
   window.addEventListener('resize', resizeCanvasStage);
   window.addEventListener('DOMContentLoaded', resizeCanvasStage);
 
-  // Cria um texto para exibir o tempo na tela
+  // ----- TEXTO TEMPO --------
   const textoTimer = new createjs.Text("Tempo: 0s", `${fontSize_text}px 'Press Start 2P'`,"#000");
   textoTimer.x = 10;
   textoTimer.y = 10;
   stage.addChild(textoTimer);
 
-  // --- NOVO: texto para mostrar quantas combinações faltam ---
+  // ----- COMBINAÇÕES RESTANTES ------
   const textoFaltam = new createjs.Text(`Faltam: 0`,  `${fontSize_text}px 'Press Start 2P'`,"#000");
   textoFaltam.x = 550;
   textoFaltam.y = 10;
   stage.addChild(textoFaltam);
   
-  // Atualiza o tempo a cada segundo
   setInterval(() => {
     estadoJogo.tempo++;
     textoTimer.text = "Tempo: " + estadoJogo.tempo + "s";
   }, 1000);
 
-  // Atualiza o texto que mostra quantas combinações faltam
+
+  // ----- FUNÇÕES ------
+
   function atualizarTextoFaltam() {
     textoFaltam.text = `Faltam: ${estadoJogo.totalRespostasPossiveis - estadoJogo.respostasCorretas} contas para fazer!`;
   }
+
   function atualizarCorFase() {
     const cor = cores.coresFase[estadoJogo.faseAtual] || "#ffffff";
     document.body.style.backgroundColor = cor;
     const canvas = document.getElementById("gameCanvas");
     canvas.style.backgroundColor = cor;
   }
+
   function atualizarVidas() {
     const vidasDiv = document.getElementById("vidas");
     vidasDiv.textContent = "❤️".repeat(estadoJogo.vidas);
   }
 
-  // Função que cria cada bloco
   function criarBloco(texto, x, y, tipo) {
     const cont = new createjs.Container();
     const shape = new createjs.Shape();
     const corBloco = cores.coresBlocosFase[estadoJogo.faseAtual] || cores.corOriginal;
-    shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+    shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#080808ff").drawRoundRect(0, 0, 150, 80, 12);
     const label = new createjs.Text(texto, `${fontSize_num}px Comic Sans MS`, "#000");
     label.textAlign = "center";
     label.textBaseline = "middle";
@@ -181,7 +181,6 @@ window.onload = function () {
     return cont;
   }
 
-  // Função para criar as colunas (usando coordenadas proporcionais)
   function criarColunas() {
     estadoJogo.blocos = [];
     const colunas = fases[estadoJogo.faseAtual];
@@ -194,7 +193,6 @@ window.onload = function () {
     }
   }
 
-  // Função para identificar qual bloco foi clicado
   function pegarBlocoEm(x, y) {
     return estadoJogo.blocos.find(b => {
       const bx = b.x, by = b.y;
@@ -205,21 +203,19 @@ window.onload = function () {
     });
   }
 
-  // Função global que reseta todas as linhas vermelhas e blocos selecionados
   window.resetLinha = function () {
     for (let l of estadoJogo.linhasErradas) {
       stage.removeChild(l);
     }
     estadoJogo.blocos.forEach(b => {
       const corBloco = cores.coresBlocosFase[estadoJogo.faseAtual] || cores.corOriginal;
-      b.shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+      b.shape.graphics.beginFill(corBloco).setStrokeStyle(3).beginStroke("#070707ff").drawRoundRect(0, 0, 150, 80, 12);
     });
     estadoJogo.linhasErradas = [];
     estadoJogo.pontosSelecionados = [];
     stage.update();
   }
 
-  // Função para resetar o jogo
   function resetJogo() {
     estadoJogo.pontuacao = 0;
     estadoJogo.respostasCorretas = 0;
@@ -234,7 +230,7 @@ window.onload = function () {
       });
       b.linhasConectadas = [];
       const corBloco = cores.coresBlocosFase[estadoJogo.faseAtual] || cores.corOriginal;
-      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#0a0a0aff").drawRoundRect(0, 0, 150, 80, 12);
     });
     estadoJogo.pontosSelecionados = [];
     estadoJogo.blocos.forEach(b => stage.removeChild(b));
@@ -245,7 +241,6 @@ window.onload = function () {
     stage.update();
   }
 
-  // Função para enviar a pontuação acumulada para o endpoint pontuação.js
   function enviarPontuacaoParaServidor(pontuacao, materia) {
     const crianca_id = localStorage.getItem('crianca_id');
     if (!crianca_id) {
@@ -258,7 +253,7 @@ window.onload = function () {
       body: JSON.stringify({
         materia: materia, 
         id_crianca: crianca_id,        
-        pontuacao: estadoJogo.pontuacao
+        pontuacao: pontuacao
       })
     })
     .then(res => res.json())
@@ -266,8 +261,19 @@ window.onload = function () {
     .catch(err => console.error("Erro ao enviar pontuação:", err));
   }
 
-  // Função para criar o pop-up de fim de fase
-  function criarPopupFinal() {
+
+  function criarPopupFIM() { // ÚLTIMO POP-UP 
+    const popup = document.getElementById("popupFim");
+    popup.classList.add("mostrar");
+    const pontuacao = document.getElementById("pontuacaoAcumulada");
+    pontuacao.textContent = estadoJogo.pontuacaoAcumulada;
+    document.getElementById("btnFIM").onclick = () => {
+      window.location.href = "/index.html";
+    };
+  }
+
+
+  function criarPopupFinal() { // POP-UP DO FINAL DE CADA FASE
     estadoJogo.pontuacaoAcumulada += estadoJogo.pontuacao;
     const popup = document.getElementById("popupFimFase");
     const pontuacaoSpan = document.getElementById("pontuacaoFinal");
@@ -289,8 +295,7 @@ window.onload = function () {
       btnProximo.onclick = () => {
         popup.classList.remove("mostrar");
         enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "matematica");
-        alert("🎉 Parabéns! Você completou todas as fases! Sua pontuação total foi: " + estadoJogo.pontuacaoAcumulada);
-        window.location.href = "/index.html";
+        criarPopupFIM()
       };
     }
     btnJogarDeNovo.onclick = () => {
@@ -299,7 +304,6 @@ window.onload = function () {
     };
   }
 
-  // Função para criar o pop-up de game over
   function criarPopupGameOver() {
     const popup = document.getElementById("popupGameOver");
     popup.classList.add("mostrar");
@@ -321,11 +325,11 @@ window.onload = function () {
     const blocoMesmoTipo = estadoJogo.pontosSelecionados.find(b => b.tipo === bloco.tipo);
     if (blocoMesmoTipo) {
       const corBloco = cores.coresBlocosFase[estadoJogo.faseAtual] || cores.corOriginal;
-      blocoMesmoTipo.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+      blocoMesmoTipo.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#0b0b0bff").drawRoundRect(0, 0, 150, 80, 12);
       estadoJogo.pontosSelecionados = estadoJogo.pontosSelecionados.filter(b => b !== blocoMesmoTipo);
     }
     estadoJogo.pontosSelecionados.push(bloco);
-    bloco.shape.graphics.clear().beginFill(cores.corSelecionado).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+    bloco.shape.graphics.clear().beginFill(cores.corSelecionado).setStrokeStyle(3).beginStroke("#ffffffff").drawRoundRect(0, 0, 150, 80, 12);
     if (estadoJogo.pontosSelecionados.length === 4) {
       verificarResposta();
     }
@@ -408,12 +412,12 @@ window.onload = function () {
     mostrarIcone(correta, b4.x + 70, b4.y);
     estadoJogo.pontosSelecionados.forEach(b => {
       const corBloco = cores.coresBlocosFase[estadoJogo.faseAtual] || cores.corOriginal;
-      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#ffa500").drawRoundRect(0, 0, 150, 80, 12);
+      b.shape.graphics.clear().beginFill(corBloco).setStrokeStyle(3).beginStroke("#060606ff").drawRoundRect(0, 0, 150, 80, 12);
     });
     estadoJogo.pontosSelecionados = [];
   }
 
-  // Inicialização do jogo
+  // ------ INICIANDO O JOGO --------
   criarColunas();
   atualizarTextoFaltam();
   atualizarVidas();

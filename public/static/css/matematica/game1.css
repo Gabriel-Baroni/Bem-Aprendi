@@ -173,7 +173,8 @@ a {
 
 /*-------------------ESTILO DOS POP-UP'S------------------ */
 #popupFimFase,
-#popupGameOver {
+#popupGameOver,
+#popupFim {
   position: fixed;
   top: 0; left: 0;
   width: 100vw;
@@ -189,14 +190,17 @@ a {
 }
 
 #popupFimFase.mostrar,
-#popupGameOver.mostrar {
+#popupGameOver.mostrar,
+#popupFim.mostrar {
   visibility: visible;
   opacity: 1;
 }
 
 /* Caixa principal do popup com estilo pixelado */
 #popupFimFase .caixa,
-#popupGameOver .caixa {
+#popupGameOver .caixa,
+#popupFim .caixa
+ {
   position: relative;
   background-color: #ffe8a3;
   border: 6px solid #5c2b00;
@@ -215,7 +219,8 @@ a {
 
 /* Título grande estilo pixel */
 #popupFimFase .titulo,
-#popupGameOver .titulo {
+#popupGameOver .titulo,
+#popupFim .titulo {
   font-size: 18px;
   color: #ffff;
   background: #ff6b6b;
@@ -230,7 +235,8 @@ a {
 
 /* Texto da pontuação */
 #popupFimFase .pontuacao,
-#popupGameOver .pontuacao {
+#popupGameOver .pontuacao,
+#popupFim .pontuacao {
   font-size: 14px;
   color: #ffff;
   text-align: center;
@@ -239,7 +245,8 @@ a {
 
 /* Container dos botões estilo pixel */
 #popupFimFase .botoes,
-#popupGameOver .botoes {
+#popupGameOver .botoes,
+#popupFim .botoes{
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -248,7 +255,8 @@ a {
 
 /* Botões com estilo pixelado */
 #popupFimFase button,
-#popupGameOver button {
+#popupGameOver button,
+#popupFim button {
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
   padding: 12px 10px;
@@ -266,7 +274,8 @@ a {
 }
 
 #popupFimFase button:hover,
-#popupGameOver button:hover {
+#popupGameOver button:hover,
+#popupFim button:hover {
   background-color: #00a9d6;
   transform: translateY(2px);
   box-shadow: 0 4px #000;
@@ -361,14 +370,16 @@ a {
     margin-top: 5px;
   }
   #popupFimFase .caixa,
-  #popupGameOver .caixa {
+  #popupGameOver .caixa,
+  #popupFim .caixa {
     width: 60vw;
     padding: 6px;
     font-size: 11px;
   }
 
   #popupFimFase .titulo,
-  #popupGameOver .titulo {
+  #popupGameOver .titulo,
+  #popFim .titulo {
     width: 80%;
   }
 
