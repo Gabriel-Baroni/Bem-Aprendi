@@ -171,6 +171,113 @@ a {
   left: 0;
 }
 
+/* ------ ESTILOS DA CAIXA DE DIÁLOGO -------*/
+#caixa-dialogo {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background-color: #fff8d1;
+  border: 4px solid #5c2b00;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 8px 8px 0 #000;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  z-index: 200;
+  pointer-events: auto;
+  display: none; /* Começa escondido */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lado esquerdo (foto + nome) */
+#dialogo-esquerda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+/* Foto do personagem */
+#dialogo-foto {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  background: #fff2b3;
+}
+
+/* Nome do personagem */
+#dialogo-nome {
+  margin-top: 8px;
+  font-size: 10px;
+  background: #ff6b6b;
+  padding: 4px 8px;
+  color: #fff;
+  border-radius: 6px;
+  border: 2px solid #222;
+  text-shadow: 1px 1px #000;
+}
+
+/* Texto do diálogo */
+#dialogo-texto-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#dialogo-texto {
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Botão de fechar */
+#dialogo-fechar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4b4b;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-family: 'Press Start 2P', cursive;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 300;
+}
+
+/* Botão iniciar minigame */
+.botao-iniciar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 12px 10px;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 6px #000;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+  height: 70px;
+}
+
+.botao-iniciar:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
 /*-------------------ESTILO DOS POP-UP'S------------------ */
 #popupFimFase,
 #popupGameOver,
@@ -271,6 +378,7 @@ a {
   flex: 1;
   max-width: 140px;
   line-height: 1.5;
+  z-index: 20;
 }
 
 #popupFimFase button:hover,
@@ -347,6 +455,17 @@ a {
   justify-items: center;
 }
 
+.overlay-escuro {
+  position: fixed;        /* fixa na tela */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* escurece */
+  z-index: 10;          /* bem alto para ficar acima de tudo */
+  display: none;          /* começa invisível */
+}
+
 /* ------------------ MEDIA QUERIES PARA RESPONSIVIDADE ------------------- */
 
 /* -----------------MEDIA QUERIE PARA CELULARES------------------- */
@@ -402,6 +521,24 @@ a {
     font-size: 3vw;
     right: 5px;
     top: 5.5%
+  }
+    #caixa-dialogo {
+    width: 80%;
+    height: 25%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+    #dialogo-foto {
+    width: 50%;
+    height: 50%;
+  }
+
+    .botao-iniciar {
+    font-size: 12px;
+    height: 70%;
+    width: 25%;
+    padding: 10px 8px;
   }
 
 }

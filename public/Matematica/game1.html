@@ -2,80 +2,93 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Minigame de Matemática</title>
+  <title>Minigame de Operações</title>
   <link rel="stylesheet" href="../static/css/matematica/game1.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  
-    <div id="rotate-message">
+
+  <div id="overlay-dialogo" class="overlay-escuro"></div>
+
+  <div id="rotate-message">
     <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
   </div>
 
   <div id="app">
-     <h2>Minigame de Operações</h2>
-  <canvas id="gameCanvas"></canvas>
-  <button id="resetButton" onclick="resetLinha()">Apagar Linhas Erradas</button>
+    <h2>Minigame de Operações</h2>
+    <canvas id="gameCanvas"></canvas>
+    <button id="resetButton" onclick="resetLinha()">Apagar Linhas Erradas</button>
 
-
-<div id="menu-icon">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-
-
-<nav id="side-menu">
-  <p id="nome-crianca"></p>
-  <ul>
-    <a href="/index.html"><li>Início</li></a>
-    <a href=""><li>Ranking</li></a>
-    <a href="/NavBar/conf/configuracoes.html"><li>Configurações</li></a>
-    <a href=""><li>Como jogar ?</li></a>
-    <li>Sair</li>
-  </ul>
-</nav>
-
-<div id="popupFimFase">
-  <div class="caixa">
-    <div class="titulo">Parabéns!</div>
-    <div class="pontuacao">Sua pontuação: <span id="pontuacaoFinal">0</span> / 200</div>
-    <div class="botoes">
-      <button id="btnProximo">Próximo</button>
-      <button id="btnJogarDeNovo">Jogar de novo</button>
+    <!-- Caixa de Diálogo -->
+    <div id="caixa-dialogo">
+      <div id="dialogo-esquerda">
+        <img id="dialogo-foto" src="imagens/professor.png" alt="Personagem" />
+        <div id="dialogo-nome">Professor Leo</div>
+      </div>
+      <div id="dialogo-texto-container">
+        <div id="dialogo-texto"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="popupGameOver" class="popup">
-  <div class="caixa">
-    <div class="titulo">Game Over</div>
-    <div class="botoes">
-      <button id="btnGameOverJogarDeNovo">Jogar de Novo</button>
-      <button id="btnGameOverMenu">Voltar ao Menu</button>
+  <!-- Menu -->
+  <div id="menu-icon">
+    <div></div><div></div><div></div>
+  </div>
+
+  <nav id="side-menu">
+    <p id="nome-crianca"></p>
+    <ul>
+      <a href="/index.html"><li>Início</li></a>
+      <a href=""><li>Ranking</li></a>
+      <a href="/NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+      <a href=""><li>Como jogar ?</li></a>
+      <li>Sair</li>
+    </ul>
+  </nav>
+
+  <!-- Popups -->
+  <div id="popupFimFase" class="popup">
+    <div class="caixa">
+      <div class="titulo">Parabéns!</div>
+      <div class="pontuacao">Sua pontuação: <span id="pontuacaoFinal">0</span> / 200</div>
+      <div class="botoes">
+        <button id="btnProximo">Próximo</button>
+        <button id="btnJogarDeNovo">Jogar de novo</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="popupFim">
-  <div class="caixa">
-    <div class="titulo">Você acabou o desafio!</div>
-    <div class="pontuacao">Sua pontuação total foi: <span id="pontuacaoAcumulada">0</span> / 1000</div>
-    <div class="botoes">
-      <button id="btnFIM">Voltar ao Menu</button>
+  <div id="popupGameOver" class="popup">
+    <div class="caixa">
+      <div class="titulo">Game Over</div>
+      <div class="botoes">
+        <button id="btnGameOverJogarDeNovo">Jogar de Novo</button>
+        <button id="btnGameOverMenu">Voltar ao Menu</button>
+      </div>
     </div>
   </div>
-</div>
+
+  <div id="popupFim" class="popup">
+    <div class="caixa">
+      <div class="titulo">Você acabou o desafio!</div>
+      <div class="pontuacao">Sua pontuação total foi: <span id="pontuacaoAcumulada">0</span> / 1000</div>
+      <div class="botoes">
+        <button id="btnFIM">Voltar ao Menu</button>
+      </div>
+    </div>
+  </div>
 
   <div id="vidas">❤️❤️❤️</div>
 
-  </div>
- 
+  <!-- Scripts -->
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="../static/js/matematica/game1/dialogo.js"></script>
   <script src="../static/js/matematica/game1/game1.js"></script>
   <script src="../static/js/matematica/game1/menu.js"></script>
   <script src="../static/js/matematica/game1/sounds.js"></script>
   <script src="../static/js/index/NavBarControls.js"></script>
+
 </body>
 </html>

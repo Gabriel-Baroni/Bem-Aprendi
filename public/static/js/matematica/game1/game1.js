@@ -47,6 +47,7 @@ window.onload = function () {
     linhasErradas: [],
     corIndex: 0,
     tempo: 0,
+    contandoTempo: true,
     faseAtual: 0,
     pontuacaoAcumulada: 0,
     pontuacao: 0,
@@ -93,33 +94,6 @@ window.onload = function () {
     return yBaseStart + j * yBaseStep;
   }
 
-  // Função para reposicionar blocos ao redimensionar
-  function reposicionarBlocos() {
-      estadoJogo.blocos.forEach((bloco) => {
-      const tipo = bloco.tipo;
-      const colunas = fases[estadoJogo.faseAtual][tipo];
-      const j = colunas.indexOf(bloco.valor);
-      if (j !== -1) {
-        bloco.x = getX(tipo);
-        bloco.y = getY(j);
-      }
-    });
-    stage.update();
-  }
-
-  // Função para redimensionar o canvas e escalar o stage
-  function resizeCanvasStage() {
-    const canvas = document.getElementById('gameCanvas');
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    stage.scaleX = canvas.width / 1000;
-    stage.scaleY = canvas.height / 500;
-    reposicionarBlocos();
-    stage.update();
-  }
-
   window.addEventListener('resize', resizeCanvasStage);
   window.addEventListener('DOMContentLoaded', resizeCanvasStage);
 
@@ -136,13 +110,74 @@ window.onload = function () {
   stage.addChild(textoFaltam);
   
   setInterval(() => {
-    estadoJogo.tempo++;
-    textoTimer.text = "Tempo: " + estadoJogo.tempo + "s";
+    if(estadoJogo.contandoTempo){
+       estadoJogo.tempo++;
+      textoTimer.text = "Tempo: " + estadoJogo.tempo + "s";
+    }
   }, 1000);
 
 
   // ----- FUNÇÕES ------
+function dialogoInstrucoes(callbackFimDialogo) {
+  document.getElementById("overlay-dialogo").style.display = "block";
+  estadoJogo.contandoTempo = false;
+  const nomePersonagem = "Prof. Leo";
+  const imagemPersonagem = "/static/img/matematica/prof.png";
+  const falas = [
+    "Seja bem-vindo ao Desafio dos sinais!",
+    "Nesse desafio você pode ver 4 colunas: primeiro número, sinal, segundo número e resultado.",
+    "Clique em um de cada coluna para formar uma conta!.",
+    "Exemplo: 3 + 4 = 7.",
+    "Se estiver certo, você ganha pontos. Se errar, perde uma vida!",
+    "Acerte todas as contas da fase para avançar.",
+    "Ahh, e não se esqueça! QUANTO MAIS RÁPIDO MELHOR!",
+    "Boa sorte! E que a matemática esteja com você!"
+  ];
 
+  let falaIndex = 0;
+  mostrarDialogo(nomePersonagem, imagemPersonagem, falas[falaIndex], () => {
+    document.getElementById("caixa-dialogo").onclick = () => {
+      if (!textoEmDigitacao) {
+        falaIndex++;
+        if (falaIndex < falas.length) {
+          mostrarDialogo(nomePersonagem, imagemPersonagem, falas[falaIndex]);
+        } else {
+          document.getElementById("caixa-dialogo").onclick = null;
+          document.getElementById("caixa-dialogo").style.display = "none";
+          document.getElementById("overlay-dialogo").style.display = "none";
+          estadoJogo.contandoTempo = true;
+          if (typeof callbackFimDialogo === "function") {
+            callbackFimDialogo(); // Chama o callback para iniciar o jogo
+          }
+        }
+      }
+    };
+  });
+}
+
+  function reposicionarBlocos() {
+      estadoJogo.blocos.forEach((bloco) => {
+      const tipo = bloco.tipo;
+      const colunas = fases[estadoJogo.faseAtual][tipo];
+      const j = colunas.indexOf(bloco.valor);
+      if (j !== -1) {
+        bloco.x = getX(tipo);
+        bloco.y = getY(j);
+      }
+    });
+    stage.update();
+  }
+  function resizeCanvasStage() {
+    const canvas = document.getElementById('gameCanvas');
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    stage.scaleX = canvas.width / 1000;
+    stage.scaleY = canvas.height / 500;
+    reposicionarBlocos();
+    stage.update();
+  }
   function atualizarTextoFaltam() {
     textoFaltam.text = `Faltam: ${estadoJogo.totalRespostasPossiveis - estadoJogo.respostasCorretas} contas para fazer!`;
   }
@@ -418,9 +453,22 @@ window.onload = function () {
   }
 
   // ------ INICIANDO O JOGO --------
-  criarColunas();
-  atualizarTextoFaltam();
-  atualizarVidas();
-  atualizarCorFase();
-  resizeCanvasStage();
+  requestAnimationFrame(() => {
+    criarColunas();
+    atualizarTextoFaltam();
+    atualizarVidas();
+    atualizarCorFase();
+    resizeCanvasStage();
+});
+
+ requestAnimationFrame(() => {
+  dialogoInstrucoes(() => {
+    criarColunas();
+    atualizarTextoFaltam();
+    atualizarVidas();
+    atualizarCorFase();
+    resizeCanvasStage();
+  });
+ });
+
 };
