@@ -87,13 +87,6 @@ window.onload = function () {
   const fontSize_num = 40 * escala;
   const fontSize_text = 15 * escala;
 
-  function getX(i) {
-    return colXBase[i];
-  }
-  function getY(j) {
-    return yBaseStart + j * yBaseStep;
-  }
-
   window.addEventListener('resize', resizeCanvasStage);
   window.addEventListener('DOMContentLoaded', resizeCanvasStage);
 
@@ -118,6 +111,13 @@ window.onload = function () {
 
 
   // ----- FUNÇÕES ------
+  function getX(i) {
+    return colXBase[i];
+  }
+  function getY(j) {
+    return yBaseStart + j * yBaseStep;
+  }
+
 function dialogoInstrucoes(callbackFimDialogo) {
   document.getElementById("overlay-dialogo").style.display = "block";
   estadoJogo.contandoTempo = false;
@@ -167,6 +167,7 @@ function dialogoInstrucoes(callbackFimDialogo) {
     });
     stage.update();
   }
+
   function resizeCanvasStage() {
     const canvas = document.getElementById('gameCanvas');
     if (!canvas) return;
@@ -178,6 +179,7 @@ function dialogoInstrucoes(callbackFimDialogo) {
     reposicionarBlocos();
     stage.update();
   }
+
   function atualizarTextoFaltam() {
     textoFaltam.text = `Faltam: ${estadoJogo.totalRespostasPossiveis - estadoJogo.respostasCorretas} contas para fazer!`;
   }
@@ -215,7 +217,7 @@ function dialogoInstrucoes(callbackFimDialogo) {
     estadoJogo.blocos.push(cont);
     return cont;
   }
-
+  
   function criarColunas() {
     estadoJogo.blocos = [];
     const colunas = fases[estadoJogo.faseAtual];
