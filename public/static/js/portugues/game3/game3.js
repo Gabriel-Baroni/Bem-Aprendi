@@ -56,27 +56,50 @@ window.onload = function () {
     return letras;
   }
 
+  // LETRAS EM BLOCOS
   function criarLetras() {
     const silabas = imagensFase[estadoJogo.faseAtual].silabas;
     const letrasSeparadas = silabas.join("").split("");
     const letras = embaralhar(letrasSeparadas);
 
     letras.forEach((letra, i) => {
-      const txt = new createjs.Text(letra, "20px  'Press Start 2P'", "#000");
-      txt.x = 300 + i * 60;
-      txt.y = 400;
-      txt.cursor = "pointer";
-      txt.letra = letra;
-      txt.originalX = txt.x;
-      txt.originalY = txt.y;
-      enableDrag(txt);
-      stage.addChild(txt);
-      estadoJogo.letras.push(txt);
+      // Criar retângulo arredondado para o bloco da letra
+      const bloco = new createjs.Shape();
+      bloco.graphics.beginFill("#88c0d0").drawRoundRect(0, 0, 50, 50, 8);
+
+      // Criar texto da letra, centralizado no bloco
+      const txt = new createjs.Text(letra.toUpperCase(), "24px 'Press Start 2P'", "#000");
+      txt.textAlign = "center";
+      txt.textBaseline = "middle";
+      txt.x = 25; // centro horizontal do bloco (largura/2)
+      txt.y = 25; // centro vertical do bloco (altura/2)
+
+      // Container para agrupar bloco + texto
+      const container = new createjs.Container();
+      container.x = 300 + i * 60;
+      container.y = 400;
+      container.letra = letra;
+      container.addChild(bloco, txt);
+
+      container.originalX = container.x;
+      container.originalY = container.y;
+
+      enableDrag(container);
+      stage.addChild(container);
+      estadoJogo.letras.push(container);
     });
   }
 
   function enableDrag(item) {
     item.on("mousedown", function (evt) {
+      // Remove a letra da caixa onde ela estava (se estava)
+      estadoJogo.silabasCaixas.forEach(caixa => {
+        const index = caixa.letras.indexOf(this.letra);
+        if (index !== -1) {
+          caixa.letras.splice(index, 1);
+        }
+      });
+
       this.offset = { x: evt.stageX - this.x, y: evt.stageY - this.y };
     });
 
@@ -88,13 +111,13 @@ window.onload = function () {
 
     item.on("pressup", function (evt) {
       const alvo = estadoJogo.silabasCaixas.find(caixa =>
-        evt.stageX > caixa.x && evt.stageX < caixa.x + 100 &&
+        evt.stageX > caixa.x && evt.stageX < caixa.x + caixa.largura &&
         evt.stageY > caixa.y && evt.stageY < caixa.y + 60 &&
         caixa.letras.length < caixa.maxLetras
       );
       if (alvo) {
         alvo.letras.push(this.letra);
-        this.x = alvo.x + 10 + alvo.letras.length * 20;
+        this.x = alvo.x + 10 + (alvo.letras.length - 1) * 55; // espaçamento maior para não sobrepor
         this.y = alvo.y + 10;
         estadoJogo.letrasUsadas.push(this);
       } else {
@@ -104,47 +127,52 @@ window.onload = function () {
     });
   }
 
-  function criarCaixasSilabas() {
-    const silabas = imagensFase[estadoJogo.faseAtual].silabas;
+function criarCaixasSilabas() {
+  const silabas = imagensFase[estadoJogo.faseAtual].silabas;
+  let posX = 100; // posição inicial X
 
-    silabas.forEach((_, i) => {
-      const caixa = new createjs.Shape();
-      caixa.graphics.setStrokeStyle(2).beginStroke("#000").drawRect(0, 0, 100, 60);
-      caixa.x = 350 + i * 120;
-      caixa.y = 300;
-      stage.addChild(caixa);
+  silabas.forEach((silaba, i) => {
+    const larguraCaixa = silaba.length * 60 + 20; // largura proporcional à sílaba
 
-      estadoJogo.silabasCaixas.push({
-        x: caixa.x,
-        y: caixa.y,
-        maxLetras: silabas[i].length,
-        letras: [],
-        shape: caixa
-      });
+    const caixa = new createjs.Shape();
+    caixa.graphics.setStrokeStyle(2).beginStroke("#000").drawRoundRect(0, 0, larguraCaixa, 60, 20);
+    caixa.x = posX;
+    caixa.y = 300;
+    stage.addChild(caixa);
+
+    estadoJogo.silabasCaixas.push({
+      x: caixa.x,
+      y: caixa.y,
+      largura: larguraCaixa,
+      maxLetras: silaba.length,
+      letras: [],
+      shape: caixa
     });
-  }
 
- function calcularPontuacaoSilabas() {
-    const tempoMaxPontos = 30;   // até aqui pontuação máxima
-    const tempoMinPontos = 120;  // a partir daqui pontuação mínima
+    // Atualiza posX para próxima caixa, somando largura + espaço extra
+    posX += larguraCaixa + 20;
+  });
+}
+
+  function calcularPontuacaoSilabas() {
+    const tempoMaxPontos = 30;
+    const tempoMinPontos = 120;
     const pontuacaoMax = 200;
     const pontuacaoMin = 50;
     let pontosPalavra = 0;
 
     if (estadoJogo.tempo <= tempoMaxPontos) {
-    pontosPalavra = pontuacaoMax;  // tempo ideal, ganha máxima
+      pontosPalavra = pontuacaoMax;
     } else if (estadoJogo.tempo >= tempoMinPontos) {
-    pontosPalavra = pontuacaoMin;  // tempo lento, pontuação mínima
+      pontosPalavra = pontuacaoMin;
     } else {
-    // entre tempoMaxPontos e tempoMinPontos, pontuação decrescente linear
-    const fator = (estadoJogo.tempo - tempoMaxPontos) / (tempoMinPontos - tempoMaxPontos);
-    pontosPalavra = (1 - fator) * pontuacaoMax + fator * pontuacaoMin;
+      const fator = (estadoJogo.tempo - tempoMaxPontos) / (tempoMinPontos - tempoMaxPontos);
+      pontosPalavra = (1 - fator) * pontuacaoMax + fator * pontuacaoMin;
     }
 
     if (!estadoJogo.pontuacao) estadoJogo.pontuacao = 0;
     estadoJogo.pontuacao += Math.floor(pontosPalavra);
-    }
-
+  }
 
   function verificarResposta() {
     const silabasCorretas = imagensFase[estadoJogo.faseAtual].silabas;
@@ -166,7 +194,7 @@ window.onload = function () {
     }
   }
 
-  function criarPopupFinal() { // POP-UP DO FINAL DE CADA FASE
+  function criarPopupFinal() {
     estadoJogo.pontuacaoAcumulada += estadoJogo.pontuacao;
     const popup = document.getElementById("popupFimFase");
     const pontuacaoSpan = document.getElementById("pontuacaoFinal");
@@ -188,7 +216,7 @@ window.onload = function () {
       btnProximo.onclick = () => {
         popup.classList.remove("mostrar");
         enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "português");
-        criarPopupFIM()
+        criarPopupFIM();
       };
     }
     btnJogarDeNovo.onclick = () => {
@@ -241,14 +269,14 @@ window.onload = function () {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        materia: materia, 
-        id_crianca: crianca_id,        
+        materia: materia,
+        id_crianca: crianca_id,
         pontuacao: pontuacao
       })
     })
-    .then(res => res.json())
-    .then(data => console.log("Pontuação atualizada:", data))
-    .catch(err => console.error("Erro ao enviar pontuação:", err));
+      .then(res => res.json())
+      .then(data => console.log("Pontuação atualizada:", data))
+      .catch(err => console.error("Erro ao enviar pontuação:", err));
   }
 
   document.getElementById("btnVerificar").onclick = verificarResposta;
@@ -256,5 +284,7 @@ window.onload = function () {
   // Inicia o jogo
   resetarFase();
 };
+
+
 
 
