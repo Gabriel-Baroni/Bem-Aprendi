@@ -3,13 +3,14 @@ const stage = new createjs.Stage("stage");
 
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
-  { x: 356, y: 619, materia: "Matemática", img:"" },
+  { x: 356, y: 619, materia: "Matemática", img:"static/img/matematica/sala.png" },
   { x: 266, y: 289, materia: "Lógica",  img:""},
   { x: 949, y: 822, materia: "Português", img:"" },
   { x: 919, y: 295, materia: "História", img:"" },
   { x: 1151, y: 560, materia: "Ciências", img:"" },
   { x: 1669, y: 830, materia: "Inglês", img:"" }
 ];
+
 
 // Cria variaveis globais para o player, popup e fundoClick
 let player;
@@ -21,7 +22,7 @@ let ultimoSelecionado = null; // Variável para guardar o último círculo clica
 const loader = new createjs.LoadQueue();
 loader.loadManifest([
   { id: "bg", src: "static/img/index_img/tela_fases.png" },
-  { id: "player", src: "static/img/index_img/bem_te_vi.png" }
+  { id: "player", src: "static/img/index_img/bem_te_vi.png"}
 ]);
 loader.on("complete", init);
 
@@ -55,6 +56,17 @@ stage.addChild(bg);
   player.y = 850;
   stage.addChild(player);
 
+// Pré-carrega as imagens das salas (ESTA COM UM LEVE LAG)
+const imagensPrecarregadas = {};
+
+fases.forEach(fase => {
+  if (fase.img) {
+    const img = new Image();
+    img.src = fase.img;
+    imagensPrecarregadas[fase.materia] = img;
+  }
+});
+
 // Cria os círculos para cada fase e suas características
 fases.forEach((pos, i) => {
   const circle = new createjs.Shape();
@@ -78,7 +90,11 @@ fases.forEach((pos, i) => {
     clickMateriaSound .play();
 
     const popupImage = document.getElementById("popup-image");
-    popupImage.style.backgroundImage = `url('${pos.img}')`
+    if (imagensPrecarregadas[pos.materia] && imagensPrecarregadas[pos.materia].complete) {
+      popupImage.style.backgroundImage = `url('${imagensPrecarregadas[pos.materia].src}')`;
+    } else {
+      popupImage.style.backgroundImage = "";
+    }
 
     // Restaura o último selecionado, se não for o mesmo
     if (ultimoSelecionado && ultimoSelecionado !== circle) {
@@ -94,12 +110,13 @@ fases.forEach((pos, i) => {
 
     ultimoSelecionado = circle; 
 
+    movePlayerTo(i);
     // Mostra o popup HTML com a matéria
     popup = document.getElementById("popup-materia");
     titulo = document.getElementById("titulo-popup");
     botao = document.getElementById("botao-popup");
 
-    titulo.textContent = pos.materia;
+     titulo.textContent = pos.materia;
 
     // Posiciona o pop-up no centro da tela
     popup.style.position = "fixed";
@@ -110,8 +127,6 @@ fases.forEach((pos, i) => {
 
     fundoClick.visible = true;
     botao.onclick = () => acessarSala(pos.materia);
-
-    movePlayerTo(i);
   });
 
   document.getElementById("close-popup").addEventListener("click", () => {
@@ -137,11 +152,10 @@ function movePlayerTo(index) {
 
 // A função que acessa a sala da matéria selecionada
 function acessarSala(materia) {
-  alert("Indo para a sala de " + materia);
     const rotas = {
     "Matemática": "Matematica/sala.html",
     "Lógica": "game2.html",
-    "Português": "game3.html",
+    "Português": "Portugues/sala.html",
     "História": "game4.html",
     "Ciências": "game5.html",
     "Inglês": "game6.html"

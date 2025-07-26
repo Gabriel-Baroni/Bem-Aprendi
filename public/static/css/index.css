@@ -31,7 +31,7 @@ body[data-bs-theme="dark"] {
   background-color: #ffe8a3;
   border: 6px solid #5c2b00;
   padding: 16px;
-  width: 500px;      /* menor que antes */
+  width: 600px;      /* menor que antes */
   height: 300px;     /* menor que antes */
   font-family: 'Press Start 2P', cursive;
   font-size: 11px;
@@ -64,16 +64,16 @@ body[data-bs-theme="dark"] {
 
 /* Espaço para imagem pixelada à esquerda */
 .popup .popup-image {
-  width: 300px;           /* aumenta a largura */
+  width: 350px;           /* aumenta a largura */
   height: 200px;          /* aumenta a altura */
   background-color: #c2a15c;
   border: 4px solid #5c2b00;
   border-radius: 12px;
   image-rendering: pixelated;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: auto;           /* centraliza verticalmente se necessário */
+  margin: 10px;           /* centraliza verticalmente se necessário */
   display: flex;
   align-items: center;
   justify-content: center;

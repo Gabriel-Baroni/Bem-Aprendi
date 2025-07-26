@@ -41,7 +41,7 @@ h2 {
 
 
 /* ---------------ESTILO DO BOTÃO DE RESET-------------- */
-button#resetButton {
+button#btnVerificar {
   background-color: #f9c784; /* laranja pastel */
   border: 4px solid #f6a96b;
   border-radius: 12px;
@@ -60,7 +60,7 @@ button#resetButton {
   width: fit-content;
 }
 
-button#resetButton:hover {
+button#btnVerificar:hover {
   background-color: #f6a96b;
 }
 
@@ -487,7 +487,7 @@ a {
     font-size: 0.6rem;
   }
 
-    button#resetButton {
+    button#btnVerificar {
     font-size: 0.6rem;
     width: 80vw;
     padding: 10px;

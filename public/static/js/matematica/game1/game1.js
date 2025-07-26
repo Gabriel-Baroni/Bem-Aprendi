@@ -331,7 +331,7 @@ function dialogoInstrucoes(callbackFimDialogo) {
       btnProximo.style.display = "inline-block";
       btnProximo.onclick = () => {
         popup.classList.remove("mostrar");
-        enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "matematica");
+        enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "matemática");
         criarPopupFIM()
       };
     }
