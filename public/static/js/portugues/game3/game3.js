@@ -1,11 +1,8 @@
-// Espera carregar a página
 window.onload = function () {
-
   const imagensFase = [
     { imagem: "../static/img/portugues/vassoura.png", palavra: "vassoura", silabas: ["vas", "sou", "ra"] },
     { imagem: "../static/img/portugues/cavalo.png", palavra: "cavalo", silabas: ["ca", "va", "lo"] },
     { imagem: "../static/img/portugues/pirulito.png", palavra: "pirulito", silabas: ["pi", "ru", "li", "to"] },
-    // ... até 5 fases
   ];
 
   const estadoJogo = {
@@ -56,25 +53,21 @@ window.onload = function () {
     return letras;
   }
 
-  // LETRAS EM BLOCOS
   function criarLetras() {
     const silabas = imagensFase[estadoJogo.faseAtual].silabas;
     const letrasSeparadas = silabas.join("").split("");
     const letras = embaralhar(letrasSeparadas);
 
     letras.forEach((letra, i) => {
-      // Criar retângulo arredondado para o bloco da letra
       const bloco = new createjs.Shape();
       bloco.graphics.beginFill("#88c0d0").drawRoundRect(0, 0, 50, 50, 8);
 
-      // Criar texto da letra, centralizado no bloco
       const txt = new createjs.Text(letra.toUpperCase(), "24px 'Press Start 2P'", "#000");
       txt.textAlign = "center";
       txt.textBaseline = "middle";
-      txt.x = 25; // centro horizontal do bloco (largura/2)
-      txt.y = 25; // centro vertical do bloco (altura/2)
+      txt.x = 25;
+      txt.y = 25;
 
-      // Container para agrupar bloco + texto
       const container = new createjs.Container();
       container.x = 300 + i * 60;
       container.y = 400;
@@ -90,68 +83,109 @@ window.onload = function () {
     });
   }
 
-  function enableDrag(item) {
-    item.on("mousedown", function (evt) {
-      // Remove a letra da caixa onde ela estava (se estava)
-      estadoJogo.silabasCaixas.forEach(caixa => {
-        const index = caixa.letras.indexOf(this.letra);
-        if (index !== -1) {
-          caixa.letras.splice(index, 1);
-        }
+function enableDrag(item) {
+  item.on("mousedown", function (evt) {
+    // Ao iniciar o arrasto, remova a letra da caixa onde ela estiver
+    estadoJogo.silabasCaixas.forEach(caixa => {
+      const idx = caixa.letras.findIndex(letra => letra === this.getChildAt(1));
+      if (idx !== -1) {
+        caixa.letras[idx] = null;  // Libera o espaço na posição correta
+      }
+    });
+
+    this.offset = { x: evt.stageX - this.x, y: evt.stageY - this.y };
+  });
+
+  item.on("pressmove", function (evt) {
+    this.x = evt.stageX - this.offset.x;
+    this.y = evt.stageY - this.offset.y;
+    stage.update();
+  });
+
+item.on("pressup", function (evt) {
+  const alvo = estadoJogo.silabasCaixas.find(caixa =>
+    evt.stageX > caixa.x && evt.stageX < caixa.x + caixa.largura &&
+    evt.stageY > caixa.y && evt.stageY < caixa.y + 60 &&
+    caixa.letras.filter(l => l !== null).length < caixa.maxLetras
+  );
+
+  if (alvo) {
+    const letraShape = this.getChildAt(1);
+    const posicaoLivre = alvo.letras.findIndex(l => l === null);
+    let indicePosicao = posicaoLivre;
+
+    if (posicaoLivre !== -1) {
+      alvo.letras[posicaoLivre] = letraShape;
+    } else {
+      alvo.letras.push(letraShape);
+      indicePosicao = alvo.letras.length - 1;
+    }
+
+    this.x = alvo.x + 10 + indicePosicao * 55;
+    this.y = alvo.y + 10;
+  } else {
+    this.x = this.originalX;
+    this.y = this.originalY;
+  }
+});
+}
+
+  function criarCaixasSilabas() {
+    const silabas = imagensFase[estadoJogo.faseAtual].silabas;
+    let posX = 100;
+    estadoJogo.silabasCaixas = [];
+
+    silabas.forEach((silaba, i) => {
+      const larguraCaixa = silaba.length * 55 + 20;
+      const caixa = new createjs.Shape();
+      caixa.graphics.setStrokeStyle(2).beginStroke("#000").drawRoundRect(0, 0, larguraCaixa, 60, 20);
+      caixa.x = posX;
+      caixa.y = 300;
+      stage.addChild(caixa);
+
+      estadoJogo.silabasCaixas.push({
+        x: caixa.x,
+        y: caixa.y,
+        largura: larguraCaixa,
+        maxLetras: silaba.length,
+        letras: [],
+        shape: caixa
       });
 
-      this.offset = { x: evt.stageX - this.x, y: evt.stageY - this.y };
-    });
-
-    item.on("pressmove", function (evt) {
-      this.x = evt.stageX - this.offset.x;
-      this.y = evt.stageY - this.offset.y;
-      stage.update();
-    });
-
-    item.on("pressup", function (evt) {
-      const alvo = estadoJogo.silabasCaixas.find(caixa =>
-        evt.stageX > caixa.x && evt.stageX < caixa.x + caixa.largura &&
-        evt.stageY > caixa.y && evt.stageY < caixa.y + 60 &&
-        caixa.letras.length < caixa.maxLetras
-      );
-      if (alvo) {
-        alvo.letras.push(this.letra);
-        this.x = alvo.x + 10 + (alvo.letras.length - 1) * 55; // espaçamento maior para não sobrepor
-        this.y = alvo.y + 10;
-        estadoJogo.letrasUsadas.push(this);
-      } else {
-        this.x = this.originalX;
-        this.y = this.originalY;
-      }
+      posX += larguraCaixa + 30;
     });
   }
 
-function criarCaixasSilabas() {
-  const silabas = imagensFase[estadoJogo.faseAtual].silabas;
-  let posX = 100; // posição inicial X
+function verificarResposta() {
+  const silabasCorretas = imagensFase[estadoJogo.faseAtual].silabas;
+  let silabasJogador = [];
 
-  silabas.forEach((silaba, i) => {
-    const larguraCaixa = silaba.length * 60 + 20; // largura proporcional à sílaba
+  for (const caixa of estadoJogo.silabasCaixas) {
+    // Verifica se todas as posições da caixa estão preenchidas (não nulas)
+    if (caixa.letras.some(l => l === null)) {
+      alert("Preencha todas as caixas corretamente antes de verificar!");
+      return;
+    }
 
-    const caixa = new createjs.Shape();
-    caixa.graphics.setStrokeStyle(2).beginStroke("#000").drawRoundRect(0, 0, larguraCaixa, 60, 20);
-    caixa.x = posX;
-    caixa.y = 300;
-    stage.addChild(caixa);
+    // Concatena os textos das letras, ignorando posições vazias (null)
+    const silabaFormada = caixa.letras.map(l => l.text.toLowerCase()).join("");
+    silabasJogador.push(silabaFormada);
+  }
 
-    estadoJogo.silabasCaixas.push({
-      x: caixa.x,
-      y: caixa.y,
-      largura: larguraCaixa,
-      maxLetras: silaba.length,
-      letras: [],
-      shape: caixa
-    });
+  const acerto = silabasJogador.every((silaba, i) => silaba === silabasCorretas[i]);
 
-    // Atualiza posX para próxima caixa, somando largura + espaço extra
-    posX += larguraCaixa + 20;
-  });
+  if (acerto) {
+    calcularPontuacaoSilabas();
+    criarPopupFinal();
+  } else {
+    estadoJogo.vidas--;
+    atualizarVidas();
+    if (estadoJogo.vidas <= 0) {
+      criarPopupGameOver();
+    } else {
+      alert("Ops! Separe as sílabas corretamente!");
+    }
+  }
 }
 
   function calcularPontuacaoSilabas() {
@@ -170,28 +204,7 @@ function criarCaixasSilabas() {
       pontosPalavra = (1 - fator) * pontuacaoMax + fator * pontuacaoMin;
     }
 
-    if (!estadoJogo.pontuacao) estadoJogo.pontuacao = 0;
     estadoJogo.pontuacao += Math.floor(pontosPalavra);
-  }
-
-  function verificarResposta() {
-    const silabasCorretas = imagensFase[estadoJogo.faseAtual].silabas;
-    const silabasJogador = estadoJogo.silabasCaixas.map(caixa => caixa.letras.join(""));
-
-    const acerto = JSON.stringify(silabasJogador) === JSON.stringify(silabasCorretas);
-
-    if (acerto) {
-      calcularPontuacaoSilabas();
-      criarPopupFinal();
-    } else {
-      estadoJogo.vidas--;
-      atualizarVidas();
-      if (estadoJogo.vidas <= 0) {
-        criarPopupGameOver();
-      } else {
-        alert("Ops! Separe as sílabas corretamente!");
-      }
-    }
   }
 
   function criarPopupFinal() {
@@ -200,8 +213,10 @@ function criarCaixasSilabas() {
     const pontuacaoSpan = document.getElementById("pontuacaoFinal");
     pontuacaoSpan.textContent = estadoJogo.pontuacao;
     popup.classList.add("mostrar");
+
     const btnProximo = document.getElementById("btnProximo");
     const btnJogarDeNovo = document.getElementById("btnJogarDeNovo");
+
     if (estadoJogo.faseAtual < imagensFase.length - 1) {
       btnProximo.textContent = "Próxima Fase";
       btnProximo.style.display = "inline-block";
@@ -219,6 +234,7 @@ function criarCaixasSilabas() {
         criarPopupFIM();
       };
     }
+
     btnJogarDeNovo.onclick = () => {
       popup.classList.remove("mostrar");
       resetarFase();
@@ -237,6 +253,14 @@ function criarCaixasSilabas() {
     atualizarVidas();
     estadoJogo.pontuacao = 0;
     estadoJogo.tempo = 0;
+    caixaObj = {
+      x: caixa.x,
+      y: caixa.y,
+      largura: larguraCaixa,
+      maxLetras: silaba.length,
+      letras: Array(silaba.length).fill(null),  // <-- importante!
+      shape: caixa
+    };
   }
 
   function criarPopupGameOver() {
@@ -280,10 +304,9 @@ function criarCaixasSilabas() {
   }
 
   document.getElementById("btnVerificar").onclick = verificarResposta;
-
-  // Inicia o jogo
   resetarFase();
 };
+
 
 
 
