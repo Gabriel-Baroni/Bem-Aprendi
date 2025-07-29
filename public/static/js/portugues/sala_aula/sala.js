@@ -5,7 +5,7 @@ window.onload = function () {
   createjs.Ticker.addEventListener("tick", stage);
 
   // FUNDO
-  const fundo = new createjs.Bitmap("/static/img/matematica/sala.png");
+  const fundo = new createjs.Bitmap("/static/img/portugues/sala.png");
   fundo.image.onload = () => {
     fundo.scaleX = stage.canvas.width / fundo.image.width;
     fundo.scaleY = stage.canvas.height / fundo.image.height;
@@ -14,21 +14,21 @@ window.onload = function () {
   stage.addChild(fundo);
 
   // PERSONAGEM
-  const personagem = new createjs.Bitmap("/static/img/matematica/prof.png"); // substitua pelo caminho da sua imagem
-  personagem.x = 800;
-  personagem.y = 200;
+  const personagem = new createjs.Bitmap("/static/img/portugues/prof.png"); // substitua pelo caminho da sua imagem
+  personagem.x = 700;
+  personagem.y = 250;
   personagem.cursor = "pointer";
   personagem.image.onload = () => {
-    const desiredRadius = 40;
-    const scale = (desiredRadius * 3.5) / personagem.image.width;
+    const desiredRadius = 70;
+    const scale = (desiredRadius * 6) / personagem.image.width;
     personagem.scaleX = personagem.scaleY = scale;
     stage.update();
   };
   stage.addChild(personagem);
 
 // DIÁLOGO DO PROFESSOR
-  const nomePersonagem = "Prof. Leo";
-  const imagemPersonagem = "/static/img/matematica/prof.png";
+  const nomePersonagem = "Prof. João";
+  const imagemPersonagem = "/static/img/portugues/prof.png";
   const falas = [
     "Olá, aluno como vai?",
     "Eu sou o Professor João, um Tucano",
