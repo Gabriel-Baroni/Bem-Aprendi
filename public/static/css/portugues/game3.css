@@ -281,7 +281,8 @@ a {
 /*-------------------ESTILO DOS POP-UP'S------------------ */
 #popupFimFase,
 #popupGameOver,
-#popupFim {
+#popupFim,
+#popupAlerta {
   position: fixed;
   top: 0; left: 0;
   width: 100vw;
@@ -298,7 +299,8 @@ a {
 
 #popupFimFase.mostrar,
 #popupGameOver.mostrar,
-#popupFim.mostrar {
+#popupFim.mostrar,
+#popupAlerta.mostrar {
   visibility: visible;
   opacity: 1;
 }
@@ -306,7 +308,8 @@ a {
 /* Caixa principal do popup com estilo pixelado */
 #popupFimFase .caixa,
 #popupGameOver .caixa,
-#popupFim .caixa
+#popupFim .caixa,
+#popupAlerta .caixa
  {
   position: relative;
   background-color: #ffe8a3;
@@ -327,7 +330,8 @@ a {
 /* Título grande estilo pixel */
 #popupFimFase .titulo,
 #popupGameOver .titulo,
-#popupFim .titulo {
+#popupFim .titulo,
+#popupAlerta .titulo{
   font-size: 18px;
   color: #ffff;
   background: #ff6b6b;
@@ -343,7 +347,8 @@ a {
 /* Texto da pontuação */
 #popupFimFase .pontuacao,
 #popupGameOver .pontuacao,
-#popupFim .pontuacao {
+#popupFim .pontuacao,
+#popupAlerta .pontuacao {
   font-size: 14px;
   color: #ffff;
   text-align: center;
@@ -353,7 +358,8 @@ a {
 /* Container dos botões estilo pixel */
 #popupFimFase .botoes,
 #popupGameOver .botoes,
-#popupFim .botoes{
+#popupFim .botoes,
+#popupAlerta .botoes {
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -363,7 +369,7 @@ a {
 /* Botões com estilo pixelado */
 #popupFimFase button,
 #popupGameOver button,
-#popupFim button {
+#popupFim button{
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
   padding: 12px 10px;
@@ -496,7 +502,8 @@ a {
   }
   #popupFimFase .caixa,
   #popupGameOver .caixa,
-  #popupFim .caixa {
+  #popupFim .caixa,
+  #popupAlerta .caixa {
     width: 60vw;
     padding: 6px;
     font-size: 11px;
@@ -504,7 +511,8 @@ a {
 
   #popupFimFase .titulo,
   #popupGameOver .titulo,
-  #popFim .titulo {
+  #popFim .titulo,
+  #popupAlerta .titulo {
     width: 80%;
   }
 
