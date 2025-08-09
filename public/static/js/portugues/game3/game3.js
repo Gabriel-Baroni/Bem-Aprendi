@@ -3,6 +3,8 @@ window.onload = function () {
     { imagem: "../static/img/portugues/Vasspritesheet.png", larguraFrame: 193, alturaFrame: 112, count: 6, escala: 1, silabas: ["vas", "sou", "ra"] },
     { imagem: "../static/img/portugues/Carspritesheet.png", larguraFrame: 480, alturaFrame: 488, count: 6, escala: 0.5, silabas: ["car", "ro"] },
     { imagem: "../static/img/portugues/Busspritesheet.png", larguraFrame: 91, alturaFrame: 91, count: 6, escala: 1, silabas: ["bús", "so", "la"] },
+    {imagem: "../static/img/portugues/Dogspritesheet.png", larguraFrame: 144, alturaFrame: 144, count: 12, escala: 1, silabas: ["ca", "chor", "ro"] },
+    { imagem: "../static/img/portugues/Dinospritesheet.png", larguraFrame: 166, alturaFrame: 166, count: 8, escala: 1, silabas: ["di", "nos", "sa", "u", "ro"] }
   ];
 
   const cores = ["#58cae9ff", "#6ae870ff", "#dc5d44ff", "#d953acff", "#ee2f1eff"];
