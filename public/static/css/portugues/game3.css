@@ -1,6 +1,6 @@
 /* -----------------ESTILO DO BODY E DO CANVAS------------- */
 body {
-  background-color: #FFF8E7; /* Amarelo pastel bem clarinho */
+  background-color: #fff7db; /* Amarelo pastel bem clarinho */
   font-family: 'Press Start 2P', cursive, sans-serif;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ body {
 /* Ajustar o h1 para ficar melhor em telas pequenas */
 h2 { 
   font-size: 1vw;
-  text-shadow: 2px 2px 0 #fddde6;
+  text-shadow: 2px 2px 0 #faf204;
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;
@@ -34,7 +34,6 @@ h2 {
   margin: 0 auto;
   background-color: #fff7db;
   image-rendering: pixelated;
-  cursor: crosshair;
   box-sizing: border-box;
   padding: 2%;
 }

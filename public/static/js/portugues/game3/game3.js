@@ -187,7 +187,7 @@ item.on("pressup", function (evt) {
     }
 
     this.x = alvo.x + 10 + indicePosicao * 55;
-    this.y = alvo.y + 10;
+    this.y = alvo.y + 5;
   } else {
     this.x = this.originalX;
     this.y = this.originalY;

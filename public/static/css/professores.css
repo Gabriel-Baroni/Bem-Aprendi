@@ -1,0 +1,53 @@
+body {
+    font-family: 'Press Start 2P', cursive, sans-serif;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha */
+    gap: 24px;       /* Espaço entre os cartões */
+    justify-content: center;
+    margin: 32px auto;
+    max-width: 1200px;
+}
+
+.flip-container {
+  width: 400px;
+  height: 300px;
+  perspective: 1000px; 
+  background-color: antiquewhite;/* Define a profundidade da perspectiva */
+}
+
+.flipper {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s; /* Tempo da transição */
+  transform-style: preserve-3d;
+  position: relative; /* Para posicionar as divs front e back */
+}
+
+.front, .back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  justify-items: center;
+  backface-visibility: hidden; /* Esconde a parte de trás do elemento */
+}
+
+.back {
+  transform: rotateY(180deg); /* Inicia a parte de trás escondida */
+}
+
+.flip-container:hover .flipper {
+  transform: rotateY(180deg); /* Gira o flipper ao passar o mouse */
+}
+
+#imgAnimal{
+    width: 50%;
+    height: 50%;
+    margin: 2%;
+}
+
+#nomeProf{
+    font-size: 12pt;
+}
