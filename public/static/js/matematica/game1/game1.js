@@ -121,7 +121,7 @@ window.onload = function () {
 function dialogoInstrucoes(callbackFimDialogo) {
   document.getElementById("overlay-dialogo").style.display = "block";
   estadoJogo.contandoTempo = false;
-  const nomePersonagem = "Prof. Leo";
+  const nomePersonagem = "Prof. Naná";
   const imagemPersonagem = "/static/img/matematica/prof.png";
   const falas = [
     "Seja bem-vindo ao Desafio dos sinais!",

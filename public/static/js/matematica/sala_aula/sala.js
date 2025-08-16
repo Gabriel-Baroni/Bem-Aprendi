@@ -27,11 +27,11 @@ window.onload = function () {
   stage.addChild(personagem);
 
 // DIÁLOGO DO PROFESSOR
-  const nomePersonagem = "Prof. Leo";
+  const nomePersonagem = "Prof. Naná";
   const imagemPersonagem = "/static/img/matematica/prof.png";
   const falas = [
     "Olá, aluno como vai?",
-    "Eu sou o Professor Leo, um Lobo Guará!",
+    "Eu sou o Professor Naná, um Lobo Guará!",
     "Você está pronto para começar nosso super legal DESAFIO DE MATEMÁTICA?!",
     "Vamos aprender JOGANDO! Melhor que isso só dois disso!!",
     "Clique no botão ao lado para começar!"

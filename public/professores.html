@@ -8,32 +8,119 @@
     <link rel="stylesheet" href="static/css/professores.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-bs-theme="light">
+
+  <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+  </div>
+
+  <div id="app">
+    <div id="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <nav id="side-menu">
+        <p id="nome-crianca"></p>
+        <ul>
+          <li><button onclick="history.back()">Voltar</button></li>
+          <a href=""><li>Ranking</li></a>
+          <a href="NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+          <a href="NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+          <a href="/auth.html"><li>Sair</li></a>
+        </ul>
+      </nav>
 
   <div class="cards">
   <div class="flip-container">
     <div class="flipper">
       <div class="front">
         <img id="imgAnimal" src="static/img/profs_img/guara.webp">
-        <h1 id="nomeProf">Professor Léo</h1>
+        <h1 id="nomeProf">Professor Naná</h1>
         <h2 id="nomeAnimal">Lobo Guará</h2>
       </div>
       <div class="back">
-        Detalhes do Professor 1
+          <ul id="descricaoAnimal">
+            <li>O lobo-guará parece um cachorro de pernas longas e pelo alaranjado.</li>
+            <li>Ele vive no Cerrado e gosta de frutas, como a lobeira, além de pequenos animais.</li>
+          </ul>
       </div>
     </div>
   </div>
+
   <div class="flip-container">
     <div class="flipper">
       <div class="front">
-        Professor 2
+        <img id="imgAnimal" src="static/img/profs_img/tucano.jpg">
+        <h1 id="nomeProf">Professor Tuca</h1>
+        <h2 id="nomeAnimal">Tucano</h2>
       </div>
       <div class="back">
-        Detalhes do Professor 2
+          <ul id="descricaoAnimal">
+            <li>O tucano é um pássaro famoso por seu bico grandão e colorido!</li>
+            <li>Mora em florestas do Brasil, como a Amazônia e a Mata Atlântica, e adora frutas bem docinhas.</li>
+          </ul>
       </div>
     </div>
   </div>
 
+    <div class="flip-container">
+    <div class="flipper">
+      <div class="front">
+        <img id="imgAnimal" src="static/img/profs_img/tamandua.webp">
+        <h1 id="nomeProf">Professor Duá</h1>
+        <h2 id="nomeAnimal">Tamanduá-Bandeira</h2>
+      </div>
+      <div class="back">
+          <ul id="descricaoAnimal">
+            <li>O tamanduá-bandeira é um bichão de focinho comprido que adora comer formigas e cupins!</li>
+            <li>Ele vive no Brasil em lugares como o Cerrado, Pantanal e Mata Atlântica, usando sua língua gigante para pegar insetos.</li>
+          </ul>
+      </div>
+    </div>
+  </div>
 
+      <div class="flip-container">
+    <div class="flipper">
+      <div class="front">
+        <img id="imgAnimal" src="static/img/profs_img/jaguatirica.jpg">
+        <h1 id="nomeProf">Professora Jade</h1>
+        <h2 id="nomeAnimal">Jaguatirica</h2>
+      </div>
+      <div class="back">
+          <ul id="descricaoAnimal">
+            <li>A jaguatirica é como um gatão cheio de manchas lindas! 🐆</li>
+            <li>Ela vive no Brasil em lugares como a Amazônia, Pantanal, Mata Atlântica e Cerrado.</li>
+            <li>De noite, sai para passear e caçar, pulando e escalando árvores como uma verdadeira atleta.</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-container">
+    <div class="flipper">
+      <div class="front">
+        <img id="imgAnimal" src="static/img/profs_img/bemte.jpg">
+        <h1 id="nomeProf">Aluno</h1>
+        <h2 id="nomeAnimal">Bem-Te-Vi</h2>
+      </div>
+      <div class="back">
+          <ul id="descricaoAnimal">
+            <li>O bem-te-vi é um passarinho amarelinho com asas escuras e um topete fofinho.</li>
+            <li>Ele vive em quase todo o Brasil e adora cantar bem alto o seu famoso “bem-te-vi!”, que parece até que está falando seu nome! 🎶</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+      
+
+
+
+<script src="static/js/index/NavBarControls.js"></script>
+<script src="static/js/ScripitComum/menu.js" ></script>
+<script src="static/js/index/sounds.js" ></script>
+<script src='static/js/conf/theme.js' ></script>
 </body>
 </html>

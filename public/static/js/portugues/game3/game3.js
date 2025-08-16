@@ -51,7 +51,7 @@ window.onload = function () {
 function dialogoInstrucoes(callbackFimDialogo) {
   document.getElementById("overlay-dialogo").style.display = "block";
   estadoJogo.contandoTempo = false;
-  const nomePersonagem = "Prof. João";
+  const nomePersonagem = "Prof. Tuca";
   const imagemPersonagem = "/static/img/portugues/prof.png";
   const falas = [
     "Seja bem-vindo ao Desafio das Sílabas!",

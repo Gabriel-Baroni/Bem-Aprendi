@@ -27,11 +27,11 @@ window.onload = function () {
   stage.addChild(personagem);
 
 // DIÁLOGO DO PROFESSOR
-  const nomePersonagem = "Prof. João";
+  const nomePersonagem = "Prof. Tuca";
   const imagemPersonagem = "/static/img/portugues/prof.png";
   const falas = [
     "Olá, aluno como vai?",
-    "Eu sou o Professor João, um Tucano",
+    "Eu sou o Professor Tuca, um Tucano",
     "Você está pronto para começar nosso super legal DESAFIO DE PORTUGUÊS?!",
     "Vamos aprender JOGANDO!",
     "Clique no botão ao lado para começar!"
