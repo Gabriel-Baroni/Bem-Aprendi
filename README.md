@@ -1,9 +1,12 @@
-<h1 align="center"> BEM-APRENDI </h1>
+<h1 align="center"> BEM-APRENDI </h1> 
+<p align= "center">
+ <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/39d8b81a-1d7f-4769-b255-e4e150c32edb" />
+</p>
 <p align="center">Um trabalho para o PROJETO INTEGRADOR e para DESENVOLVIMENTO DE APLICAÇÕES WEB - 4º Informática do IFSP-Jacareí</p>
 <br>
 <p align="center">
-<img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellow&style=for-the-badge"/>
-
+ <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellow&style=for-the-badge"/>
+</p>
 <h1>👓 Professores responsáveis</h1> 
 
 -  Ana Paula Abrantes de Castro Shiguemori
@@ -45,7 +48,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 
 - `Sistema operacional compatível`: O sistema deve ser acessado por qualquer navegador dos seguintes sistemas: Windows, Linux, android, ios, MacOs.
 
-- `Tecnologias utilizadas`: O sistema deve ser WEB, ou seja, precisa ser desenvolvido para ser acessados pelos navegadores. Assim, o sistema vai ser criado utilizando das tecnologias javaScript, HTML5, CSS3, CreateJS, nodeJS.
+- `Tecnologias utilizadas`: O sistema deve ser WEB, ou seja, precisa ser desenvolvido para ser acessados pelos navegadores.
 
 
 <h2>Requisitos Externos:</h2>
@@ -54,7 +57,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 
 - `Marco Civil da Internet (Lei nº 12.965/2014)`: O sistema deve seguir as normas estabelecidas pelo Marco Civil da Internet. 
 
-- `Código de Defesa do Consumidor (CDC) – Lei nº 8.078/1990`: O sistema de seguir as normas estabelecidas pelo Código de Defesa do Consumidor. 
+- `Código de Defesa do Consumidor (CDC) – Lei nº 8.078/1990`: O sistema deve seguir as normas estabelecidas pelo Código de Defesa do Consumidor. 
 
 
 <h1>📑 Matriz de Requisitos</h1>
