@@ -10,7 +10,6 @@ body {
 }
 
 
-
 body[data-bs-theme="dark"] {
   background: #292828; /* fundo preto no modo escuro */
 }
@@ -170,7 +169,7 @@ a {
   border: none;
   color: #5c2b00;
   background: none;
-  font-size: 13px;
+  font-size: 0.6rem;
   font-family: 'Press Start 2P', cursive;
   cursor: pointer;
 }
@@ -206,12 +205,40 @@ a {
   font-size: 0.6rem;
   padding: 3% 0;
 }
+.flip-container {
+  width: 150px;
+  height: 150px;
+  perspective: 1000px; 
+  background-color: #ffe8a3;
+  border: 6px solid #5c2b00;
+  border-radius: 16px;
+}
 
+#nomeProf, #nomeAnimal {
+    font-size: 5pt;
+}
 
+#descricaoAnimal {
+    font-size: 5pt;
+    padding: 12px;
+    text-align: justify;
+    line-height: 1.6;  
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1); 
+    margin: 20px auto; 
+    background-color: #f8e7b4;
+    text-indent: 20px;
+}
 
-@media (min-width: 1025px){
+#imgAnimal{
+    width: 60%;
+    height: 60%;
+    margin: 2%;
+    display: block;
+    border-radius: 10%;
+}
 
 }
+
 
 /* Esconde o app e mostra a mensagem de rotação em modo retrato */
 @media screen and (orientation: portrait) {
@@ -243,5 +270,4 @@ a {
       user-select: none;
       line-height: 1.5;
   }
-}
 }
