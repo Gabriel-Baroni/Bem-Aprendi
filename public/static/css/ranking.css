@@ -1,0 +1,217 @@
+body {
+  margin: 40px; /* margem ao redor do canvas */
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center;     /* centraliza vertical */
+  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  background: var(--bs-light-bg, #f0f0f0);
+}
+
+body[data-bs-theme="dark"] {
+  background: #292828; /* fundo preto no modo escuro */
+}
+
+.ranking-container {
+  margin: 40px auto;
+  width: 100%;
+  height: 100%;
+  background: #fffbe6;
+  border: 6px solid #5c2b00;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #ffb347;
+  padding: 32px 16px;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+
+/* Título do ranking */
+.ranking-title {
+  font-size: 18px;
+  margin-bottom: 24px;
+  background: #ffb347;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 4px 4px 0 #ffb347;
+  color: #fff;
+  text-shadow: 2px 2px #5c2b00;
+  border: 4px solid #5c2b00;
+}
+
+/* Select de matéria */
+.materia-select {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  margin-bottom: 24px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #ffb347;
+  background: #ffe8a3;
+  color: #5c2b00;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #ffb347;
+}
+
+/* Lista do ranking */
+ul#ranking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Item do ranking */
+ul#ranking-list li {
+  font-size: 13px;
+  background: #ffb347;
+  color: #fff;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px #5c2b00;
+  letter-spacing: 1px;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+/* Destaque para o primeiro lugar */
+ul#ranking-list li:first-child {
+  background: #ffe8a3;
+  color: #5c2b00;
+  font-weight: bold;
+  border: 3px solid #ffb347;
+  box-shadow: 4px 4px 0 #ffb347;
+}
+
+/* Hover nos itens do ranking */
+ul#ranking-list li:hover {
+  background: #ff6b6b;
+  color: #fff;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px 0 #5c2b00;
+  transform: scale(1.05);
+}
+
+/* -------------ESTILO DO MENU LATERAL------------- */
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe8a3 80%, #ffb347 100%);
+  color: #5c2b00;
+  padding: 60px 20px 20px 20px;
+  box-sizing: border-box;
+  transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  z-index: 1000;
+  border-right: 8px solid #5c2b00;
+  box-shadow: 8px 0 0 #ffb347, 0 0 0 8px #fffbe6;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+  #nome-crianca {
+    font-size: 0.8rem;
+  }
+
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  padding: 18px 0;
+  border-bottom: 3px dashed #ffb347;
+  cursor: pointer;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  background: #fffbe6;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #ffb347;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: #5c2b00;
+}
+
+#side-menu ul li:hover {
+  background: #ffb347;
+  color: #fff;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px 0 #5c2b00;
+  transform: scale(1.05);
+}
+#menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  background: #ffe8a3;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #ffb347;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#side-menu ul li button {
+  width: 100%;
+  border: none;
+  color: #5c2b00;
+  background: none;
+  font-size: 0.6rem;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+
+#menu-icon div {
+  background-color: #5c2b00;
+  height: 6px;
+  margin: 3px 0;
+  border-radius: 2px;
+  width: 80%;
+  image-rendering: pixelated;
+}
+
+
+/* Quando ativo, mostra o menu */
+#side-menu.active {
+  left: 0;
+}
+
+/* Itens do menu */
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+#rotate-message {
+  display: none;
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 600px) {
+  .ranking-container {
+    max-width: 95vw;
+    padding: 16px 4px;
+  }
+  .ranking-title {
+    font-size: 14px;
+    padding: 8px;
+  }
+  ul#ranking-list li {
+    font-size: 10px;
+    padding: 6px;
+  }
+}

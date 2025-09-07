@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranking das Melhores Pontuações</title>
+  <link rel="stylesheet" href="../../static/css/ranking.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body data-bs-theme="light">
+  
+  <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+  </div>
+  <div id="app">
+     <div id="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <nav id="side-menu">
+        <p id="nome-crianca"></p>
+        <ul>
+          <li><button onclick="history.back()">Voltar</button></li>
+          <a href="../../NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+          <a href="/professores.html"><li>Professores</li></a>
+          <a href="../../NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+          <a href="/auth.html"><li>Sair</li></a>
+      
+        </ul>
+      </nav>
+
+    <div class="ranking-container">
+      <div class="ranking-title">Ranking das Melhores Pontuações</div>
+      <select class="materia-select" id="materia-select">
+        <option value="matemática">Matemática</option>
+        <option value="lógica">Lógica</option>
+        <option value="português">Português</option>
+        <option value="história">História</option>
+        <option value="ciências">Ciências</option>
+        <option value="inglês">Inglês</option>
+      </select>
+      <ul id="ranking-list">
+        <li>Carregando...</li>
+      </ul>
+    </div>
+  </div>
+
+<script src="../../static/js/ranking/ranking_resposta.js"></script>
+<script src="../../static/js/ranking/sounds.js"></script>
+<script src="../../static/js/ScripitComum/menu.js" ></script>
+<script src="../../static/js/conf/theme.js" ></script>
+<script src="../../static/js/index/NavBarControls.js"></script>
+</body>
+</html>
