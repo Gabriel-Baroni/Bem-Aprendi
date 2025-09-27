@@ -1,0 +1,617 @@
+/* -----------------ESTILO DO BODY E DO CANVAS------------- */
+body {
+  background-color: #FFF8E7; /* Amarelo pastel bem clarinho */
+  font-family: 'Press Start 2P', cursive, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  user-select: none;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Ajustar o h1 para ficar melhor em telas pequenas */
+h2 { 
+  font-size: 1vw;
+  text-shadow: 2px 2px 0 #fddde6;
+  letter-spacing: 3px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive, sans-serif;
+  user-select: none;
+  padding: 0 10px;
+  word-break: break-word;
+}
+
+/* Canvas com borda pixelada e fundo pastel */
+#gameCanvas {
+  width: 80vw;
+  aspect-ratio: 4 / 3;
+  max-height: 75vh;
+  display: block;
+  margin: 0 auto;
+  background-color: #fff7db;
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+
+/* ---------------ESTILO DO BOTÃO DE RESET-------------- */
+button#resetButton {
+  background-color: #f9c784; /* laranja pastel */
+  border: 4px solid #f6a96b;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #4a3c31;
+  padding: 15px 50px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #d9985a;
+  transition: background-color 0.3s ease;
+  font-family: 'Press Start 2P', cursive, sans-serif;
+  user-select: none;
+  filter: drop-shadow(2px 2px 1px #b2703e);
+  width: 90vw;
+  width: fit-content;
+}
+
+button#resetButton:hover {
+  background-color: #f6a96b;
+}
+
+/* Para dar aquele efeito pixelado nas fontes e bordas */
+* {
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+}
+
+/* ---------------ESTILO DO MENU LATERAL---------------*/
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe8a3 80%, #ffb347 100%);
+  color: #5c2b00;
+  padding: 60px 20px 20px 20px;
+  box-sizing: border-box;
+  transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  z-index: 1000;
+  border-right: 8px solid #5c2b00;
+  box-shadow: 8px 0 0 #ffb347, 0 0 0 8px #fffbe6;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+  #nome-crianca {
+    font-size: 0.8rem;
+  }
+
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  padding: 18px 0;
+  border-bottom: 3px dashed #ffb347;
+  cursor: pointer;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  background: #fffbe6;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #ffb347;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: #5c2b00;
+}
+
+#side-menu ul li:hover {
+  background: #ffb347;
+  color: #fff;
+  box-shadow: 2px 2px 0 #5c2b00;
+  text-shadow: 1px 1px 0 #5c2b00;
+  transform: scale(1.05);
+}
+
+#menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  background: #ffe8a3;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 #ffb347;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#side-menu ul li button {
+  width: 100%;
+  border: none;
+  color: #5c2b00;
+  background: none;
+  font-size: 13px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+
+#menu-icon div {
+  background-color: #5c2b00;
+  height: 6px;
+  margin: 3px 0;
+  border-radius: 2px;
+  width: 80%;
+  image-rendering: pixelated;
+}
+
+/* Quando ativo, mostra o menu */
+#side-menu.active {
+  left: 0;
+}
+
+/* ------ ESTILOS DA CAIXA DE DIÁLOGO -------*/
+#caixa-dialogo {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background-color: #fff8d1;
+  border: 4px solid #5c2b00;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 8px 8px 0 #000;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  z-index: 200;
+  pointer-events: auto;
+  display: none; /* Começa escondido */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lado esquerdo (foto + nome) */
+#dialogo-esquerda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+/* Foto do personagem */
+#dialogo-foto {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  border: 3px solid #5c2b00;
+  border-radius: 8px;
+  background: #fff2b3;
+}
+
+/* Nome do personagem */
+#dialogo-nome {
+  margin-top: 8px;
+  font-size: 10px;
+  background: #ff6b6b;
+  padding: 4px 8px;
+  color: #fff;
+  border-radius: 6px;
+  border: 2px solid #222;
+  text-shadow: 1px 1px #000;
+}
+
+/* Texto do diálogo */
+#dialogo-texto-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#dialogo-texto {
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Botão de fechar */
+#dialogo-fechar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4b4b;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-family: 'Press Start 2P', cursive;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 300;
+}
+
+/* Botão iniciar minigame */
+.botao-iniciar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 12px 10px;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 6px #000;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+  height: 70px;
+}
+
+.botao-iniciar:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+/*-------------------ESTILO DOS POP-UP'S------------------ */
+#popupFimFase,
+#popupGameOver,
+#popupFim {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#popupFimFase.mostrar,
+#popupGameOver.mostrar,
+#popupFim.mostrar {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Caixa principal do popup com estilo pixelado */
+#popupFimFase .caixa,
+#popupGameOver .caixa,
+#popupFim .caixa
+ {
+  position: relative;
+  background-color: #ffe8a3;
+  border: 6px solid #5c2b00;
+  border-radius: 16px;
+  width: 30vw;
+  padding: 20px;
+  box-shadow: 8px 8px 0 #000;
+  font-family: 'Press Start 2P', cursive;
+  color: #222;
+  image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Título grande estilo pixel */
+#popupFimFase .titulo,
+#popupGameOver .titulo,
+#popupFim .titulo {
+  font-size: 18px;
+  color: #ffff;
+  background: #ff6b6b;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-shadow: 2px 2px #000;
+  user-select: none;
+  box-shadow: 0 4px #000;
+  text-align: center;
+  width: 90%;
+}
+
+/* Texto da pontuação */
+#popupFimFase .pontuacao,
+#popupGameOver .pontuacao,
+#popupFim .pontuacao {
+  font-size: 14px;
+  color: #ffff;
+  text-align: center;
+  user-select: none;
+}
+
+/* Container dos botões estilo pixel */
+#popupFimFase .botoes,
+#popupGameOver .botoes,
+#popupFim .botoes{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 20px;
+}
+
+/* Botões com estilo pixelado */
+#popupFimFase button,
+#popupGameOver button,
+#popupFim button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 12px 10px;
+  background-color: #00c4ff;
+  color: #fff;
+  border: 4px solid #222;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 6px #000;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+  flex: 1;
+  max-width: 140px;
+  line-height: 1.5;
+  z-index: 20;
+}
+
+#popupFimFase button:hover,
+#popupGameOver button:hover,
+#popupFim button:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px);
+  box-shadow: 0 4px #000;
+}
+
+#gif-fim{
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* Botão Próximo com cor verde */
+#popupFimFase button#btnProximo,
+#popupGameOver button#btnProximo {
+  background-color: #4caf50;
+}
+
+#popupFimFase button#btnProximo:hover,
+#popupGameOver button#btnProximo:hover {
+  background-color: #45a049;
+}
+
+/* Botão Jogar de Novo azul */
+#popupFimFase button#btnJogarDeNovo,
+#popupGameOver button#btnJogarDeNovo {
+  background-color: #2196f3;
+  
+}
+
+#popupFimFase button#btnJogarDeNovo:hover,
+#popupGameOver button#btnJogarDeNovo:hover {
+  background-color: #1e88e5;
+}
+
+/* Botão fechar no canto superior direito */
+#popupFimFase .close-btn,
+#popupGameOver .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4b4b;
+  border: 3px solid #222;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  width: 28px;
+  height: 28px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px #000;
+  user-select: none;
+  transition: background 0.2s ease;
+  z-index: 110;
+}
+
+#popupFimFase .close-btn:hover,
+#popupGameOver .close-btn:hover {
+  background: #d13b3b;
+}
+
+/* Vidas fixadas no canto superior direito */
+#vidas {
+  position: fixed;
+  top: 8%;
+  right: 20px;
+  z-index: 1000;
+  font-size: 3vw;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+}
+
+.overlay-escuro {
+  position: fixed;        /* fixa na tela */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* escurece */
+  z-index: 10;          /* bem alto para ficar acima de tudo */
+  display: none;          /* começa invisível */
+}
+
+/* ------------------ MEDIA QUERIES PARA RESPONSIVIDADE ------------------- */
+
+/* -----------------MEDIA QUERIE PARA CELULARES------------------- */
+@media (min-width: 601px) and (max-width: 1024px) {
+    #gameCanvas {
+    width: 90vw;
+    height: 70vh;
+    border-width: 2px;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 0.6rem;
+  }
+
+    button#resetButton {
+    font-size: 0.6rem;
+    width: 80vw;
+    padding: 10px;
+    margin: 0px;
+    margin-top: 5px;
+  }
+  #popupFimFase .caixa,
+  #popupGameOver .caixa,
+  #popupFim .caixa {
+    width: 60vw;
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  #popupFimFase .titulo,
+  #popupGameOver .titulo,
+  #popFim .titulo {
+    width: 80%;
+  }
+
+  #side-menu {
+    width: 50vw;
+    left: -50vw;
+  }
+
+  #side-menu ul li {
+  font-size: 0.6rem;
+  padding: 3% 0;
+}
+
+  #menu-icon {
+    width: 6vw;
+    height: 4vw;
+  }
+
+    #vidas {
+    font-size: 3vw;
+    right: 5px;
+    top: 5.5%
+  }
+    #caixa-dialogo {
+    width: 85%;
+    height: 35%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  #dialogo-foto {
+    width: 25%;
+    height: 25%;
+  }
+  #dialogo-nome {
+    margin-top: 3px;
+  }
+
+    .botao-iniciar {
+    font-size: 12px;
+    height: 70%;
+    width: 25%;
+    padding: 10px 8px;
+  }
+
+}
+
+/* -----------------MEDIA QUERIE PARA  COMPUTADORES------------------- */
+@media (min-width: 1025px){
+  #gameCanvas {
+    width: 90vw;
+    height: 90vh;
+
+    border-width: 2px;
+  }
+    h2 {
+    margin-top: 0%;
+  }
+  
+    #vidas {
+    font-size: 2vw;
+    right: 5px;
+    top: 3%
+  }
+}
+#rotate-message {
+  display: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+@media screen and (orientation: portrait) {
+  #app {
+    display: none;
+  }
+
+  #rotate-message {
+    margin: 40px; /* margem ao redor do canvas */
+    display: flex;
+    justify-content: center; /* centraliza horizontal */
+    align-items: center;     /* centraliza vertical */
+    height: calc(100vh - 80px); /* altura da tela menos as margens */
+    font-family: 'Press Start 2P', cursive;
+    width: 100%;
+
+  }
+  #aviso_tela{
+      font-size: 150%;
+      color: #fff;
+      padding: 10px;
+      margin: 0 0 12px 0;
+      background: #ff6b6b;
+      border: 4px solid #222;
+      border-radius: 10px;
+      text-shadow: 2px 2px #000;
+      text-align: center;
+      box-shadow: 0 4px #000;
+      user-select: none;
+      line-height: 1.5;
+  }
+}
+
+
+
+
+

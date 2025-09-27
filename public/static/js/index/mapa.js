@@ -154,7 +154,7 @@ function movePlayerTo(index) {
 function acessarSala(materia) {
     const rotas = {
     "Matemática": "Matematica/sala.html",
-    "Lógica": "game2.html",
+    "Lógica": "logica/game2.html",
     "Português": "Portugues/sala.html",
     "História": "game4.html",
     "Ciências": "game5.html",
