@@ -1,7 +1,5 @@
 window.onload = function () {
-    // --- ESTRUTURA DE DADOS DO JOGO DE LÓGICA ---
     const fasesLogica = [
-        // Fase 1: Ordenação por Tamanho
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/maca_pequena.png" },
@@ -9,7 +7,6 @@ window.onload = function () {
                 { id: 3, imagem: "../static/img/logica/maca_grande.png" }
             ]
         },
-        // Fase 2: Sequência Numérica/Quantidade
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/pote_1_biscoito.png" },
@@ -17,7 +14,6 @@ window.onload = function () {
                 { id: 3, imagem: "../static/img/logica/pote_3_biscoitos.png" },
             ]
         },
-        // Fase 3: Ciclo de Vida
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/ovo.png" },
@@ -26,7 +22,6 @@ window.onload = function () {
                 { id: 4, imagem: "../static/img/logica/galinha.png" }
             ]
         },
-        // Fase 4: Rotina Diária
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/acordar.png" },
@@ -35,7 +30,6 @@ window.onload = function () {
                 { id: 4, imagem: "../static/img/logica/ir_escola.png" }
             ]
         },
-        // Fase 5: Causa e Efeito
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/crianca_com_sorvete.png" },
@@ -81,7 +75,7 @@ window.onload = function () {
         document.getElementById("caixa-dialogo").style.display = "flex";
         estadoJogo.contandoTempo = false;
         
-        const nomePersonagem = "Prof. Tuca";
+        const nomePersonagem = "Prof. Duá";
         const imagemPersonagem = "static/img/portugues/prof.png";
         const falas = [
             "Bem-vindo ao Desafio da Lógica!",
