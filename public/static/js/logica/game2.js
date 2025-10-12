@@ -76,7 +76,7 @@ window.onload = function () {
         estadoJogo.contandoTempo = false;
         
         const nomePersonagem = "Prof. Duá";
-        const imagemPersonagem = "static/img/portugues/prof.png";
+        const imagemPersonagem = "../static/img/logica/prof.png";
         const falas = [
             "Bem-vindo ao Desafio da Lógica!",
             "Arraste as figuras para os quadrados na ordem correta.",

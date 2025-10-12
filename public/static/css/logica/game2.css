@@ -1,6 +1,6 @@
 /* -----------------ESTILO DO BODY E DO CANVAS------------- */
 body {
-  background-color: #FFF8E7; /* Amarelo pastel bem clarinho */
+  background-color: #fff7db; /* Amarelo pastel bem clarinho */
   font-family: 'Press Start 2P', cursive, sans-serif;
   display: flex;
   flex-direction: column;
@@ -550,7 +550,28 @@ a {
   }
 
 }
+button#btnVerificar {
+  background-color: #f9c784; /* laranja pastel */
+  border: 4px solid #f6a96b;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #4a3c31;
+  padding: 15px 50px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #d9985a;
+  transition: background-color 0.3s ease;
+  font-family: 'Press Start 2P', cursive, sans-serif;
+  user-select: none;
+  filter: drop-shadow(2px 2px 1px #b2703e);
+  width: 90vw;
+  width: fit-content;
+}
 
+button#btnVerificar:hover {
+  background-color: #f6a96b;
+}
 /* -----------------MEDIA QUERIE PARA  COMPUTADORES------------------- */
 @media (min-width: 1025px){
   #gameCanvas {

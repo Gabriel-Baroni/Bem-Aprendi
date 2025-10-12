@@ -4,7 +4,7 @@ const stage = new createjs.Stage("stage");
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
   { x: 356, y: 619, materia: "Matemática", img:"static/img/matematica/sala.png" },
-  { x: 266, y: 289, materia: "Lógica",  img:""},
+  { x: 266, y: 289, materia: "Lógica",  img:"static/img/matematica/sala.png"},
   { x: 949, y: 822, materia: "Português", img:"static/img/portugues/sala.png" },
   { x: 919, y: 295, materia: "História", img:"" },
   { x: 1151, y: 560, materia: "Ciências", img:"" },
@@ -154,7 +154,7 @@ function movePlayerTo(index) {
 function acessarSala(materia) {
     const rotas = {
     "Matemática": "Matematica/sala.html",
-    "Lógica": "logica/game2.html",
+    "Lógica": "logica/sala.html",
     "Português": "Portugues/sala.html",
     "História": "game4.html",
     "Ciências": "game5.html",

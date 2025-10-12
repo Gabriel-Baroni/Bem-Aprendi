@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sala de Aula - Diálogo</title>
+  <link rel="stylesheet" href="../static/css/matematica/sala.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="icon" href="../static/img/favICON.jpg" type="image/png">
+</head>
+<body>
+  
+  <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+  </div>
+  <div id="app">
+    <div id="container-canvas">
+    <canvas id="gameCanvas" width="2060" height="1080"></canvas>
+
+    <div id="caixa-dialogo">
+      <div id="dialogo-esquerda">
+        <img id="dialogo-foto" src="../static/img/logica/prof.png" alt="Personagem" />
+        <div id="dialogo-nome">Professor Naná</div>
+      </div>
+      <div id="dialogo-texto-container">
+        <div id="dialogo-texto"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-icon">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <nav id="side-menu">
+    <p id="nome-crianca"></p>
+    <ul>
+      <li><button onclick="history.back()">Voltar</button></li>
+      <a href=""><li>Ranking</li></a>
+      <a href="../NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+      <a href=""><li>Ajuda</li></a>
+      <a href="../NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+      <a href="/auth.html"><li>Sair</li></a>
+    </ul>
+  </nav>
+
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="../static/js/ScripitComum/dialogo.js"></script>
+    <script src="../static/js/logica/sala_aula/sala.js"></script>
+    <script src="../../static/js/ScripitComum/menu.js"></script>
+    <script src="../../static/js/index/NavBarControls.js"></script>
+    <script src="../static/js/matematica/game1/sounds.js"></script>
+
+  </div>
+
+</body>
+</html>
