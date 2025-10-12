@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sala em Construção</title>
+    <link rel="stylesheet" href="static/css/obra.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="icon" href="static/img/favICON.jpg" type="image/png">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+      <div id="rotate-message">
+    <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+  </div>
+
+
+  <div id="app">
+      <div id="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <nav id="side-menu">
+        <p id="nome-crianca"></p>
+        <ul>
+          <li><button onclick="history.back()">Voltar</button></li>
+          <a href="/auth.html"><li>Sair</li></a>
+        </ul>
+      </nav>
+
+      <div id="popup-materia" class="popup" style="display: none;">
+        <div class="close-btn" id="close-popup">X</div>
+        <div class="popup-content">
+          <div id="popup-esquerda">
+            <h2 id="titulo-popup">Título</h2>
+            <button id="botao-popup">Entrar na Sala</button>
+          </div>
+          <div id="popup-direita">
+            <div class="popup-image" id="popup-image"></div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container">
+        <h1>Sala em Construção</h1>
+        <p>Desculpe, esta sala ainda está em construção. Por favor, volte mais tarde!</p>
+    </div>
+  </div>
+</body>
+    <script src="static/js/ScripitComum/menu.js" ></script>
+    <script src="static/js/index/NavBarControls.js"></script>
+
+</html>

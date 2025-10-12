@@ -6,9 +6,9 @@ const fases = [
   { x: 356, y: 619, materia: "Matemática", img:"static/img/matematica/sala.png" },
   { x: 266, y: 289, materia: "Lógica",  img:"static/img/matematica/sala.png"},
   { x: 949, y: 822, materia: "Português", img:"static/img/portugues/sala.png" },
-  { x: 919, y: 295, materia: "História", img:"" },
-  { x: 1151, y: 560, materia: "Ciências", img:"" },
-  { x: 1669, y: 830, materia: "Inglês", img:"" }
+  { x: 919, y: 295, materia: "História", img:"static/img/obra/construct.png" },
+  { x: 1151, y: 560, materia: "Ciências", img:"static/img/obra/construct.png" },
+  { x: 1669, y: 830, materia: "Inglês", img:"static/img/obra/construct.png" }
 ];
 
 
@@ -156,9 +156,9 @@ function acessarSala(materia) {
     "Matemática": "Matematica/sala.html",
     "Lógica": "logica/sala.html",
     "Português": "Portugues/sala.html",
-    "História": "game4.html",
-    "Ciências": "game5.html",
-    "Inglês": "game6.html"
+    "História": "obra.html",
+    "Ciências": "obra.html",
+    "Inglês": "obra.html"
   };
    window.location.href = rotas[materia] || `sala.html?materia=${encodeURIComponent(materia)}`;
 }
