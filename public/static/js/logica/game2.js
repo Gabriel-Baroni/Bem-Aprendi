@@ -10,8 +10,8 @@ window.onload = function () {
         {
             sequencia: [
                 { id: 1, imagem: "../static/img/logica/pote_1_biscoito.png" },
-                { id: 2, imagem: "../static/img/logica/pote_2_biscoitos.png" },
-                { id: 3, imagem: "../static/img/logica/pote_3_biscoitos.png" },
+                { id: 2, imagem: "../static/img/logica/pote_2_biscoito.png" },
+                { id: 3, imagem: "../static/img/logica/pote_3_biscoito.png" },
             ]
         },
         {
@@ -32,10 +32,10 @@ window.onload = function () {
         },
         {
             sequencia: [
-                { id: 1, imagem: "../static/img/logica/crianca_com_sorvete.png" },
-                { id: 2, imagem: "../static/img/logica/sol_forte.png" },
-                { id: 3, imagem: "../static/img/logica/sorvete_derretendo.png" },
-                { id: 4, imagem: "../static/img/logica/crianca_triste.png" }
+                { id: 1, imagem: "../static/img/logica/semente.png" },
+                { id: 2, imagem: "../static/img/logica/broto.png" },
+                { id: 3, imagem: "../static/img/logica/planta.png" },
+                { id: 4, imagem: "../static/img/logica/flor.png" }
             ]
         }
     ];
@@ -198,6 +198,26 @@ window.onload = function () {
         stage.update();
     }
 
+    function enviarPontuacaoParaServidor(pontuacao, materia) {
+        const crianca_id = localStorage.getItem('crianca_id');
+        if (!crianca_id) {
+        console.error('Crianca não autenticada!');
+        return;
+        }
+        fetch("/pontuacao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            materia: materia, 
+            id_crianca: crianca_id,        
+            pontuacao: pontuacao
+        })
+        })
+        .then(res => res.json())
+        .then(data => console.log("Pontuação atualizada:", data))
+        .catch(err => console.error("Erro ao enviar pontuação:", err));
+   }
+
     function criarCaixasAlvo() {
         const fase = fasesLogica[estadoJogo.faseAtual];
         const { length: numeroDeCaixas } = fase.sequencia;
@@ -280,6 +300,26 @@ window.onload = function () {
         }
         estadoJogo.pontuacao = Math.floor(pontosFase);
     }
+     function enviarPontuacaoParaServidor(pontuacao, materia) {
+        const crianca_id = localStorage.getItem('crianca_id');
+        if (!crianca_id) {
+            console.error('Crianca não autenticada!');
+            return;
+        }
+        fetch("/pontuacao", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                materia: materia,
+                id_crianca: crianca_id,
+                pontuacao: pontuacao
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log("Pontuação atualizada:", data))
+        .catch(err => console.error("Erro ao enviar pontuação:", err));
+    }
+
 
     function criarPopupFinal() {
         estadoJogo.pontuacaoAcumulada += estadoJogo.pontuacao;
@@ -301,7 +341,7 @@ window.onload = function () {
             btnProximo.textContent = "Finalizar";
             btnProximo.onclick = () => {
                 popup.classList.remove("mostrar");
-                enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "logica");
+                enviarPontuacaoParaServidor(estadoJogo.pontuacaoAcumulada, "lógica");
                 criarPopupFIM();
             };
         }
@@ -314,7 +354,8 @@ window.onload = function () {
         };
 
     }
-    
+
+
     function criarPopupGameOver() {
         const popup = document.getElementById("popupGameOver");
         popup.classList.add("mostrar");
@@ -346,26 +387,7 @@ window.onload = function () {
         document.getElementById("btnFIM").onclick = () => { window.location.href = "/index.html"; };
     }
     
-    function enviarPontuacaoParaServidor(pontuacao, materia) {
-        const crianca_id = localStorage.getItem('crianca_id');
-        if (!crianca_id) {
-            console.error('Crianca não autenticada!');
-            return;
-        }
-        fetch("/pontuacao", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                materia: materia,
-                id_crianca: crianca_id,
-                pontuacao: pontuacao
-            })
-        })
-        .then(res => res.json())
-        .then(data => console.log("Pontuação atualizada:", data))
-        .catch(err => console.error("Erro ao enviar pontuação:", err));
-    }
-
+   
     // --- INICIALIZAÇÃO DO JOGO ---
     document.getElementById("btnVerificar").onclick = verificarResposta;
 
