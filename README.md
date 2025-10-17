@@ -82,7 +82,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <img  src="https://github.com/user-attachments/assets/c504a5b1-0774-4e99-9228-44085e8ff641" width=1000> 
 
 <h2>Modelo Entidade Relacionamento (MER)</h2>
-<img src="https://github.com/user-attachments/assets/81630861-7745-434e-b22f-d702b69d3e0c" width=1000> 
+<img src="https://github.com/user-attachments/assets/a89af567-f26a-41a3-bfd4-e143f1ae02d3" width=1000> 
 
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
@@ -96,13 +96,10 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <img src="https://img.shields.io/badge/Bootstrap-blueviolet?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 
-
 `Back-end`:
 <br><br>
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white">
 <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white">
-
-
 
 
 `Banco de Dados`:
