@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
       email,
       password: senha
     });
-    console.log('Resposta do signUp:', data); // 👈 VER AQUI
+    console.log('Resposta do signUp:', data); 
     if (error) {
       return res.status(400).json({ error: error.message });
     }

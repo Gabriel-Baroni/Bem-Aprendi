@@ -22,9 +22,13 @@ btnConfirmar.addEventListener('click', async () => {
     idParaExcluir = null;
     carregarPerfis();
   }
+  else {
+    await deletarContaResponsavel();
+    modal.hide();
+  }
 });
 
-// Função de excluir perfil
+// Função de excluir perfil criança
 async function excluirPerfil(id) {
   try {
     const { error: erroPontuacoes } = await supabase
@@ -45,7 +49,56 @@ async function excluirPerfil(id) {
   }
 }
 
-// Carrega perfis
+async function deletarContaResponsavel() {
+  try {
+    const { data: criancas, error: errBuscar } = await supabase
+      .from('Crianca')
+      .select('id')
+      .eq('id_responsavel', responsavel_id);
+    if (errBuscar) throw errBuscar;
+
+    const ids = (criancas || []).map(c => c.id);
+    if (ids.length > 0) {
+      const { error: erroPontuacoes } = await supabase
+        .from('pontuacoes_materias')
+        .delete()
+        .in('id_crianca', ids);
+      if (erroPontuacoes) throw erroPontuacoes;
+    }
+
+    const { error: erroCriancas } = await supabase
+      .from('Crianca')
+      .delete()
+      .eq('id_responsavel', responsavel_id);
+    if (erroCriancas) throw erroCriancas;
+
+    const { error: erroResponsavel } = await supabase
+      .from('Usuario_infos')
+      .delete()
+      .eq('id_auth', responsavel_id);
+    if (erroResponsavel) throw erroResponsavel;
+
+    // chama rota server-side que usa service_role para apagar do Auth
+    const resp = await fetch('/auth/delete-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: responsavel_id })
+    });
+    const resultado = await resp.json();
+    if (!resp.ok) throw new Error(resultado.error || 'Falha ao remover usuário do Auth');
+
+    await supabase.auth.signOut();
+    localStorage.clear();
+    window.location.href = '/auth.html';
+  } catch (err) {
+    console.error('Erro ao excluir conta:', err);
+    alert('Erro ao excluir a conta. Veja console para detalhes.');
+  }
+}
+
+    
+
+// Carrega perfis das crianças
 async function carregarPerfis() {
   const { data: criancas, error } = await supabase
     .from('Crianca')
@@ -95,6 +148,9 @@ async function carregarPerfis() {
   });
 }
 
+document.getElementById('excluir_responsável').addEventListener('click', () => {
+  modal.show()
+});
 btnCadastrar.addEventListener('click', () => {
   window.location.href = '/NavBar/perfis/cadastrar_crianca.html';
 });

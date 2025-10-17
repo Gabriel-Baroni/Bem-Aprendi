@@ -30,8 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const result = await response.json();
 
         if (response.ok) {
-          alert('Cadastro realizado com sucesso! Faça o login.');
-          window.location.href = '/auth.html';
+          localStorage.setItem('access_token', result.session.access_token);
+          localStorage.setItem('refresh_token', result.session.refresh_token);
+          localStorage.setItem('user_id', result.user_id);
+          localStorage.setItem('user_nome', result.usuario.nome);
+          localStorage.setItem('tipo_usuario', result.usuario.tipo);
+          window.location.href = '../../NavBar/perfis/perfil.html';
           cadastroForm.reset();
         } else {
           alert(result.error || 'Erro ao cadastrar.');

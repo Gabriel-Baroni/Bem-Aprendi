@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js'; 
 import pontuacaoRoute from './routes/pontuacao.js'; 
 import rankingRoutes from './routes/ranking.js';
+import deleteUserRoute from './routes/deleteAuth.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.static('public'));
 app.use('/auth', authRoutes);
 app.use('/pontuacao', pontuacaoRoute);
 app.use('/ranking', rankingRoutes);
+app.use('/auth', deleteUserRoute);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
