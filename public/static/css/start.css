@@ -2,14 +2,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 100vh;
   font-family: 'Press Start 2P', monospace;
-  background-image: url(../img/start/tela_start.jpeg);
+  background-image: url(../img/start/start.png);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* Faz a imagem cobrir toda a área */
-  margin: 0; /* Remove margens do body para evitar scroll */
-  min-height: 100vh; /* Garante altura mínima de 100% da viewport */
+  background-position: top center; /* ALTERADO AQUI */
+  background-size: cover;
+  margin: 0;
+  min-height: 100vh;
 }
 
 .container {
@@ -19,13 +19,22 @@ body {
 .botao {
   font-size: 32px;
   padding: 20px 60px;
-  border: none;
-  border-radius: 30px;
-  background: #4caf50;
-  color: white;
-  cursor: pointer;
-  animation: pulse 1s infinite;
   font-family: 'Press Start 2P', monospace;
+  color: white;
+  animation: pulse 1s infinite; 
+  cursor: pointer;
+  background-color: #00c4ff;
+  border: 4px solid #222;   
+  border-radius: 10px;       
+  box-shadow: 0 6px #000;    
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+}
+
+.botao:hover {
+  background-color: #00a9d6;
+  transform: translateY(2px); 
+  box-shadow: 0 4px #000;
 }
 
 @keyframes pulse {

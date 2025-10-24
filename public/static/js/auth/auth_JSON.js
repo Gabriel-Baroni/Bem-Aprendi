@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
           localStorage.setItem('user_id', result.user_id);
           localStorage.setItem('user_nome', result.usuario.nome);
           localStorage.setItem('tipo_usuario', result.usuario.tipo);
-          window.location.href = '../../NavBar/perfis/perfil.html';
+          window.location.href = '/start.html';
           cadastroForm.reset();
         } else {
           alert(result.error || 'Erro ao cadastrar.');
@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
           if (result.usuario.tipo === 'responsavel') {
             // Limpa crianca_id para que o responsável escolha depois
             localStorage.removeItem('crianca_id');
-            window.location.href = 'NavBar/perfis/perfil.html';
+            window.location.href = '/start.html';
           } else {
             // Usuário é criança, usa seu próprio ID como crianca_id
             localStorage.setItem('crianca_id', result.user_id);
             localStorage.setItem('crianca_nome', result.usuario.nome);
-            window.location.href = '/index.html';
+            window.location.href = '/start.html';
           }
 
           loginForm.reset();
