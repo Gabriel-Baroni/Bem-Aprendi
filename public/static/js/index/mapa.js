@@ -1,6 +1,43 @@
 // Cria o palco com o Createjs
 const stage = new createjs.Stage("stage");
 
+stage.on("click", function(event) { // 1. Adicionámos o 'event' aqui
+    
+    // Procura o áudio SÓ NO MOMENTO DO CLIQUE
+    const musica = document.getElementById('musica-fundo');
+    
+    if (musica) {
+        
+        // Checa se a música JÁ ESTÁ a tocar
+        if (musica.paused) { 
+            console.log("Música encontrada! Dando o primeiro play...");
+            
+            musica.muted = false;
+            musica.volume = 1.0; 
+            musica.load(); // Força o carregamento
+            musica.currentTime = 0; 
+            
+            var playPromise = musica.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(e => console.error("Play falhou:", e));
+            }
+            
+            // 2. ADICIONÁMOS ISTO:
+            // Isto impede que o clique "suba" para o document
+            // e acione outros scripts (como o menu.js)
+            if (event) {
+                event.stopPropagation();
+            }
+            
+        }
+    } else {
+        console.error("Música NÃO encontrada no clique!");
+    }
+    
+}, null, true);
+
+
 // Cria um array com as coordenadas das materias e seus nomes
 const fases = [
   { x: 356, y: 619, materia: "Matemática", img:"static/img/matematica/sala.png" },
