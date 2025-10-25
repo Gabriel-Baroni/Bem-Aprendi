@@ -1,11 +1,11 @@
 /* ESTILO DO BODY E CANVAS */
 body {
-  margin: 40px; /* margem ao redor do canvas */
-  display: flex;
-  justify-content: center; /* centraliza horizontal */
-  align-items: center;     /* centraliza vertical */
-  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  margin: 0; /* <-- ESTA É A CORREÇÃO PRINCIPAL */
+  padding: 0; /* Garante que não há preenchimento */
+  height: 100vh; /* altura total da tela */
   background: var(--bs-light-bg, #f0f0f0);
+  background-size: cover;
+  overflow: hidden; /* Previne qualquer scrollbar */
 }
 
 
@@ -16,8 +16,8 @@ body[data-bs-theme="dark"] {
 
 /* Canvas com tamanho fluido para desktops e mobiles */
 #stage {
-  width: 100vw;  /* largura padrão */
-  height: 90vh; /* altura padrão */
+  width: 100vw;   /* largura padrão */
+  height: 100vh; /* altura padrão */
   display: block; /* remove espaçamento */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -31,7 +31,7 @@ body[data-bs-theme="dark"] {
   background-color: #ffe8a3;
   border: 6px solid #5c2b00;
   padding: 16px;
-  width: 600px;      /* menor que antes */
+  width: 600px;     /* menor que antes */
   height: 300px;     /* menor que antes */
   font-family: 'Press Start 2P', cursive;
   font-size: 11px;
@@ -64,8 +64,8 @@ body[data-bs-theme="dark"] {
 
 /* Espaço para imagem pixelada à esquerda */
 .popup .popup-image {
-  width: 350px;           /* aumenta a largura */
-  height: 200px;          /* aumenta a altura */
+  width: 350px;         /* aumenta a largura */
+  height: 200px;        /* aumenta a altura */
   background-color: #c2a15c;
   border: 4px solid #5c2b00;
   border-radius: 12px;
@@ -73,7 +73,7 @@ body[data-bs-theme="dark"] {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 10px;           /* centraliza verticalmente se necessário */
+  margin: 10px;         /* centraliza verticalmente se necessário */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,7 +272,7 @@ a {
 }
 
   #stage {
-  width: 100vw;  /* largura padrão */
+  width: 100vw;   /* largura padrão */
   height: 100vh; /* altura padrão */
   display: block; /* remove espaçamento */
 }
@@ -281,7 +281,7 @@ a {
 
 @media (min-width: 1025px){
   #stage {
-  width: 100vw;  /* largura padrão */
+  width: 100vw;   /* largura padrão */
   height: 100vh; /* altura padrão */
   display: block; /* remove espaçamento */
 }
@@ -324,6 +324,46 @@ a {
   }
 }
 
+/* ---- CÓDIGO DA TELA DE ENTRADA ADICIONADO AQUI ---- */
+#tela-entrada-mapa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background-image: url(../img/start/start.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 
+#btn-iniciar-mapa {
+  font-size: 32px;
+  padding: 20px 60px;
+  font-family: 'Press Start 2P', monospace;
+  color: white;
+  animation: pulse 1s infinite; 
+  cursor: pointer;
+  background-color: #00c4ff;
+  border: 4px solid #222;   
+  border-radius: 10px;       
+  box-shadow: 0 6px #000;    
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+}
 
+#btn-iniciar-mapa:hover {
+background-color: #00a9d6;
+  transform: translateY(2px); 
+  box-shadow: 0 4px #000;
+}
 
+@keyframes pulse {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.1);}
+  100% { transform: scale(1);}
+}
