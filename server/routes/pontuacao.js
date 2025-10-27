@@ -11,32 +11,49 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // 1. Verificar se a criança existe
-    const { data: criancaData, error: criancaError } = await supabase
+    // 1. Verificar/Criar a criança (como antes)
+    const { data: criancaData } = await supabase
       .from('Crianca')
-      .select('*')
+      .select('id') 
       .eq('id', id_crianca)
       .single();
 
-    // 2. Se não existir, inserir criança auto-responsável
     if (!criancaData) {
-      const { error: insertError } = await supabase
+      console.log(`Criança ${id_crianca} não encontrada, criando...`);
+      const { error: insertCriancaError } = await supabase
         .from('Crianca')
-        .insert([{ id: id_crianca, id_responsavel: id_crianca}]);
-      if (insertError) throw insertError;
+        .insert([{ id: id_crianca, id_responsavel: id_crianca }]);
+        
+      if (insertCriancaError) throw insertCriancaError;
     }
 
-    // 3. Fazer upsert da pontuação
+    // 2. SALVAR NO HISTÓRICO (O NOVO PASSO - QUE FALTA NO SEU CÓDIGO)
+    // Apenas insere a nova tentativa. 
+    const { error: historicoError } = await supabase
+      .from('historico_tentativas') // <-- Nome da nova tabela
+      .insert([
+        { id_crianca, materia, pontuacao }
+      ]);
+      
+    if (historicoError) throw historicoError;
+
+    // 3. ATUALIZAR A PONTUAÇÃO PRINCIPAL (O CÓDIGO ANTIGO)
+    // Atualiza a tabela 'pontuacoes_materias' com a pontuação mais recente.
     const { error: upsertError } = await supabase
       .from('pontuacoes_materias')
       .upsert(
         [{ id_crianca, materia, pontuacao }],
-        { onConflict: ['id_crianca', 'materia'] }
+        { onConflict: ['id_crianca', 'materia'] } // Use o nome da sua restrição
       );
 
+    if (upsertError) throw upsertError;
+    
+    // 4. Enviar resposta de sucesso (TAMBÉM FALTA NO SEU CÓDIGO)
+    return res.status(201).json({ message: 'Pontuação registrada e histórico salvo' });
+
   } catch (error) {
-    console.error('Erro ao atualizar pontuação:', error.message);
-    return res.status(500).json({ message: 'Erro interno do servidor' });
+    console.error('Erro ao registrar pontuação:', error.message);
+    return res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
 

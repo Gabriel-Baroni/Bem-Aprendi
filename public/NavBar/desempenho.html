@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho da Criança</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/desempenho.css">
+</head>
+<body data-bs-theme="light">
+
+    <div id="rotate-message">
+        <p id="aviso_tela">Por favor, vire seu dispositivo para o modo paisagem para continuar.</p>
+    </div>
+
+ <div id="app"> 
+    <div id="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <nav id="side-menu">
+        <p id="nome-crianca"></p>
+        <ul>
+          <li><button onclick="history.back()">Voltar</button></li>
+          <a href="NavBar/conf/configuracoes.html"><li>Configurações</li></a>
+          <a href="NavBar/professores.html"><li>Professores</li></a>
+          <a href="NavBar/perfis/perfil.html" id="link-perfis"><li>Perfis</li></a>
+          <a href="NavBar/ranking/ranking.html"><li>Ranking</li></a>
+          <a href="NavBar/desempenho.html"><li>Desempenho</li></a>
+          <a href="/auth.html"><li>Sair</li></a>
+        </ul>
+      </nav>
+
+     <div class="container my-4">
+        <h1 class="mb-4" id="titulo-desempenho">Desempenho</h1>
+
+        <ul class="nav nav-tabs" id="abasMaterias" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="mat-tab" data-bs-toggle="tab" data-bs-target="#mat-pane" type="button" role="tab">Matemática</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="log-tab" data-bs-toggle="tab" data-bs-target="#log-pane" type="button" role="tab">Lógica</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="por-tab" data-bs-toggle="tab" data-bs-target="#por-pane" type="button" role="tab">Português</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="his-tab" data-bs-toggle="tab" data-bs-target="#his-pane" type="button" role="tab">História</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cie-tab" data-bs-toggle="tab" data-bs-target="#cie-pane" type="button" role="tab">Ciências</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ing-tab" data-bs-toggle="tab" data-bs-target="#ing-pane" type="button" role="tab">Inglês</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="conteudoAbas">
+            <div class="tab-pane fade show active p-3" id="mat-pane" role="tabpanel">
+                <h2>Matemática</h2>
+                <div class="chart-container">
+                    <canvas id="chart-Matemática"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="log-pane" role="tabpanel">
+                <h2>Lógica</h2>
+                <div class="chart-container">
+                    <canvas id="chart-Lógica"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="por-pane" role="tabpanel">
+                <h2>Português</h2>
+                <div class="chart-container">
+                    <canvas id="chart-Português"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="his-pane" role="tabpanel">
+                <h2>História</h2>
+                <div class="chart-container">
+                    <canvas id="chart-História"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="cie-pane" role="tabpanel">
+                <h2>Ciências</h2>
+                <div class="chart-container">
+                    <canvas id="chart-Ciências"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade p-3" id="ing-pane" role="tabpanel">
+                <h2>Inglês</h2>
+                <div class="chart-container">
+                    <canvas id="chart-Inglês"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ </div>
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../static/js/ScripitComum/menu.js" ></script>
+    <script src="../static/js/conf/theme.js" ></script>
+    <script src="../static/js/NavBarControls.js"></script>
+    <script src="../static/js/desempenho/desempenho.js"></script>
+</body>
+</html>
