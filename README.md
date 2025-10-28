@@ -1,4 +1,4 @@
-<h1 align="center"> BEM-APRENDI </h1> 
+<img width="889" height="664" alt="image" src="https://github.com/user-attachments/assets/8bb14d7c-0c79-434d-aac8-3cecf8ed697e" /><h1 align="center"> BEM-APRENDI </h1> 
 <p align= "center">
  <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/39d8b81a-1d7f-4769-b255-e4e150c32edb" />
 </p>
@@ -82,7 +82,8 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <img  src="https://github.com/user-attachments/assets/c504a5b1-0774-4e99-9228-44085e8ff641" width=1000> 
 
 <h2>Modelo Entidade Relacionamento (MER)</h2>
-<img src="https://github.com/user-attachments/assets/a89af567-f26a-41a3-bfd4-e143f1ae02d3" width=1000> 
+<img src="https://github.com/user-attachments/assets/24711657-9790-4f96-a321-2ff175fc68a4" width=1000> 
+
 
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
