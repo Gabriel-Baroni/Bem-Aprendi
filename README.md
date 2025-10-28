@@ -1,4 +1,3 @@
-<img width="889" height="664" alt="image" src="https://github.com/user-attachments/assets/8bb14d7c-0c79-434d-aac8-3cecf8ed697e" /><h1 align="center"> BEM-APRENDI </h1> 
 <p align= "center">
  <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/39d8b81a-1d7f-4769-b255-e4e150c32edb" />
 </p>
