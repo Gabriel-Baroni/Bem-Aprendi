@@ -1,21 +1,18 @@
-/* ARQUIVO: desempenho.css */
-
-/* ESTILO DO BODY (Copiado do seu ranking.css) */
+/* -------------ESTILO GERAL DA PÁGINA DE DESEMPENHO------------- */
 body {
-  margin: 40px; /* margem ao redor do canvas */
+  margin: 40px; 
   display: flex;
-  justify-content: center; /* centraliza horizontal */
-  align-items: center;     /* centraliza vertical */
-  height: calc(100vh - 80px); /* altura da tela menos as margens */
+  justify-content: center; 
+  align-items: center;     
+  height: calc(100vh - 80px); 
   background: var(--bs-light-bg, #f0f0f0);
   font-family: 'Press Start 2P', cursive;
 }
 
 body[data-bs-theme="dark"] {
-  background: #292828; /* fundo preto no modo escuro */
+  background: #292828; 
 }
 
-/* CONTÊINER PRINCIPAL (Estilo do .ranking-container) */
 .container {
   width: 90%;
   max-width: 900px;
@@ -29,7 +26,6 @@ body[data-bs-theme="dark"] {
   image-rendering: pixelated;
 }
 
-/* TÍTULO (Estilo do .ranking-title) */
 h1#titulo-desempenho {
   font-size: 18px;
   margin-bottom: 24px;
@@ -43,10 +39,9 @@ h1#titulo-desempenho {
   text-align: center;
 }
 
-/* ABAS DE MATÉRIAS (Estilo do .materia-select) */
 .nav-tabs {
-  border-bottom: none; /* Remove a linha padrão do Bootstrap */
-  gap: 8px; /* Espaço entre os botões de aba */
+  border-bottom: none;
+  gap: 8px; 
   margin-bottom: 24px;
 }
 
@@ -69,10 +64,9 @@ h1#titulo-desempenho {
   color: #fff;
   text-shadow: 1px 1px #5c2b00;
   opacity: 1;
-  border-color: #5c2b00; /* Garante que a borda não desapareça no hover */
+  border-color: #5c2b00; 
 }
 
-/* Aba ativa (destaque vermelho, como o hover do ranking) */
 .nav-tabs .nav-link.active {
   background: #ff6b6b;
   color: #fff;
@@ -82,7 +76,6 @@ h1#titulo-desempenho {
   opacity: 1;
 }
 
-/* Remove o brilho de foco feio do Bootstrap */
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:active {
   box-shadow: 2px 2px 0 #ffb347;
 }
@@ -90,7 +83,6 @@ h1#titulo-desempenho {
    box-shadow: 4px 4px 0 #5c2b00;
 }
 
-/* CONTEÚDO DA ABA (onde o gráfico fica) */
 .tab-content {
   border-top: 4px dashed #ffb347;
   padding-top: 16px;
@@ -103,7 +95,6 @@ h1#titulo-desempenho {
   text-align: center;
 }
 
-/* CONTÊINER DO GRÁFICO */
 .chart-container {
   position: relative;
   height: 400px;
@@ -112,11 +103,11 @@ h1#titulo-desempenho {
   border: 4px solid #5c2b00;
   border-radius: 12px;
   padding: 10px;
-  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+  box-sizing: border-box; 
 }
 
 
-/* -------------ESTILO DO MENU LATERAL (Copiado do seu ranking.css)------------- */
+/* -------------ESTILO DO MENU LATERAL------------- */
 #side-menu {
   position: fixed;
   top: 0;
@@ -208,8 +199,6 @@ a {
   image-rendering: pixelated;
 }
 
-
-/* Quando ativo, mostra o menu */
 #side-menu.active {
   left: 0;
 }
@@ -230,67 +219,78 @@ a {
   font-size: 0.6rem;
   padding: 3% 0;
 }
-
-  #stage {
-  width: 100vw;   /* largura padrão */
-  height: 100vh; /* altura padrão */
-  display: block; /* remove espaçamento */
-}
-
-}
-
-
-@media (min-width: 1025px){
-  #stage {
-  width: 100vw;   /* largura padrão */
-  height: 100vh; /* altura padrão */
-  display: block; /* remove espaçamento */
-}
-
-  body {
+ body {
     margin: 10px;
-    height: calc(100vh - 20px);
+    height: 90vh;
   }
   .container {
-    width: 95vw;
+    width: 80vw;
     padding: 16px 8px;
+    height: 90vh;
   }
   h1#titulo-desempenho {
     font-size: 14px;
-    padding: 8px;
   }
    .nav-tabs .nav-link {
-    font-size: 10px; /* Abas menores */
+    font-size: 0.35rem;
     padding: 8px;
   }
   .chart-container {
-    height: 300px; /* Gráfico menor */
-  }
+    height: 35vh; 
 
+}
+
+.tab-pane h2 {
+    font-size: 0.5rem;
+    padding: 0%;
+    margin-bottom: 2%;
+}
+}
+
+@media (min-width: 1025px){
+  body {
+    margin: 40px;
+    height: calc(100vh - 80px);
+  }
+  .container {
+    width: 900px;
+    padding: 32px;
+    height: auto;
+  }
+   h1#titulo-desempenho {
+    font-size: 18px;
+  }
+   .nav-tabs .nav-link {
+    font-size: 12px;
+    padding: 10px;
+  }
+   .chart-container {
+    height: 400px; 
 }
 
 #rotate-message {
   display: none;
 }
+}
 
-/* Esconde o app e mostra a mensagem de rotação em modo retrato */
 @media screen and (orientation: portrait) {
-  #app {
+ #app {
     display: none;
   }
 
   #rotate-message {
-    margin: 40px; /* margem ao redor do canvas */
+    margin: 40px;
     display: flex;
-    justify-content: center; /* centraliza horizontal */
-    align-items: center;     /* centraliza vertical */
-    height: calc(100vh - 80px); /* altura da tela menos as margens */
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
     background: #f0f0f0;
     font-family: 'Press Start 2P', cursive;
 
   }
+
   #aviso_tela{
-      font-size: 200%;
+      font-size: 150%;
       color: #fff;
       padding: 10px;
       margin: 0 0 12px 0;
@@ -304,3 +304,4 @@ a {
       line-height: 1.5;
   }
 }
+

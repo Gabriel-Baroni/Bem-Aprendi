@@ -73,7 +73,7 @@ async function carregarDesempenho() {
                 try {
                     const ctx = canvasElement.getContext('2d');
                     new Chart(ctx, { 
-                        type: 'line', 
+                        type: 'bar', 
                         data: {
                             labels: dadosAgrupados[materia].labels, 
                             datasets: [{
