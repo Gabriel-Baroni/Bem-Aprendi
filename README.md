@@ -83,6 +83,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <h2>Modelo Entidade Relacionamento (MER)</h2>
 <img src="https://github.com/user-attachments/assets/24711657-9790-4f96-a321-2ff175fc68a4" width=1000> 
 
+<h1>📖 Dicionário de Dados</h1>
 
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
