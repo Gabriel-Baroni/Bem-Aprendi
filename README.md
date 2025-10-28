@@ -11,7 +11,7 @@
 -  Ana Paula Abrantes de Castro Shiguemori
 -  Flavia Beatriz Rodrigues Prisco da Cunha
 -  Ariadne Arrais Cruz
--  Sostenes Pereira Gomes
+-  Luis Eduardo Sales do Nascimento
 
 <h1>🎯 Objetivo do projeto</h1> 
 O objetivo do projeto é construir um jogo de navegador educativo, que visa ensinar e estimular crianças a apreder de forma lúdica e prática. O estimulo ocorre com mimi games educativos, exercitanto o raciocício lógico das crianças. Os personagens pertencem a fauna brasileira e o mascote é um bem-te-vi, dando origem ao nome do jogo (Bem-Aprendi), cada personagem ensina uma matéria distinta, deixando a experiência mais divertida. 
@@ -71,9 +71,8 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 `Esboço da Interface`: <img src="https://github.com/user-attachments/assets/fd435986-9a24-4f1a-8ec6-91acd348258c" width=1000> 
 `Mockup do site`: https://www.canva.com/design/DAGhcNGDoB4/RJ91RutQgmSEIraWqMDJyQ/edit
 
-<h1>📊 Modelagem do Banco de Dados</h1>
-
 <h1>🧍Diagramas UML</h1>
+
 <h2>Diagrama de Caso de Uso</h2>
 <img src="https://github.com/user-attachments/assets/c430381e-3e8c-4358-a4c6-9ab4fd46ad97" width=1000> 
 
@@ -84,6 +83,55 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 6 anos
 <img src="https://github.com/user-attachments/assets/24711657-9790-4f96-a321-2ff175fc68a4" width=1000> 
 
 <h1>📖 Dicionário de Dados</h1>
+
+Esse projeto contará com as seguintes Entidades e atributos
+
+<h2>Users</h2>
+ Essa entidade é necessária para cadastrar os dados dos usuários, utilizando o serviço de autenticação do supabase. Os dados são os atributos:
+ <br><br>
+ 
+- `uuid`: É um atributo do tipo uuid. É o responsável por criar um **Id único** para o usuário(**CHAVE PRIMÁRIA**).
+- `email`: É um atributo do tipo TEXT. É o responsável por armazenar o email do usuário.
+
+<h2>Entidade Usuario_infos</h2>
+ Essa entidade é necessária para cadastrar os dados adicionais dos usuários. Os dados são os atributos:
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT8. É o responsável por criar um **Id único** para o usuário(**CHAVE PRIMÁRIA**).
+- `tipo`: É um atributo do tipo TEXT. É o responsável por armazenar o tipo do usuário: responsável ou criança.
+- `nome`: É um atributo do tipo TEXT. É o responsável por armazenar o nome do usuário.
+- `idade`: É um atributo do tipo INT8. É o responsável por armazenar a idade do usuário.
+- `id_auth`: É um atributo do tipo UUID. É o responsável por referênciar esse usuário a entidade Users(**CHAVE ESTRANGEIRA**).
+
+<h2>Entidade Crianca</h2>
+ Essa entidade é necessária para cadastrar os dados das crianças. Os dados são os atributos:
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT8. É o responsável por criar um **Id único** para o usuário(**CHAVE PRIMÁRIA**).
+- `nome`: É um atributo do tipo TEXT. É o responsável por armazenar o nome do usuário.
+- `idade`: É um atributo do tipo INT8. É o responsável por armazenar a idade do usuário.
+- `id_responsavel`: É um atributo do tipo UUID. É o responsável por referênciar essa criança a algum responsável da entidade Users(**CHAVE ESTRANGEIRA**).
+
+<h2>Entidade pontuaçoes-materias</h2>
+ Essa entidade é necessária para relacionar a última pontuação feita com a criança. Os dados são os atributos:
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT8. É o responsável por criar um **Id único** para a pontuação(**CHAVE PRIMÁRIA**).
+- `materia`: É um atributo do tipo TEXT. É o responsável por armazenar o nome da matéria referente a pontuação.
+- `pontuacao`: É um atributo do tipo INT8. É o responsável por armazenar a pontuação obtida pela crianca.
+- `updated_at`: É um atributo do tipo timestamptz. É o responsável por armazenar a data e hora da atualização da pontuação.
+- `id_crianca`: É um atributo do tipo UUID. É o responsável por referênciar essa pontuação a açguma criança da entidade Crianca(**CHAVE ESTRANGEIRA**).
+
+  <h2>Entidadehistorico-tentativas</h2>
+ Essa entidade é necessária para armazenar as tentativas feitas pela criança. Os dados são os atributos:
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT8. É o responsável por criar um **Id único** para a pontuação(**CHAVE PRIMÁRIA**).
+- `materia`: É um atributo do tipo TEXT. É o responsável por armazenar o nome da matéria referente a pontuação.
+- `pontuacao`: É um atributo do tipo INT8. É o responsável por armazenar a pontuação obtida pela crianca.
+- `created_at`: É um atributo do tipo timestamptz. É o responsável por armazenar a data e hora da criação da tentativa.
+- `id_crianca`: É um atributo do tipo UUID. É o responsável por referênciar essa pontuação a açguma criança da entidade Crianca(**CHAVE ESTRANGEIRA**).
+  
 
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
