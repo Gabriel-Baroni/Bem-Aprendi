@@ -1,3 +1,4 @@
+// importações necessárias
 import express from 'express';
 import supabase from '../db/supabaseAdmin.js';
 
@@ -11,7 +12,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // 1. Verificar/Criar a criança (como antes)
     const { data: criancaData } = await supabase
       .from('Crianca')
       .select('id') 
@@ -27,8 +27,6 @@ router.post('/', async (req, res) => {
       if (insertCriancaError) throw insertCriancaError;
     }
 
-    // 2. SALVAR NO HISTÓRICO (O NOVO PASSO - QUE FALTA NO SEU CÓDIGO)
-    // Apenas insere a nova tentativa. 
     const { error: historicoError } = await supabase
       .from('historico_tentativas') // <-- Nome da nova tabela
       .insert([

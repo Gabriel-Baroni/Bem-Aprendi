@@ -1,8 +1,10 @@
+// importações necessárias
 import { Router } from 'express';
 import supabaseAdmin from '../db/supabaseAdmin.js';
 
 const router = Router();
 
+// Criação da rota POST /delete-user
 router.post('/delete-user', async (req, res) => {
   const { user_id } = req.body;
   if (!user_id) return res.status(400).json({ error: 'user_id required' });

@@ -3,11 +3,6 @@ import supabase from '../db/supabaseAdmin.js'; // Use o cliente Admin do Supabas
 
 const router = express.Router();
 
-/*
- * ROTA: GET /api/desempenho/:idCrianca
- * Busca todo o histórico de tentativas de uma criança específica.
- * O ID da criança é passado pela URL.
- */
 router.get('/:idCrianca', async (req, res) => {
     const { idCrianca } = req.params;
 
