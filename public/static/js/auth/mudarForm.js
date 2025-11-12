@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Aplica o fundo inicial de cadastro
   document.body.classList.add('cadastro-bg');
 
+  //Mostrar o formulário de LOGIN
   showLoginBtn.addEventListener('click', function () {
     cadastroForm.style.display = 'none';
     cadastroTitle.style.display = 'none';
@@ -19,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.remove('cadastro-bg');
     document.body.classList.add('login-bg');
   });
-
+  
+  //Mostrar o formulário de CADASTRO
   showCadastroBtn.addEventListener('click', function () {
     loginForm.style.display = 'none';
     loginTitle.style.display = 'none';

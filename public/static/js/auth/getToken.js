@@ -15,9 +15,9 @@ async function handleRedirect() {
     });
 
     if (error) {
-      console.error('❌ Erro ao configurar sessão:', error.message);
+      console.error('Erro ao configurar sessão:', error.message);
     } else {
-      console.log('✅ Sessão iniciada:', data);
+
       // Remove o hash da URL
       history.replaceState(null, '', window.location.pathname);
       // Redireciona para a mesma página limpa ou outra, se quiser
