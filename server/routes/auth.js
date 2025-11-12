@@ -1,4 +1,4 @@
-// importações necessárias
+//Importações necessárias
 import { Router } from 'express';
 import supabase from '../db/supabaseAdmin.js';
 
