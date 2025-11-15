@@ -2,41 +2,59 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='static/css/auth.css'>
+    <link rel="icon" href="static/img/favICON.jpg" type="image/png">
 
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Page Title</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href= 'static/css/auth.css'>
-  <link rel="icon" href="static/img/favICON.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
   <div class="container">
-    <h2 class = "cadastro">Cadastro</h2>
-    <form class = "input" id="cadastro-form">
+    <h2 class="cadastro">Cadastro</h2>
+    <form class="input" id="cadastro-form">
       <input type="text" name="nome" placeholder="Nome" required>
       <input type="text" name="idade" placeholder="Idade" required>
       <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <input type="password" name="confir_senha" placeholder="Confirmar Senha" required>
+
+      <div class="password-container">
+        <input type="password" name="senha" placeholder="Senha" required>
+        <i class="fa-solid fa-eye toggle-password"></i>
+      </div>
+
+      <div class="password-container">
+        <input type="password" name="confir_senha" placeholder="Confirmar Senha" required>
+        <i class="fa-solid fa-eye toggle-password"></i>
+      </div>
+
       <div class="botoesForm">
-            <button type="submit" class = "botao + btn_cadastro">Cadastrar</button>
+            <button type="submit" class="botao + btn_cadastro">Cadastrar</button>
             <button type="button" id="show-login" class="trocarForm_cadastro">Já tem uma conta?</button>
       </div>
     </form>
 
-    <h2 class = "cadastro">Login</h2>
-    <form class = "input" id="login-form">
+    <h2 class="cadastro">Login</h2>
+    <form class="input" id="login-form">
       <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="senha" placeholder="Senha" required>
+
+      <div class="password-container">
+        <input type="password" name="senha" placeholder="Senha" required>
+        <i class="fa-solid fa-eye toggle-password"></i>
+      </div>
+
       <div class="botoesForm">
-        <button type="submit" class ="botao + btn_login">Entrar</button>
+        <button type="submit" class="botao + btn_login">Entrar</button>
         <button type="button" id="show-cadastro" class="trocarForm_login">Não tem uma conta?</button>
       </div>
     </form>
   </div>
+
   <script type="module" src="static/js/auth/getToken.js"></script>
   <script src='static/js/auth/auth_JSON.js'></script>
   <script src="static/js/auth/mudarForm.js"></script>
+  
+  <script src="static/js/auth/showPassword.js"></script>
 </body>
 </html>
