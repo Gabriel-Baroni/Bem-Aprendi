@@ -37,6 +37,12 @@ async function excluirPerfil(id) {
       .eq('id_crianca', id);
     if (erroPontuacoes) throw erroPontuacoes;
 
+    const { error: erroProgresso } = await supabase
+      .from("historico_tentativas")
+      .delete()
+      .eq("id_crianca", id);
+    if (erroProgresso) throw erroProgresso;
+
     const { error: erroCrianca } = await supabase
       .from('Crianca')
       .delete()
@@ -51,48 +57,33 @@ async function excluirPerfil(id) {
 
 async function deletarContaResponsavel() {
   try {
-    const { data: criancas, error: errBuscar } = await supabase
-      .from('Crianca')
-      .select('id')
-      .eq('id_responsavel', responsavel_id);
-    if (errBuscar) throw errBuscar;
-
-    const ids = (criancas || []).map(c => c.id);
-    if (ids.length > 0) {
-      const { error: erroPontuacoes } = await supabase
-        .from('pontuacoes_materias')
-        .delete()
-        .in('id_crianca', ids);
-      if (erroPontuacoes) throw erroPontuacoes;
-    }
-
-    const { error: erroCriancas } = await supabase
-      .from('Crianca')
-      .delete()
-      .eq('id_responsavel', responsavel_id);
-    if (erroCriancas) throw erroCriancas;
-
-    const { error: erroResponsavel } = await supabase
-      .from('Usuario_infos')
-      .delete()
-      .eq('id_auth', responsavel_id);
-    if (erroResponsavel) throw erroResponsavel;
-
-    // chama rota server-side que usa service_role para apagar do Auth
-    const resp = await fetch('/auth/delete-user', {
+    // 1. CHAMA A ROTA DO SERVIDOR
+    const resp = await fetch('/auth/delete-user', { // Ajuste o caminho se necessário
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Envia o ID do responsável que está na variável global
       body: JSON.stringify({ user_id: responsavel_id })
     });
-    const resultado = await resp.json();
-    if (!resp.ok) throw new Error(resultado.error || 'Falha ao remover usuário do Auth');
 
+    // 2. Verifica se a rota falhou
+    if (!resp.ok) {
+      // Tenta ler a mensagem de erro que o servidor enviou
+      const errorData = await resp.json();
+      throw new Error(errorData.error || `Falha no servidor: ${resp.status}`);
+    }
+    
+    // 3. SUCESSO!
+    console.log('Usuário excluído com sucesso pela rota.');
     await supabase.auth.signOut();
     localStorage.clear();
     window.location.href = '/auth.html';
+
   } catch (err) {
-    console.error('Erro ao excluir conta:', err);
-    alert('Erro ao excluir a conta. Veja console para detalhes.');
+    // 4. O ERRO (do fetch ou do servidor) VAI APARECER AQUI
+    console.error('Erro detalhado ao excluir conta:', err.message);
+    alert('Erro ao excluir a conta. Veja o console para detalhes.');
   }
 }
 
