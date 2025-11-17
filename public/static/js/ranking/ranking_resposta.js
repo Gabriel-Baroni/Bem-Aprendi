@@ -1,4 +1,5 @@
 async function carregarRanking(materia) {
+  //Busca as pontuações na rota /ranking/:materia
     const res = await fetch(`/ranking/${encodeURIComponent(materia)}`);
     const ranking = await res.json();
     const lista = document.getElementById('ranking-list');
@@ -7,6 +8,7 @@ async function carregarRanking(materia) {
       lista.innerHTML = '<li>Nenhuma pontuação encontrada.</li>';
       return;
     }
+    //Cria um item de lista para cada entrada no ranking
     ranking.forEach((item, i) => {
       lista.innerHTML += `<li>${i+1}. ${item.nome} - ${item.pontuacao} pontos</li>`;
     });

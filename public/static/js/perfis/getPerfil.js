@@ -1,5 +1,6 @@
 import supabase from '../db/supabaseClient.js';
 
+//Pega os itens do localStorage
 const responsavel_id = localStorage.getItem('user_id');
 const listaPerfis = document.getElementById('lista-perfis');
 const btnCadastrar = document.getElementById('btn-cadastrar');
@@ -31,18 +32,20 @@ btnConfirmar.addEventListener('click', async () => {
 // Função de excluir perfil criança
 async function excluirPerfil(id) {
   try {
+    //Deleta as pontuações da crinaça
     const { error: erroPontuacoes } = await supabase
       .from('pontuacoes_materias')
       .delete()
       .eq('id_crianca', id);
     if (erroPontuacoes) throw erroPontuacoes;
-
+    //Deleta o progresso da criança
     const { error: erroProgresso } = await supabase
       .from("historico_tentativas")
       .delete()
       .eq("id_crianca", id);
     if (erroProgresso) throw erroProgresso;
 
+    //Deleta o perfil da criança
     const { error: erroCrianca } = await supabase
       .from('Crianca')
       .delete()
@@ -57,7 +60,7 @@ async function excluirPerfil(id) {
 
 async function deletarContaResponsavel() {
   try {
-    // 1. CHAMA A ROTA DO SERVIDOR
+    // CHAMA A ROTA DO SERVIDOR /delete-user
     const resp = await fetch('/auth/delete-user', { // Ajuste o caminho se necessário
       method: 'POST',
       headers: {
@@ -67,21 +70,19 @@ async function deletarContaResponsavel() {
       body: JSON.stringify({ user_id: responsavel_id })
     });
 
-    // 2. Verifica se a rota falhou
+    // Verifica se a rota falhou
     if (!resp.ok) {
-      // Tenta ler a mensagem de erro que o servidor enviou
       const errorData = await resp.json();
       throw new Error(errorData.error || `Falha no servidor: ${resp.status}`);
     }
     
-    // 3. SUCESSO!
+
     console.log('Usuário excluído com sucesso pela rota.');
     await supabase.auth.signOut();
     localStorage.clear();
     window.location.href = '/auth.html';
 
   } catch (err) {
-    // 4. O ERRO (do fetch ou do servidor) VAI APARECER AQUI
     console.error('Erro detalhado ao excluir conta:', err.message);
     alert('Erro ao excluir a conta. Veja o console para detalhes.');
   }
@@ -91,6 +92,7 @@ async function deletarContaResponsavel() {
 
 // Carrega perfis das crianças
 async function carregarPerfis() {
+  //Seleciona as crianças do responsável logado
   const { data: criancas, error } = await supabase
     .from('Crianca')
     .select('id, nome, idade')
@@ -133,7 +135,7 @@ async function carregarPerfis() {
 
   document.querySelectorAll('.botao-excluir-perfil').forEach(botao => {
     botao.addEventListener('click', () => {
-      idParaExcluir = botao.getAttribute('data-id');
+      idParaExcluir = botao.getAttribute('data-id'); //atribui o id para exclusão
       modal.show();
     });
   });

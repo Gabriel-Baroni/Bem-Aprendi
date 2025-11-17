@@ -4,7 +4,7 @@ import supabase from '../db/supabaseClient.js';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    //Pega os dados vindos do formulário
     const nome = document.getElementById('nome').value;
     const idade = parseInt(document.getElementById('idade').value);
     const id_responsavel = localStorage.getItem('user_id');
@@ -13,7 +13,7 @@ import supabase from '../db/supabaseClient.js';
       alert('Usuário não autenticado!');
       return;
     }
-
+    //INsere os daddos na tabela Crianca
     const { data, error } = await supabase
       .from('Crianca')
       .insert([{ nome, idade, id_responsavel }]);
