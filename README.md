@@ -119,7 +119,7 @@ Esse projeto contará com as seguintes Entidades e atributos
 - `updated_at`: É um atributo do tipo timestamptz. É o responsável por armazenar a data e hora da atualização da pontuação.
 - `id_crianca`: É um atributo do tipo UUID. É o responsável por referênciar essa pontuação a açguma criança da entidade Crianca(**CHAVE ESTRANGEIRA**).
 
-  <h2>Entidadehistorico-tentativas</h2>
+  <h2>Entidade historico-tentativas</h2>
  Essa entidade é necessária para armazenar as tentativas feitas pela criança. Os dados são os atributos:
  <br><br>
  
