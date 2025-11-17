@@ -26,10 +26,7 @@ O público-alvo desse projeto são crianças da faixa etária a partir de 8 anos
  - `Mini games`: Mini games educativos que ensinem as crianças conceitos báscios das matérias.
 
  - `Sistema de pontuação e Ranking`: Pontuação do usuário em cada disciplina e pontuação geral do usuário. A pontuação geral é usada como base para a criação de um ranking entre os usuários.
-
- - `Sistema de conquistas`: Quando o usuário atingir determinado marco, será desbloqueado uma conquista. 
-
-
+ 
 <h1>☑️ Requisitos não funcionais para o site</h1> 
 
 <h2>Requisitos de Produto:</h2>
