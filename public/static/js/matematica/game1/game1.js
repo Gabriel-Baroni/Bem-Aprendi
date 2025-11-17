@@ -309,7 +309,6 @@ function dialogoInstrucoes(callbackFimDialogo) {
     };
   }
 
-
   function criarPopupFinal() { // POP-UP DO FINAL DE CADA FASE
     estadoJogo.pontuacaoAcumulada += estadoJogo.pontuacao;
     const popup = document.getElementById("popupFimFase");

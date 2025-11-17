@@ -14,6 +14,7 @@ function mostrarDialogo(nome, imagem, texto, callback) {
   dialogo.style.display = "flex";
   textoEmDigitacao = true;
 
+  //Efeirto de digitação
   let i = 0;
   const intervalo = setInterval(() => {
     textoEl.textContent += texto.charAt(i);

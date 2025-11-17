@@ -63,7 +63,7 @@ window.onload = function () {
     textoTimer.y = 10;
     
     let textoInstrucao;
-
+    // --- FUNÇÕES DAS INSTRUÇÕES ---
     function dialogoInstrucoes(callbackFimDialogo) {
         if (typeof mostrarDialogo !== 'function') {
             console.error("A função 'mostrarDialogo' não foi encontrada. Verifique se o arquivo dialogo.js está sendo carregado corretamente.");
@@ -110,20 +110,20 @@ window.onload = function () {
             textoTimer.text = `Tempo: ${estadoJogo.tempo}s`;
         }
     }, 1000);
-
+    // --- FUNÇÃO DE ARRASTAR ---
     function enableDrag(item) {
         item.on("mousedown", function (evt) {
             estadoJogo.caixasAlvo.forEach(caixa => { if (caixa.figura === this) caixa.figura = null; });
             this.offset = { x: this.x - evt.stageX, y: this.y - evt.stageY };
             stage.setChildIndex(this, stage.numChildren - 1);
         });
-
+        //Atualaiza a posição do item enquanto é arrastado
         item.on("pressmove", function (evt) {
             this.x = evt.stageX + this.offset.x;
             this.y = evt.stageY + this.offset.y;
             stage.update();
         });
-
+        //Verifica se o item foi solto sobre uma caixa alvo válida
         item.on("pressup", function (evt) {
             const alvo = estadoJogo.caixasAlvo.find(caixa =>
                 evt.stageX > caixa.x && evt.stageX < caixa.x + caixa.largura &&
@@ -141,19 +141,21 @@ window.onload = function () {
             stage.update();
         });
     }
-
+    
+    // ---FUNÇÃO DE VERIFICAÇÃO ---
     function verificarResposta() {
+        //verifica se todas as caixas estão preenchidas
         const todasPreenchidas = estadoJogo.caixasAlvo.every(caixa => caixa.figura !== null);
         if (!todasPreenchidas) {
             criarPopupAlerta("Você precisa preencher todas as caixas!");
             return;
         }
-
+        //Coleta a resposta do jogador
         const respostaJogador = [];
         estadoJogo.caixasAlvo.forEach(caixa => {
             respostaJogador.push(caixa.figura.id_correto);
         });
-
+        //Verifica se a resposta está correta com o id da imagem
         let acerto = true;
         for (let i = 0; i < respostaJogador.length; i++) {
             if (respostaJogador[i] !== i + 1) {
@@ -161,10 +163,11 @@ window.onload = function () {
                 break;
             }
         }
-
+        //Se a resposta estiver correta, calcula a pontuação e cria o popup final
         if (acerto) {
             calcularPontuacao();
             criarPopupFinal();
+        //Se a resposta estiver incorreta, reduz uma vida e verifica se o jogo acabou
         } else {
             estadoJogo.vidas--;
             atualizarVidas();
@@ -172,6 +175,7 @@ window.onload = function () {
 
             if (estadoJogo.vidas <= 0) {
                 criarPopupGameOver();
+
             } else {
                 criarPopupAlerta("Sequência incorreta! Tente de novo.");
                 estadoJogo.figurasArrastaveis.forEach(figura => {
@@ -183,7 +187,7 @@ window.onload = function () {
             }
         }
     }
-
+    // --- FUNÇÃO DE REINÍCIO DA FASE ---
     function resetarFase() {
         stage.removeAllChildren();
         estadoJogo.figurasArrastaveis = [];
@@ -197,7 +201,7 @@ window.onload = function () {
         estadoJogo.tempo = 0;
         stage.update();
     }
-
+    //Envia a pontuação para o servidor a com a rota /pontuacao
     function enviarPontuacaoParaServidor(pontuacao, materia) {
         const crianca_id = localStorage.getItem('crianca_id');
         if (!crianca_id) {
@@ -217,7 +221,8 @@ window.onload = function () {
         .then(data => console.log("Pontuação atualizada:", data))
         .catch(err => console.error("Erro ao enviar pontuação:", err));
    }
-
+   
+    // --- FUNÇÕES DE CRIAÇÃO DOS ELEMENTOS DO JOGO ---
     function criarCaixasAlvo() {
         const fase = fasesLogica[estadoJogo.faseAtual];
         const { length: numeroDeCaixas } = fase.sequencia;
@@ -234,7 +239,6 @@ window.onload = function () {
             estadoJogo.caixasAlvo.push({ x: caixa.x, y: caixa.y, largura: larguraCaixa, altura: alturaCaixa, figura: null, shape: caixa });
         }
     }
-
     function criarFigurasArrastaveis() {
         const fase = fasesLogica[estadoJogo.faseAtual];
         const figuras = embaralhar([...fase.sequencia]);
@@ -263,7 +267,7 @@ window.onload = function () {
             estadoJogo.figurasArrastaveis.push(container);
         });
     }
-
+    
     function embaralhar(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -300,26 +304,6 @@ window.onload = function () {
         }
         estadoJogo.pontuacao = Math.floor(pontosFase);
     }
-     function enviarPontuacaoParaServidor(pontuacao, materia) {
-        const crianca_id = localStorage.getItem('crianca_id');
-        if (!crianca_id) {
-            console.error('Crianca não autenticada!');
-            return;
-        }
-        fetch("/pontuacao", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                materia: materia,
-                id_crianca: crianca_id,
-                pontuacao: pontuacao
-            })
-        })
-        .then(res => res.json())
-        .then(data => console.log("Pontuação atualizada:", data))
-        .catch(err => console.error("Erro ao enviar pontuação:", err));
-    }
-
 
     function criarPopupFinal() {
         estadoJogo.pontuacaoAcumulada += estadoJogo.pontuacao;

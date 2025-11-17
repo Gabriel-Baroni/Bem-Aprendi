@@ -1,5 +1,5 @@
 import supabase from '../db/supabaseClient.js';
-// Suponha que você tenha o ID da criança salvo no localStorage
+// Pega o id da criança no localStorage
 const idCrianca = localStorage.getItem('crianca_id')
 
 // Atualizar Nome

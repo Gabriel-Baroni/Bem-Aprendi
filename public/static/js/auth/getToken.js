@@ -1,4 +1,4 @@
-// getToken.js
+// getToken.js (FUTURA IMPLEMENTAÇÃO DE REDIRECIONAMENTO DE TOKEN)
 import supabase from '../db/supabaseClient.js';
 
 async function handleRedirect() {

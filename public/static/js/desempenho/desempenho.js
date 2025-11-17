@@ -1,16 +1,3 @@
-/*
-* ARQUIVO: desempenho.js
-* Busca dados da API backend e desenha gráficos.
-*/
-
-// ---- 1. CONFIGURE O SUPABASE CLIENT ----
-// (Necessário apenas se você fosse usar o Supabase diretamente no frontend)
-// const SUPABASE_URL = 'https://SEU_PROJETO.supabase.co';
-// const SUPABASE_KEY = 'SUA_CHAVE_PUBLICA_ANON';
-// const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-
-// ---- 2. FUNÇÃO PRINCIPAL ----
 async function carregarDesempenho() {
     
     // Pega o ID e o Nome da criança do localStorage
@@ -24,11 +11,11 @@ async function carregarDesempenho() {
 
     if (!criancaId) {
         alert("Nenhuma criança selecionada!");
-        window.location.href = 'perfil.html'; // Ajuste este caminho se necessário
+        window.location.href = 'perfil.html'; 
         return;
     }
 
-    // ---- 3. BUSCA OS DADOS (AGORA DO NOSSO BACKEND) ----
+    // Usa a rota desempenho para buscar os dados
     try {
         const response = await fetch(`/api/desempenho/${criancaId}`); 
         
@@ -44,14 +31,14 @@ async function carregarDesempenho() {
             return; 
         }
 
-        // ---- 4. PROCESSA E AGRUPA OS DADOS ----
+        // Cria o array dadosAgrupados 
         const dadosAgrupados = {};
 
         data.forEach(tentativa => {
             const { materia, pontuacao, created_at } = tentativa;
             // Validação simples
             if (!materia || typeof pontuacao !== 'number' || !created_at) {
-                return; // Pula esta tentativa se faltar algo
+                return; 
             }
 
             if (!dadosAgrupados[materia]) {
@@ -64,7 +51,7 @@ async function carregarDesempenho() {
             dadosAgrupados[materia].scores.push(pontuacao);
         });
         
-        // ---- 5. DESENHA OS GRÁFICOS ----
+        // ----DESENHA OS GRÁFICOS ----
         for (const materia in dadosAgrupados) {
             const canvasId = `chart-${materia}`;
             const canvasElement = document.getElementById(canvasId);

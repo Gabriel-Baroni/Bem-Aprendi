@@ -1,7 +1,7 @@
 document.querySelectorAll('.toggle-password').forEach(icon => {
     icon.addEventListener('click', function () {
         
-        // Encontra o input de senha (que é o elemento irmão anterior)
+        // Encontra o input de senha 
         const input = this.previousElementSibling;
 
         // Alterna o tipo do input

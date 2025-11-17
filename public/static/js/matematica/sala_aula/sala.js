@@ -14,7 +14,7 @@ window.onload = function () {
   stage.addChild(fundo);
 
   // PERSONAGEM
-  const personagem = new createjs.Bitmap("/static/img/matematica/prof.png"); // substitua pelo caminho da sua imagem
+  const personagem = new createjs.Bitmap("/static/img/matematica/prof.png"); 
   personagem.x = 800;
   personagem.y = 200;
   personagem.cursor = "pointer";
