@@ -129,7 +129,72 @@ Esse projeto contará com as seguintes Entidades e atributos
 - `created_at`: É um atributo do tipo timestamptz. É o responsável por armazenar a data e hora da criação da tentativa.
 - `id_crianca`: É um atributo do tipo UUID. É o responsável por referênciar essa pontuação a açguma criança da entidade Crianca(**CHAVE ESTRANGEIRA**).
   
+<h1>Como utilizar 🤔</h1>
 
+### 1. Pré-requisitos
+
+Antes de começar, você vai precisar ter as seguintes ferramentas instaladas em sua máquina:
+* **[Node.js](https://nodejs.org/)**: (Recomendado v18 ou superior)
+* **[npm](https://www.npmjs.com/)**: (geralmente instalado junto com o Node.js)
+* **[Git](https://git-scm.com/)**: (para clonar o repositório)
+
+---
+
+### 2. Instalação
+
+1.  **Clone o repositório** (substitua pela URL do seu repositório):
+    ```bash
+    git clone [https://github.com/seu-usuario/BEM-APRENDI.git](https://github.com/seu-usuario/BEM-APRENDI.git)
+    ```
+
+2.  **Entre na pasta** do projeto:
+    ```bash
+    cd BEM-APRENDI
+    ```
+
+3.  **Instale as dependências** do Node.js:
+    ```bash
+    npm install
+    ```
+
+---
+
+### 3. Configuração do Ambiente (`.env`)
+
+Este projeto precisa de um arquivo `.env` na raiz para armazenar chaves de API e outras variáveis de ambiente.
+
+1.  Crie um arquivo chamado `.env` na pasta principal do projeto.
+
+2.  Adicione as variáveis de ambiente necessárias. (Como seu projeto usa o Supabase, você precisará das chaves do seu painel):
+
+    ```env
+    # Exemplo para conexão com Supabase
+    SUPABASE_URL=COLE_AQUI_A_URL_DO_SEU_PROJETO_SUPABASE
+    SUPABASE_KEY=COLE_AQUI_A_SUA_CHAVE_ANON_SUPABASE
+    ```
+    > **Nota:** Você encontra essas chaves no painel do seu projeto no Supabase, em "Project Settings" > "API".
+
+---
+
+### 4. Executando o Servidor
+
+Após instalar e configurar, você pode iniciar o servidor.
+
+1.  Inicie o servidor local:
+    ```bash
+    node server/index.js
+    ```
+    *(Como alternativa, se você tiver um script "start" no seu `package.json`, você pode usar `npm start`)*
+
+2.  O terminal deverá exibir a mensagem:
+    ```
+    Servidor rodando em http://localhost:3000
+    ```
+
+3.  Abra seu navegador e acesse o jogo:
+    [http://localhost:3000](http://localhost:3000)
+
+---
 
 <h1>🧰 Tecnologias Utilizadas</h1> 
 
