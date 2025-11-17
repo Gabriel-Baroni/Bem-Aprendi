@@ -1,6 +1,6 @@
 // importações necessárias
 import { Router } from 'express';
-import supabaseAdmin from '../db/supabaseAdmin.js'; // Seu cliente admin
+import supabaseAdmin from '../db/supabaseAdmin.js'; 
 
 const router = Router();
 
@@ -14,51 +14,47 @@ router.post('/delete-user', async (req, res) => {
   console.log(`[Servidor] Iniciando exclusão completa para: ${user_id}`);
 
   try {
-    // PASSO 1: Deleta os "netos" (ligados às crianças)
-    // Primeiro, encontramos os IDs das crianças
+    // Seleciona os ids de todas as criancas ligasdas ao usuário na tabela Crianca
     const { data: criancas, error: errCriancas } = await supabaseAdmin
-      .from('Crianca') // Atenção: Pode precisar de aspas se o nome for "Crianca"
+      .from('Crianca') 
       .select('id')
       .eq('id_responsavel', user_id);
 
     if (errCriancas) throw errCriancas;
-
+    //Guarda todos os ids das crianças em um array
     const idsCriancas = (criancas || []).map(c => c.id);
-
+    
     if (idsCriancas.length > 0) {
-      // Apaga pontuações
+      //Apaga as pontuções relacionadas as crianças na tabela pontuacoes_materias
       const { error: errPontuacoes } = await supabaseAdmin
-        .from('pontuacoes_materias') // Atenção: Pode precisar de aspas
+        .from('pontuacoes_materias') 
         .delete()
         .in('id_crianca', idsCriancas);
       if (errPontuacoes) throw errPontuacoes;
 
-      // Apaga histórico
+      // Apaga as tentativas relacionadas as crianças na tabela historico_tentativas
       const { error: errHistorico } = await supabaseAdmin
-        .from('historico_tentativas') // Atenção: Pode precisar de aspas
+        .from('historico_tentativas') 
         .delete()
         .in('id_crianca', idsCriancas);
       if (errHistorico) throw errHistorico;
     }
-
-    // PASSO 2: Deleta os "filhos" (ligados ao usuário)
     
-    // Apaga Crianças
+    // Apaga as creianças da tabela Crianca
     const { error: errDelCriancas } = await supabaseAdmin
-      .from('Crianca') // Atenção: Pode precisar de aspas
+      .from('Crianca') 
       .delete()
       .eq('id_responsavel', user_id);
     if (errDelCriancas) throw errDelCriancas;
 
-    // Apaga Infos
+    // Apaga as informações adicionais do usuário na tabela Usuario_infos
     const { error: errInfos } = await supabaseAdmin
-      .from('Usuario_infos') // Atenção: Pode precisar de aspas
+      .from('Usuario_infos') 
       .delete()
       .eq('id_auth', user_id);
     if (errInfos) throw errInfos;
 
-    // PASSO 3: Deleta o "pai" (o próprio usuário)
-    // Este é o comando que você já tinha
+    // Apaga o usuário no Auth do Supabase
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.deleteUser(user_id);
     if (authError) throw authError;
 

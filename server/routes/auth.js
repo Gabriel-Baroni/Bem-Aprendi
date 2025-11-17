@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
   let tipo = idade >= 18 ? 'responsavel' : 'crianca';
 
   try {
-    // 1. Cadastro utilizando o serviço  Auth do Supabase
+    // Cadastro utilizando o serviço  Auth do Supabase
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password: senha
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
 
     const userId = authData.user.id;
 
-    // 2. Salva dados na tabela Usuario_infos E já captura os dados de volta(nome, idade, tipo)
+    //  Salva dados na tabela Usuario_infos e já captura os dados de volta(nome, idade, tipo)
     const { data: profileData, error: dbError } = await supabase
       .from('Usuario_infos') // Use aspas se o nome tiver maiúsculas
       .insert([{ id_auth: userId, nome, idade, tipo }])
@@ -33,28 +33,26 @@ router.post('/register', async (req, res) => {
       .single(); // Espera um único resultado
 
     if (dbError) {
-      // Se a criação do perfil falhar, apague o utilizador do Auth (rollback)
+      // Se a criação do perfil falhar, apague o utilizador do Auth 
       await supabase.auth.admin.deleteUser(userId);
       return res.status(400).json({ error: dbError.message });
     }
-    
-    // Logs de sucesso ou erro 
-    // 3. [NOVO PASSO] Faz o login para obter a sessão
+
+    // Faz o login do usuário recém-criado para obter a sessão
     const { data: sessionData, error: sessionError } = await supabase.auth.signInWithPassword({
       email,
       password: senha
     });
 
     if (sessionError) {
-      // Isto não devia acontecer, mas é uma boa verificação
       return res.status(400).json({ error: sessionError.message });
     }
 
-    // 4. [NOVO RETORNO] Devolve o objeto completo que o frontend espera
+    //  Devolve o objeto completo que o frontend espera
     return res.status(201).json({
       message: 'Usuário cadastrado e logado com sucesso',
       user_id: userId,
-      session: sessionData.session, // <-- A SESSÃO QUE ESTAVA EM FALTA
+      session: sessionData.session, 
       usuario: {
         nome: profileData.nome,
         tipo: profileData.tipo
@@ -67,7 +65,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// ---------ROTA PARA LOGIN (JÁ ESTAVA CORRETA)----------
+// ---------ROTA PARA LOGIN----------
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
@@ -88,7 +86,7 @@ router.post('/login', async (req, res) => {
 
     const userId = data.user.id;
     
-    // Busca de dados adicionias do usuário na tabela Usuario_infos (nome, tipo)
+    // Busca de dados adicionais do usuário na tabela Usuario_infos (nome, tipo)
     const { data: infos, error: infoError } = await supabase
       .from('Usuario_infos') // Use aspas se o nome tiver maiúsculas
       .select('nome, tipo')
